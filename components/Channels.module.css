@@ -1,0 +1,272 @@
+/* §4.5 주문 접수 방식 (방식 1 / 방식 2 비교)
+   두 카드는 동시에 진입한다. 스태거를 주면 한쪽이 주력으로 읽혀
+   "둘 다 동등"이라는 기획 확정사항에 위배된다. */
+
+.head {
+  text-align: center;
+}
+
+.kicker {
+  font: 700 14px Pretendard, sans-serif;
+  color: var(--violet);
+  letter-spacing: 0.02em;
+}
+
+.title {
+  font: 800 52px/1.28 Pretendard, sans-serif;
+  letter-spacing: -0.042em;
+  margin: 16px 0 0;
+}
+
+.sub {
+  font: 400 18px/1.68 Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+  margin: 22px auto 0;
+  max-width: 660px;
+  word-break: keep-all;
+}
+
+.sub b {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 52px;
+}
+
+.card {
+  border: 1px solid rgba(16, 24, 40, 0.12);
+  border-radius: 24px;
+  padding: 32px 34px 34px;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform var(--d-base) var(--ease-inout),
+    border-color var(--d-base) var(--ease-inout),
+    box-shadow var(--d-base) var(--ease-inout);
+}
+
+/* 호버: translateY(-4px) + 테두리 색 진해짐. 선택 상태(클릭) 없음 — 정보 카드다. */
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(16, 24, 40, 0.24);
+    box-shadow: 0 20px 44px -28px rgba(16, 24, 40, 0.3);
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(86, 48, 227, 0.08);
+  color: var(--violet);
+  font: 700 13px Pretendard, sans-serif;
+  padding: 8px 14px;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+
+.badgeCyan {
+  background: rgba(3, 177, 216, 0.1);
+  color: var(--cyan-deep);
+}
+
+.cardTitle {
+  font: 800 27px/1.44 Pretendard, sans-serif;
+  letter-spacing: -0.032em;
+  margin-top: 22px;
+  word-break: keep-all;
+}
+
+.cardBody {
+  font: 400 16px/1.72 Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+  margin: 16px 0 0;
+  word-break: keep-all;
+}
+
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.node {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: #f7f8fa;
+}
+
+.nodeAccent {
+  background: rgba(86, 48, 227, 0.07);
+}
+
+.nodeAccentCyan {
+  background: rgba(3, 177, 216, 0.09);
+}
+
+.nodeNo {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 13px Pretendard, sans-serif;
+  background: rgba(16, 24, 40, 0.1);
+  color: rgba(26, 26, 26, 0.55);
+}
+
+.nodeNoAccent {
+  background: var(--violet);
+  color: #fff;
+}
+
+.nodeNoAccentCyan {
+  background: var(--cyan-deep);
+  color: #fff;
+}
+
+.nodeTitle {
+  font: 700 17px/1.45 Pretendard, sans-serif;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  word-break: keep-all;
+}
+
+.nodeTitleAccent {
+  color: var(--violet);
+}
+
+.nodeTitleAccentCyan {
+  color: var(--cyan-deep);
+}
+
+.nodeBody {
+  font: 500 15px/1.6 Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.52);
+  margin-top: 4px;
+  word-break: keep-all;
+}
+
+/* 카드 진입 후 단계가 순차 등장, 80ms 간격.
+   두 카드는 동시에 시작하되, 단계 수가 다르면 각자 자기 속도로 끝난다. */
+:global(.js-anim) .nodeAnimated {
+  opacity: 0;
+  transform: translateY(var(--y-sm));
+  transition:
+    opacity var(--d-enter) var(--ease-out),
+    transform var(--d-enter) var(--ease-out);
+  transition-delay: var(--node-delay, 0ms);
+}
+
+:global(.js-anim) .nodeAnimated.nodeIn {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.js-anim) .nodeAnimated {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+.foot {
+  margin-top: auto;
+  padding-top: 30px;
+}
+
+.footInner {
+  background: rgba(86, 48, 227, 0.07);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+
+.footInnerCyan {
+  background: rgba(3, 177, 216, 0.08);
+}
+
+.footTitle {
+  font: 700 15px Pretendard, sans-serif;
+  color: var(--ink);
+}
+
+.footNote {
+  font: 500 15px Pretendard, sans-serif;
+  color: var(--violet);
+  margin-top: 6px;
+}
+
+.footNoteCyan {
+  color: var(--cyan-deep);
+}
+
+.closer {
+  font: 400 17px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.5);
+  margin: 30px 0 0;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.closer b {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+@media (max-width: 1023px) {
+  .title {
+    font-size: 36px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .cardTitle {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: 27px;
+    line-height: 1.32;
+  }
+  .sub {
+    font-size: 15px;
+  }
+  .card {
+    padding: 24px 20px 26px;
+    border-radius: 18px;
+  }
+  .cardTitle {
+    font-size: 20px;
+  }
+  .cardBody {
+    font-size: 15px;
+  }
+  .node {
+    padding: 14px 14px;
+  }
+  .nodeTitle {
+    font-size: 15px;
+  }
+  .nodeBody {
+    font-size: 13px;
+  }
+  .closer {
+    font-size: 15px;
+  }
+}

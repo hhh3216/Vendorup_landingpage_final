@@ -1,0 +1,654 @@
+/* =============================================================
+   §4.4 작동 원리 — 토스식 sticky 전환 (이 페이지 모션의 핵심)
+   좌측 컬럼은 sticky로 붙어 있고, 우측 콘텐츠만 스크롤 진행도에 따라 교체된다.
+   화면 전체가 통째로 넘어가는 풀페이지 전환이 아니다. 스크롤 하이재킹 금지.
+   ============================================================= */
+
+.section {
+  background: #f7f8fa;
+  padding: 0 60px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 420px minmax(0, 1fr);
+  gap: 60px;
+  align-items: start;
+}
+
+/* --- 좌측 (고정) --- */
+.left {
+  position: sticky;
+  top: 120px;
+  padding: 110px 0 40px;
+}
+
+.title {
+  font: 800 48px/1.24 Pretendard, sans-serif;
+  letter-spacing: -0.04em;
+  margin: 0 0 34px;
+}
+
+.stepItem {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 0;
+  width: 100%;
+  text-align: left;
+}
+
+/* §1-2 얇은 세로 tick 진행 인디케이터.
+   채워지는 건 높이 애니메이션이 아니라 **색 전환** — 진행바처럼 보이면
+   스크롤 하이재킹 인상을 준다. */
+.tick {
+  width: 2px;
+  height: 44px;
+  border-radius: 1px;
+  background: rgba(16, 24, 40, 0.14);
+  flex: none;
+  margin-top: 2px;
+  transition: background var(--d-base) var(--ease-inout);
+}
+
+.stepText {
+  display: block;
+}
+
+.stepNo {
+  display: block;
+  font: 700 12px ui-monospace, Menlo, monospace;
+  color: rgba(26, 26, 26, 0.35);
+  transition: color var(--d-base) var(--ease-inout);
+}
+
+.stepTitle {
+  display: block;
+  font: 700 22px Pretendard, sans-serif;
+  letter-spacing: -0.028em;
+  color: rgba(26, 26, 26, 0.35);
+  margin-top: 5px;
+  transition: color var(--d-base) var(--ease-inout);
+}
+
+/* 활성 항목: 색 전환만. 확대하거나 움직이지 않는다. */
+.stepActive .tick {
+  background: var(--violet);
+}
+
+.stepActive .stepNo {
+  color: var(--violet);
+}
+
+.stepActive .stepTitle {
+  color: var(--ink);
+}
+
+.note {
+  font: 500 14px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.4);
+  margin-top: 28px;
+  word-break: keep-all;
+}
+
+/* --- 우측 (교체) --- */
+.right {
+  position: relative;
+  /* 스텝당 100vh 트랙 — 스크롤 진행도가 곧 스텝 인덱스가 된다 */
+  height: calc(var(--steps, 6) * 100vh);
+  padding-top: 110px;
+}
+
+/* 트랙은 IO 관측 대상일 뿐, 아무것도 그리지 않는다 */
+.tracks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.track {
+  height: 100vh;
+}
+
+/* 카드는 sticky로 화면에 고정되고, 내용만 크로스페이드로 교체된다 */
+.stage {
+  position: sticky;
+  top: 120px;
+  display: grid;
+}
+
+.card {
+  /* 6장 모두 같은 그리드 칸을 차지해 겹친다 → 크로스페이드가 가능하다.
+     align-self:start 라서 각 카드는 자기 내용만큼만 높고,
+     무대(stage)의 높이는 가장 큰 카드가 결정한다. */
+  grid-area: 1 / 1;
+  align-self: start;
+  background: #fff;
+  border-radius: 24px;
+  padding: 38px 40px 40px;
+  box-shadow: 0 2px 4px rgba(16, 24, 40, 0.04);
+  display: flex;
+  flex-direction: column;
+
+  /* 이전 카드 opacity 1→0 + translateY(0 → -12px)
+     새 카드   opacity 0→1 + translateY(12px → 0)
+     둘 다 --d-base --ease-inout, 크로스페이드로 겹치게 */
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition:
+    opacity var(--d-base) var(--ease-inout),
+    transform var(--d-base) var(--ease-inout);
+}
+
+.cardActive {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* 지나간 카드는 위로 빠진다 */
+.cardPast {
+  transform: translateY(-12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* §8.1 sticky 스텝 전환은 유지하되 크로스페이드 없이 즉시 교체 */
+  .card {
+    transition: none;
+  }
+}
+
+.cardNo {
+  font: 700 13px ui-monospace, Menlo, monospace;
+  color: var(--violet);
+}
+
+.cardTitle {
+  font: 800 34px Pretendard, sans-serif;
+  letter-spacing: -0.035em;
+  margin-top: 14px;
+}
+
+.cardBody {
+  font: 400 19px/1.7 Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.58);
+  margin: 14px 0 28px;
+  max-width: 600px;
+  word-break: keep-all;
+}
+
+.cardVisual {
+  margin-top: 0;
+}
+
+/* =============================================================
+   스텝별 목업 비주얼
+   ============================================================= */
+
+/* 01 받는다 */
+.kakaoBox {
+  background: #b2c7da;
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+}
+
+.kakaoAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  background: #fff;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 12px Pretendard, sans-serif;
+  color: #6b7684;
+}
+
+.kakaoBubble {
+  background: #fff;
+  border-radius: 4px 15px 15px 15px;
+  padding: 14px 16px;
+  font: 400 16px/1.6 -apple-system, "Apple SD Gothic Neo", sans-serif;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+/* 02 전달한다 */
+.twoWays {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.way {
+  background: #f7f8fa;
+  border-radius: 16px;
+  padding: 24px 24px 26px;
+}
+
+.wayBadge {
+  display: inline-flex;
+  font: 700 12px Pretendard, sans-serif;
+  color: var(--violet);
+  background: rgba(86, 48, 227, 0.09);
+  padding: 6px 11px;
+  border-radius: 999px;
+}
+
+.wayBadgeCyan {
+  color: var(--cyan-deep);
+  background: rgba(3, 177, 216, 0.12);
+}
+
+.wayTitle {
+  font: 800 21px Pretendard, sans-serif;
+  letter-spacing: -0.028em;
+  margin-top: 14px;
+}
+
+.wayBody {
+  font: 400 16px/1.65 Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+  margin: 8px 0 0;
+  word-break: keep-all;
+}
+
+.wayFlow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font: 600 14px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.45);
+}
+
+.wayArrow {
+  color: rgba(26, 26, 26, 0.3);
+}
+
+/* 03 추출한다 */
+.extract {
+  background: #f7f8fa;
+  border-radius: 16px;
+  padding: 24px;
+  font: 400 18px/2 Pretendard, sans-serif;
+  word-break: keep-all;
+}
+
+.tokenViolet,
+.tokenCyan {
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 6px;
+}
+
+.tokenViolet {
+  background: rgba(86, 48, 227, 0.12);
+  color: var(--violet);
+}
+
+.tokenCyan {
+  background: rgba(3, 177, 216, 0.14);
+}
+
+.tokenMuted {
+  color: rgba(26, 26, 26, 0.45);
+}
+
+/* 04 맞춘다 */
+.matchBox {
+  background: #f7f8fa;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.matchRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.matchName {
+  font: 600 18px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+  width: 120px;
+}
+
+.matchArrow {
+  color: rgba(26, 26, 26, 0.3);
+}
+
+.matchCode {
+  font: 700 16px ui-monospace, Menlo, monospace;
+  color: var(--violet);
+  background: rgba(86, 48, 227, 0.08);
+  padding: 5px 10px;
+  border-radius: 7px;
+}
+
+/* 05 확인한다 */
+.confirmBox {
+  background: #f7f8fa;
+  border-radius: 16px;
+  padding: 24px 24px 22px;
+}
+
+.confirmGrid {
+  display: grid;
+  grid-template-columns: 1fr 110px 130px;
+  gap: 0 14px;
+}
+
+.confirmTh {
+  font: 700 13px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.45);
+  padding-bottom: 11px;
+}
+
+.confirmName {
+  font: 600 17px Pretendard, sans-serif;
+  padding: 12px 0;
+  border-top: 1px solid rgba(16, 24, 40, 0.07);
+}
+
+.confirmQty {
+  font: 500 17px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.6);
+  padding: 12px 0;
+  border-top: 1px solid rgba(16, 24, 40, 0.07);
+}
+
+.confirmCode {
+  font: 600 15px ui-monospace, Menlo, monospace;
+  color: var(--violet);
+  padding: 12px 0;
+  border-top: 1px solid rgba(16, 24, 40, 0.07);
+}
+
+.confirmFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(16, 24, 40, 0.1);
+}
+
+.confirmAsk {
+  font: 800 22px Pretendard, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.confirmMeta {
+  font: 500 16px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.5);
+  margin-top: 8px;
+}
+
+.confirmApprove {
+  background: var(--violet);
+  color: #fff;
+  font: 700 17px Pretendard, sans-serif;
+  padding: 15px 34px;
+  border-radius: 12px;
+  box-shadow: 0 0 0 5px rgba(86, 48, 227, 0.14);
+  flex: none;
+}
+
+/* 06 등록한다 */
+.registerBox {
+  background: #f7f8fa;
+  border-radius: 16px;
+  padding: 22px 24px 24px;
+}
+
+.registerHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(16, 24, 40, 0.09);
+}
+
+.registerCheck {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--violet);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 16px Pretendard, sans-serif;
+  flex: none;
+}
+
+.registerTitle {
+  font: 700 20px Pretendard, sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.registerGrid {
+  display: grid;
+  grid-template-columns: 150px 1fr 96px 108px;
+  gap: 0 14px;
+  margin-top: 6px;
+}
+
+.registerTh {
+  font: 700 13px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.45);
+  padding: 12px 0 11px;
+}
+
+.registerThRight {
+  text-align: right;
+}
+
+.registerSlip {
+  font: 600 15px ui-monospace, Menlo, monospace;
+  padding: 12px 0;
+  border-top: 1px solid rgba(16, 24, 40, 0.07);
+}
+
+.registerStore {
+  font: 600 17px Pretendard, sans-serif;
+  padding: 12px 0;
+  border-top: 1px solid rgba(16, 24, 40, 0.07);
+}
+
+.registerCount {
+  font: 500 17px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.6);
+  padding: 12px 0;
+  border-top: 1px solid rgba(16, 24, 40, 0.07);
+}
+
+.registerStatusCell {
+  padding: 12px 0;
+  border-top: 1px solid rgba(16, 24, 40, 0.07);
+  text-align: right;
+}
+
+.registerBadge {
+  font: 700 13px Pretendard, sans-serif;
+  color: var(--violet);
+  background: rgba(86, 48, 227, 0.09);
+  padding: 5px 10px;
+  border-radius: 999px;
+}
+
+.registerBadgeDim {
+  color: rgba(26, 26, 26, 0.45);
+  background: rgba(16, 24, 40, 0.06);
+}
+
+.dim {
+  color: rgba(26, 26, 26, 0.48);
+}
+
+/* =============================================================
+   §7 모바일 폴백 (< 768px)
+   sticky 완전 해제. 스텝 6개를 세로 카드로 나열, 각각 공통 진입 규칙만.
+   tick 인디케이터 제거.
+   ============================================================= */
+@media (max-width: 1023px) {
+  .section {
+    padding: 0 32px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .left {
+    position: static;
+    padding: 84px 0 0;
+  }
+  .title {
+    font-size: 34px;
+    margin-bottom: 0;
+  }
+  /* 좌측 스텝 리스트와 tick은 데스크탑 전용 장치다 */
+  .stepList,
+  .note {
+    display: none;
+  }
+  .right {
+    height: auto;
+    padding-top: 32px;
+    padding-bottom: 92px;
+  }
+  .tracks {
+    display: none;
+  }
+  .stage {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  /* JS가 없을 때의 최종 상태 */
+  .card {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition: none;
+  }
+
+  /* 모바일에서는 크로스페이드 대신 카드마다 §3 공통 진입 규칙만 적용한다.
+     전역 [data-reveal]을 쓰면 데스크탑 크로스페이드와 특이도가 충돌하므로
+     이 섹션 안에서만 쓰는 전용 클래스로 분리한다. */
+  :global(.js-anim) .cardStacked {
+    opacity: 0;
+    transform: translateY(var(--y-md));
+    transition:
+      opacity var(--d-enter) var(--ease-out),
+      transform var(--d-enter) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  :global(.js-anim) .cardStacked.stackedIn {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js-anim) .cardStacked {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+  .cardTitle {
+    font-size: 26px;
+  }
+  .cardBody {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 0 20px;
+  }
+  .left {
+    padding-top: 64px;
+  }
+  .title {
+    font-size: 28px;
+  }
+  .right {
+    padding-bottom: 72px;
+  }
+  .card {
+    padding: 26px 22px 28px;
+    border-radius: 18px;
+  }
+  .cardTitle {
+    font-size: 23px;
+  }
+  .cardBody {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .twoWays {
+    grid-template-columns: 1fr;
+  }
+  .confirmGrid {
+    grid-template-columns: 1fr 68px 88px;
+  }
+  .confirmName,
+  .confirmQty {
+    font-size: 14px;
+  }
+  .confirmCode {
+    font-size: 12px;
+  }
+  .confirmFoot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .confirmAsk {
+    font-size: 18px;
+  }
+  .confirmApprove {
+    text-align: center;
+    padding: 14px;
+  }
+  .registerGrid {
+    grid-template-columns: 1fr 64px 58px;
+  }
+  /* 좁은 화면에서는 거래처 열을 접는다 */
+  .registerStore,
+  .registerGrid > .registerTh:nth-child(2) {
+    display: none;
+  }
+  .registerTitle {
+    font-size: 16px;
+  }
+  .registerSlip {
+    font-size: 12px;
+  }
+  .registerCount {
+    font-size: 14px;
+  }
+  .kakaoBubble,
+  .extract {
+    font-size: 14px;
+  }
+  .matchName {
+    font-size: 16px;
+    width: 84px;
+  }
+}

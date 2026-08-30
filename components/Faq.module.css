@@ -1,0 +1,145 @@
+/* §4.9 FAQ 아코디언 */
+
+.section {
+  padding: 110px 60px 120px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 60px;
+}
+
+.title {
+  font: 800 46px/1.26 Pretendard, sans-serif;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.item {
+  border-top: 1px solid rgba(16, 24, 40, 0.1);
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: baseline;
+  padding: 26px 0;
+  text-align: left;
+}
+
+.q {
+  font: 700 21px Pretendard, sans-serif;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+  transition: color var(--d-base) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  .trigger:hover .q {
+    color: var(--violet);
+  }
+}
+
+/* +/− 아이콘. 세로 막대가 90도 회전해 가로 막대와 겹치면 "−"가 된다.
+   rotate 만 쓰므로 §8.2(transform·opacity만 애니메이션)를 지킨다. */
+.icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  align-self: center;
+}
+
+.bar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 18px;
+  height: 1.5px;
+  background: rgba(26, 26, 26, 0.45);
+  border-radius: 1px;
+  transform: translateY(-50%);
+  transition:
+    transform var(--d-base) var(--ease-inout),
+    background var(--d-base) var(--ease-inout);
+}
+
+.barV {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.open .barV {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.open .bar {
+  background: var(--violet);
+}
+
+/* 펼침/접힘: grid-template-rows 0fr → 1fr, --d-base --ease-inout.
+   내용 opacity는 지연 없이 함께. */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--d-base) var(--ease-inout);
+}
+
+.panelOpen {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  overflow: hidden;
+  min-height: 0;
+  opacity: 0;
+  transition: opacity var(--d-base) var(--ease-inout);
+}
+
+.panelOpen .panelInner {
+  opacity: 1;
+}
+
+.a {
+  font: 400 17px/1.75 Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.6);
+  margin: 0 0 26px;
+  max-width: 800px;
+  word-break: keep-all;
+}
+
+.tail {
+  border-top: 1px solid rgba(16, 24, 40, 0.1);
+}
+
+@media (max-width: 1023px) {
+  .section {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 84px 32px 92px;
+  }
+  .title {
+    font-size: 34px;
+  }
+  .q {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 64px 20px 72px;
+  }
+  .title {
+    font-size: 27px;
+  }
+  .trigger {
+    padding: 20px 0;
+  }
+  .q {
+    font-size: 16px;
+  }
+  .a {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+}

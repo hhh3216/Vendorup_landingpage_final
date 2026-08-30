@@ -1,0 +1,324 @@
+/* §4.8 가격표 */
+
+.section {
+  background: #f7f8fa;
+}
+
+.head {
+  text-align: center;
+}
+
+.sub {
+  font: 600 20px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+  margin: 18px 0 0;
+}
+
+.sub b {
+  color: var(--violet);
+}
+
+/* 긴급성 스트립 — 공통 규칙만. 깜빡임·펄스·카운트다운 금지 (§4.8) */
+.urgency {
+  display: inline-block;
+  margin-top: 24px;
+  font: 700 16px Pretendard, sans-serif;
+  color: var(--ink);
+  background: rgba(3, 177, 216, 0.12);
+  padding: 11px 20px;
+  border-radius: 999px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.12fr 1fr;
+  gap: 20px;
+  align-items: center;
+  margin-top: 54px;
+}
+
+.plan {
+  background: #fff;
+  border-radius: 22px;
+  padding: 36px 30px 34px;
+  border: 1px solid rgba(16, 24, 40, 0.08);
+}
+
+.planMain {
+  border-radius: 24px;
+  padding: 44px 36px 42px;
+  border: 2px solid var(--violet);
+  box-shadow: 0 30px 60px -30px rgba(86, 48, 227, 0.4);
+}
+
+.planName {
+  font: 800 20px Pretendard, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.planNameMain {
+  font-size: 22px;
+}
+
+.mainHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 추천 뱃지: 카드 진입 완료 시점에 함께. 뱃지 단독 팝인 금지 (§4.8) */
+.recommend {
+  font: 700 12px Pretendard, sans-serif;
+  color: #fff;
+  background: var(--violet);
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.planDesc {
+  font: 400 16px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.5);
+  margin-top: 8px;
+}
+
+.planDescMain {
+  font: 600 17px Pretendard, sans-serif;
+  color: var(--ink);
+  margin-top: 10px;
+}
+
+/* 정가 취소선: 처음부터 취소선 상태로 보인다.
+   선이 그려지는 애니메이션은 하지 않는다 — 할인 광고 클리셰 (§4.8). */
+.listPrice {
+  font: 500 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.35);
+  margin-top: 24px;
+  text-decoration: line-through;
+}
+
+.listPriceMain {
+  margin-top: 26px;
+}
+
+.price {
+  font: 800 34px Pretendard, sans-serif;
+  letter-spacing: -0.035em;
+  margin-top: 4px;
+}
+
+.priceMain {
+  font-size: 44px;
+  letter-spacing: -0.04em;
+  color: var(--violet);
+}
+
+.per {
+  font: 600 18px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.45);
+}
+
+.perMain {
+  font-size: 20px;
+}
+
+.avail {
+  font: 600 14px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.45);
+  margin-top: 8px;
+}
+
+.availMain {
+  font-weight: 700;
+  color: var(--violet);
+}
+
+.rule {
+  height: 1px;
+  background: rgba(16, 24, 40, 0.08);
+  margin: 26px 0 20px;
+}
+
+.ruleMain {
+  margin: 28px 0 20px;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font: 500 16px Pretendard, sans-serif;
+}
+
+.featuresMain {
+  gap: 13px;
+}
+
+.feature {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.featureOff {
+  color: rgba(26, 26, 26, 0.35);
+}
+
+.on {
+  color: var(--violet);
+  font-weight: 700;
+  flex: none;
+}
+
+.featureStrong {
+  font-weight: 700;
+}
+
+.planCta {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  background: var(--violet);
+  color: #fff;
+  font: 700 17px Pretendard, sans-serif;
+  text-align: center;
+  padding: 17px;
+  border-radius: 14px;
+  min-height: 44px;
+  transition:
+    transform var(--d-base) var(--ease-inout),
+    box-shadow var(--d-base) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  .planCta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px -14px rgba(86, 48, 227, 0.6);
+  }
+}
+
+.planCta:active {
+  transform: translateY(0) scale(0.985);
+  transition-duration: var(--d-fast);
+}
+
+.footnote {
+  font: 500 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.45);
+  margin-top: 22px;
+  text-align: center;
+  word-break: keep-all;
+}
+
+/* --- 함께 드리는 것 --- */
+.bonus {
+  margin-top: 64px;
+  background: #fff;
+  border-radius: 24px;
+  padding: 40px 44px 44px;
+}
+
+.bonusTitle {
+  font: 800 28px Pretendard, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.bonusGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 40px;
+  margin-top: 26px;
+}
+
+/* 가치 스택 체크리스트: 항목당 60ms 스태거.
+   체크 아이콘 드로잉 애니메이션 없음 (§4.8). */
+.bonusItem {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.check {
+  color: var(--violet);
+  font-weight: 800;
+  flex: none;
+}
+
+.bonusText {
+  font: 400 17px/1.6 Pretendard, sans-serif;
+  word-break: keep-all;
+}
+
+.bonusText b {
+  font-weight: 700;
+}
+
+.bonusRule {
+  height: 1px;
+  background: rgba(16, 24, 40, 0.08);
+  margin: 34px 0 26px;
+}
+
+.bonusFoot {
+  font: 700 20px/1.6 Pretendard, sans-serif;
+  word-break: keep-all;
+}
+
+.bonusFootMuted {
+  font-weight: 500;
+  color: rgba(26, 26, 26, 0.55);
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  /* §7 모바일 폴백: 세로 스택, AI ORDER를 맨 위로 */
+  .planMain {
+    order: -1;
+  }
+  .bonusGrid {
+    grid-template-columns: 1fr;
+  }
+  .bonus {
+    padding: 30px 26px 32px;
+  }
+  .bonusTitle {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 767px) {
+  .sub {
+    font-size: 16px;
+  }
+  .urgency {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+  .plan {
+    padding: 26px 22px 28px;
+    border-radius: 18px;
+  }
+  .planMain {
+    padding: 30px 24px 32px;
+  }
+  .price {
+    font-size: 28px;
+  }
+  .priceMain {
+    font-size: 34px;
+  }
+  .features {
+    font-size: 15px;
+  }
+  .bonusText {
+    font-size: 15px;
+  }
+  .bonusFoot {
+    font-size: 17px;
+  }
+  .footnote {
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,283 @@
+/* =============================================================
+   Vendor-UP 랜딩페이지 — 전역 스타일 + 모션 토큰
+   ANIMATION_SPEC.md §2 (모션 토큰) / §3 (공통 진입) / §7 (모바일) / §8 (접근성)
+   ============================================================= */
+
+/* ---------- §2 전역 모션 토큰 — 코드에서 이 값만 쓴다 ---------- */
+:root {
+  /* 이징 */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* 진입: 요소가 들어올 때 */
+  --ease-inout: cubic-bezier(0.4, 0, 0.2, 1); /* 상태 변화: 색·크기·전환 */
+  --ease-linear: linear; /* 스켈레톤 시머, 진행 루프만 */
+
+  /* 듀레이션 */
+  --d-fast: 120ms; /* 탭·클릭 피드백 */
+  --d-base: 240ms; /* 호버, 색 전환, 아코디언 */
+  --d-enter: 560ms; /* 스크롤 진입 */
+  --d-slow: 800ms; /* 큰 블록(히어로 카드, 가격표) 진입 */
+
+  /* 이동 거리 — 이 3개만 사용 */
+  --y-sm: 12px; /* 작은 요소: 뱃지, 라벨, 표 한 줄 */
+  --y-md: 24px; /* 카드, 문단 */
+  --y-lg: 32px; /* 다크 섹션 내부 요소, 섹션 헤드라인 */
+
+  /* 스태거 — 형제 요소 간 지연. 최대 6개까지, 7번째부터는 동시 */
+  --stagger: 70ms;
+
+  /* 브랜드 */
+  --violet: #5630e3;
+  --violet-deep: #3b22a6;
+  --cyan: #03b1d8;
+  --cyan-deep: #0186a5;
+  --ink: #1a1a1a;
+  --dark: #111317;
+}
+
+/* §7 모바일에서 이동 거리 전부 축소 */
+@media (max-width: 767px) {
+  :root {
+    --y-md: 16px;
+    --y-lg: 20px;
+  }
+}
+
+/* ---------- 리셋 ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* §8.3-10 스무스 스크롤은 JS scrollTo로만 */
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  font-family: Pretendard, "Noto Sans KR", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-wrap: pretty;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--violet);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--violet-deep);
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+}
+
+input,
+textarea {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* 키보드 포커스 링을 모션으로 감추지 않는다 (§8.1) */
+:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+}
+
+/* =============================================================
+   §3 공통 스크롤 진입 규칙
+   -------------------------------------------------------------
+   §8.1 원칙: 기본 CSS는 **최종 상태**로 쓰고, JS가 붙었을 때만
+   초기 상태를 적용한다. 루트에 .js-anim 이 없으면(=JS 미로딩·실패)
+   모든 요소가 그냥 보인다. opacity:0 으로 콘텐츠가 사라지지 않는다.
+   ============================================================= */
+
+[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+.js-anim [data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--y-md));
+  transition:
+    opacity var(--d-enter) var(--ease-out),
+    transform var(--d-enter) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* 다크 섹션 내부 요소 · 섹션 헤드라인은 거리를 크게 (§1-3, §4.2) */
+.js-anim [data-reveal="lg"] {
+  transform: translateY(var(--y-lg));
+}
+
+/* 작은 요소: 뱃지, 라벨, 표 한 줄 */
+.js-anim [data-reveal="sm"] {
+  transform: translateY(var(--y-sm));
+}
+
+/* 큰 블록(히어로 카드, 가격표) */
+.js-anim [data-reveal-slow] {
+  transition-duration: var(--d-slow);
+}
+
+.js-anim [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* =============================================================
+   §8.1 prefers-reduced-motion: 모든 진입 애니메이션·스태거·시머 제거.
+   요소는 최종 상태로 즉시 표시.
+   ============================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .js-anim [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- 공통 레이아웃 ---------- */
+.shell {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.section-pad {
+  padding: 110px 60px 120px;
+}
+
+@media (max-width: 1023px) {
+  .section-pad {
+    padding: 84px 32px 92px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-pad {
+    padding: 64px 20px 72px;
+  }
+}
+
+/* ---------- 공통 타이포 ---------- */
+.h2 {
+  font: 800 52px/1.24 Pretendard, sans-serif;
+  letter-spacing: -0.04em;
+  word-break: keep-all;
+}
+
+.lead {
+  font: 400 21px/1.7 Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+  word-break: keep-all;
+}
+
+.eyebrow {
+  font: 600 14px Pretendard, sans-serif;
+  color: rgba(86, 48, 227, 0.7);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 1023px) {
+  .h2 {
+    font-size: 40px;
+  }
+  .lead {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  .h2 {
+    font-size: 30px;
+    line-height: 1.3;
+  }
+  .lead {
+    font-size: 16px;
+  }
+}
+
+/* ---------- 공통 버튼 (§4.1 CTA 호버/액티브) ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font: 700 17px Pretendard, sans-serif;
+  transition:
+    transform var(--d-base) var(--ease-inout),
+    box-shadow var(--d-base) var(--ease-inout),
+    border-color var(--d-base) var(--ease-inout),
+    background var(--d-base) var(--ease-inout);
+  /* 터치 타겟 최소 44px (§7) */
+  min-height: 44px;
+}
+
+.btn-primary {
+  background: var(--violet);
+  color: #fff;
+  padding: 16px 28px;
+  box-shadow: 0 12px 26px -12px rgba(86, 48, 227, 0.5);
+}
+
+.btn-ghost {
+  background: #fff;
+  color: var(--ink);
+  padding: 16px 24px;
+  border: 1px solid rgba(16, 24, 40, 0.12);
+}
+
+/* §7 호버 모션은 @media (hover:hover)로 감싼다.
+   터치 기기에서 호버 상태가 눌러붙는 것 방지 */
+@media (hover: hover) {
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px -12px rgba(86, 48, 227, 0.58);
+  }
+
+  .btn-ghost:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 24, 40, 0.22);
+    box-shadow: 0 12px 24px -14px rgba(16, 24, 40, 0.3);
+  }
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.985);
+  transition-duration: var(--d-fast);
+}
+
+/* ---------- 스크린리더 전용 ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
