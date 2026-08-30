@@ -65,19 +65,15 @@
   transform-origin: top center;
 }
 
-/* §5.2 오버레이는 영상보다 위 레이어에 항상 고정 — 페이드인 하지 않는다. */
+/* 영상을 가리지 않도록 화이트 워시는 없앴다. 헤드라인은 대신 흰 글자 +
+   text-shadow로 어떤 영상 프레임 위에서도 읽히게 한다 (아래 .headline).
+   완전히 투명한 요소는 남겨서, 나중에 다시 옅게 깔고 싶어지면 이 지점에 배경만 채우면 된다. */
 .gradient {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   height: 62%;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.6) 20%,
-    #fff 42%
-  );
   pointer-events: none;
 }
 
@@ -97,16 +93,20 @@
   left: 52px;
   right: 52px;
   bottom: 40px;
-  color: var(--ink);
+  color: #fff;
 }
 
-/* §8.2 LCP 요소(히어로 헤드라인)에 애니메이션을 걸지 않는다. */
+/* §8.2 LCP 요소(히어로 헤드라인)에 애니메이션을 걸지 않는다.
+   배경 워시가 없어졌으니, 흰 글자 + 그림자로 어떤 영상 프레임 위에서도 읽히게 한다. */
 .headline {
   font: 800 54px/1.2 Pretendard, sans-serif;
   letter-spacing: -0.045em;
   margin: 0;
   max-width: 760px;
   word-break: keep-all;
+  text-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.45),
+    0 1px 3px rgba(0, 0, 0, 0.55);
 }
 
 .below {
