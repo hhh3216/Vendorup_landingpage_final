@@ -1,0 +1,133 @@
+/* §4.11 푸터 — 진입 애니메이션 없음.
+   푸터는 스크롤 끝이므로 등장 연출이 의미 없다. */
+
+.footer {
+  background: var(--dark);
+  color: #fff;
+  padding: 80px 60px 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 620px;
+  gap: 60px;
+}
+
+/* 카이톤 로고: 정적. 그라데이션 애니메이션 금지. */
+.logo {
+  height: 52px;
+  width: 256px;
+  display: block;
+}
+
+.company {
+  font: 700 17px Pretendard, sans-serif;
+  margin-top: 24px;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.colTitle {
+  font: 700 14px Pretendard, sans-serif;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.colLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 18px;
+  font: 500 16px Pretendard, sans-serif;
+}
+
+/* 링크 호버: 밑줄 scaleX(0→1), transform-origin:left, --d-fast */
+.link {
+  position: relative;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color var(--d-fast) var(--ease-inout);
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--d-fast) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  .link:hover {
+    color: #fff;
+  }
+
+  .link:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.rule {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 56px 0 24px;
+}
+
+.legal {
+  font: 400 14px/1.9 Pretendard, sans-serif;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 1023px) {
+  .footer {
+    padding: 64px 32px 32px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .rule {
+    margin: 40px 0 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer {
+    padding: 48px 20px 28px;
+  }
+  .logo {
+    height: 40px;
+    width: 197px;
+  }
+  .company {
+    font-size: 15px;
+  }
+  .cols {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .colLinks {
+    font-size: 15px;
+    gap: 0;
+    margin-top: 8px;
+  }
+
+  /* §7 터치 타겟 최소 44px */
+  .link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .legal {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+}

@@ -1,0 +1,253 @@
+/* §4.3 해결 섹션 — 강조 스트립 + Before/After 표 */
+
+.strip {
+  margin-top: 44px;
+  background: linear-gradient(120deg, #5630e3 0%, #4526c4 60%, #03b1d8 160%);
+  border-radius: 26px;
+  padding: 46px 48px;
+  color: #fff;
+  /* 그라데이션 자체를 움직이지 않는다 (§1-5) */
+}
+
+.stripTitle {
+  font: 800 40px/1.34 Pretendard, sans-serif;
+  letter-spacing: -0.038em;
+  word-break: keep-all;
+}
+
+.stripBody {
+  font: 400 20px/1.68 Pretendard, sans-serif;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 16px 0 0;
+  max-width: 840px;
+  word-break: keep-all;
+}
+
+/* --- Before/After 표 --- */
+.table {
+  margin-top: 64px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(16, 24, 40, 0.1);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) minmax(0, 1.15fr) minmax(0, 1.15fr);
+}
+
+.thBlank {
+  padding: 20px 24px;
+  background: #fff;
+}
+
+.thNow {
+  font: 700 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.45);
+  letter-spacing: 0.01em;
+  padding: 20px 24px;
+  background: #fff;
+}
+
+.thAfter {
+  font: 700 15px Pretendard, sans-serif;
+  color: #fff;
+  letter-spacing: 0.01em;
+  padding: 20px 24px;
+  background: var(--violet);
+}
+
+.label {
+  font: 700 18px Pretendard, sans-serif;
+  letter-spacing: -0.022em;
+  padding: 22px 24px;
+  word-break: keep-all;
+  align-self: center;
+}
+
+.now {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 400 18px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+  padding: 22px 24px;
+  word-break: keep-all;
+}
+
+.after {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 600 18px Pretendard, sans-serif;
+  color: var(--ink);
+  padding: 22px 24px;
+  background: rgba(86, 48, 227, 0.05);
+  word-break: keep-all;
+}
+
+.after b {
+  font-weight: 800;
+}
+
+.divided .label,
+.divided .now {
+  border-top: 1px solid rgba(16, 24, 40, 0.09);
+}
+
+.divided .after {
+  border-top: 1px solid rgba(86, 48, 227, 0.14);
+}
+
+/* 표가 뷰포트에 들어오면 After 컬럼 셀만 위→아래로 순차 등장.
+   Before 컬럼은 처음부터 보인다 — "지금은 이미 이렇고, 바뀌는 건 오른쪽". */
+:global(.js-anim) .afterAnimated {
+  opacity: 0;
+  transform: translateY(var(--y-sm));
+  transition:
+    opacity var(--d-enter) var(--ease-out),
+    transform var(--d-enter) var(--ease-out);
+  transition-delay: var(--row-delay, 0ms);
+}
+
+:global(.js-anim) .afterAnimated.rowIn {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.js-anim) .afterAnimated {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* --- 핵심 가치 3줄 --- */
+.values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 56px;
+}
+
+.value {
+  border-left: 2px solid rgba(86, 48, 227, 0.3);
+  padding: 4px 0 4px 22px;
+  font: 700 22px/1.5 Pretendard, sans-serif;
+  letter-spacing: -0.025em;
+  word-break: keep-all;
+}
+
+.valueLead {
+  border-left-color: var(--violet);
+}
+
+.valueMuted {
+  color: rgba(26, 26, 26, 0.5);
+  font-weight: 500;
+}
+
+@media (max-width: 1023px) {
+  .stripTitle {
+    font-size: 28px;
+  }
+  .stripBody {
+    font-size: 17px;
+  }
+  .strip {
+    padding: 32px 28px;
+  }
+  .label,
+  .now,
+  .after {
+    font-size: 16px;
+    padding: 18px 18px;
+  }
+  .row {
+    grid-template-columns: minmax(140px, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .values {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .value {
+    font-size: 19px;
+  }
+}
+
+/* §7 모바일: 행 단위 세로 스택(지금/도입 후 위아래) */
+@media (max-width: 767px) {
+  .strip {
+    padding: 26px 20px;
+    border-radius: 18px;
+    margin-top: 28px;
+  }
+  .stripTitle {
+    font-size: 23px;
+  }
+  .stripBody {
+    font-size: 15px;
+  }
+
+  .table {
+    margin-top: 40px;
+    border-radius: 16px;
+  }
+
+  /* 헤더 행은 감추고, 각 셀이 자기 라벨을 달고 세로로 쌓인다 */
+  .headRow {
+    display: none;
+  }
+
+  .row {
+    display: block;
+  }
+
+  .divided {
+    border-top: 1px solid rgba(16, 24, 40, 0.09);
+  }
+
+  .label {
+    padding: 18px 18px 0;
+    font-size: 17px;
+  }
+
+  .now,
+  .after {
+    padding: 10px 18px;
+    font-size: 15px;
+    border-top: none !important;
+  }
+
+  .now::before,
+  .after::before {
+    content: attr(data-col);
+    font: 700 11px Pretendard, sans-serif;
+    letter-spacing: 0.02em;
+    flex: none;
+    width: 52px;
+  }
+
+  .now::before {
+    color: rgba(26, 26, 26, 0.4);
+  }
+
+  .after::before {
+    color: var(--violet);
+  }
+
+  .after {
+    margin: 0 12px 14px;
+    border-radius: 10px;
+  }
+
+  .values {
+    margin-top: 36px;
+  }
+
+  .value {
+    font-size: 17px;
+    padding-left: 16px;
+  }
+}

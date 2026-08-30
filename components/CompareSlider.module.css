@@ -1,0 +1,347 @@
+/* 시안 주석: "코드 단계에서 드래그 가능한 Compare Slider로 구현. 시안은 50% 지점 정지 상태."
+   → 기본값 50%에서 시안과 픽셀 동일하고, 드래그로 좌우를 비교한다.
+   드래그는 사용자 입력이므로 §8.3-7(width 애니메이션 금지)의 대상이 아니다.
+   clip-path만 갱신하고 레이아웃은 건드리지 않는다. */
+
+.wrap {
+  position: relative;
+  margin-top: 24px;
+  height: 480px;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 60px -34px rgba(16, 24, 40, 0.24),
+    0 0 0 1px rgba(16, 24, 40, 0.06);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* 지금 · 카톡 원문 */
+.before {
+  background: #b2c7da;
+}
+
+/* 도입 후 · 정형화된 주문 — 좌측 경계가 핸들 위치를 따라 잘린다 */
+.after {
+  background: #f7f8fa;
+  clip-path: inset(0 0 0 var(--pos, 50%));
+}
+
+/* 각 레이어의 내용은 시안대로 화면의 절반 폭에 자리를 잡고 움직이지 않는다.
+   움직이는 것은 잘리는 경계뿐이다. */
+.beforeInner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  padding: 28px 34px 76px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.afterInner {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  padding: 28px 34px 76px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 11px;
+  background: #fff;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 13px Pretendard, sans-serif;
+  color: #6b7684;
+}
+
+.bubble {
+  background: #fff;
+  border-radius: 5px 18px 18px 18px;
+  padding: 18px 20px;
+  font: 400 18px/1.62 -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  letter-spacing: -0.012em;
+  white-space: pre-line;
+  word-break: keep-all;
+  max-width: 400px;
+}
+
+.erpCard {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px -20px rgba(16, 24, 40, 0.2);
+  padding: 22px 24px 20px;
+}
+
+.erpHead {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.erpStore {
+  font: 800 24px Pretendard, sans-serif;
+  letter-spacing: -0.035em;
+}
+
+.erpDate {
+  font: 500 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.5);
+}
+
+.erpGrid {
+  display: grid;
+  grid-template-columns: 120px 1fr 110px 56px 56px;
+  margin-top: 16px;
+}
+
+.th {
+  font: 700 13px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.45);
+  padding-bottom: 9px;
+}
+
+.thCode {
+  color: var(--violet);
+}
+
+.thRight {
+  text-align: right;
+}
+
+.rule {
+  grid-column: 1/-1;
+  height: 2px;
+  background: rgba(16, 24, 40, 0.1);
+}
+
+.td {
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(16, 24, 40, 0.06);
+}
+
+.tdLast {
+  border-bottom: none;
+}
+
+.code {
+  font: 700 13px ui-monospace, Menlo, monospace;
+  color: var(--violet);
+  background: rgba(86, 48, 227, 0.08);
+  padding: 3px 7px;
+  border-radius: 5px;
+}
+
+.name {
+  font: 700 17px Pretendard, sans-serif;
+}
+
+.spec {
+  font: 500 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.6);
+}
+
+.qty {
+  font: 700 17px Pretendard, sans-serif;
+  text-align: right;
+}
+
+.unit {
+  font: 500 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.6);
+  text-align: right;
+}
+
+.erpFoot {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(16, 24, 40, 0.08);
+  font: 500 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+}
+
+/* --- 핸들 --- */
+.handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos, 50%);
+  width: 3px;
+  background: #fff;
+  transform: translateX(-1.5px);
+  cursor: ew-resize;
+  z-index: 3;
+}
+
+.grip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px; /* §7 터치 타겟 최소 44px */
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 6px 18px -6px rgba(16, 24, 40, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: rgba(26, 26, 26, 0.5);
+  font: 700 13px Pretendard, sans-serif;
+  transition: transform var(--d-base) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  .handle:hover .grip {
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+}
+
+.handle:focus-visible {
+  outline: none;
+}
+
+.handle:focus-visible .grip {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+}
+
+/* --- 캡션 --- */
+.tagBefore,
+.tagAfter {
+  position: absolute;
+  bottom: 24px;
+  font: 700 14px Pretendard, sans-serif;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.tagBefore {
+  left: 24px;
+  background: rgba(17, 19, 23, 0.7);
+}
+
+.tagAfter {
+  right: 24px;
+  background: var(--violet);
+}
+
+.hint {
+  font: 500 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.42);
+  margin-top: 12px;
+}
+
+@media (max-width: 1023px) {
+  .wrap {
+    height: 420px;
+  }
+  .bubble {
+    font-size: 15px;
+    padding: 14px 16px;
+  }
+  .erpGrid {
+    grid-template-columns: 92px 1fr 74px 40px 44px;
+  }
+  .th,
+  .code {
+    font-size: 11px;
+  }
+  .name,
+  .qty {
+    font-size: 14px;
+  }
+  .spec,
+  .unit {
+    font-size: 12px;
+  }
+  .erpStore {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 767px) {
+  .wrap {
+    height: 380px;
+    border-radius: 18px;
+  }
+  /* 좁은 화면에서 각 패널을 화면의 절반에 욱여넣으면 표가 글자 단위로 줄바꿈된다.
+     패널을 넓게 잡고 잘리는 경계만 가운데에 두어 내용이 읽히게 한다. */
+  .beforeInner,
+  .afterInner {
+    width: 84%;
+    padding: 18px 14px 60px;
+  }
+  .bubble {
+    font-size: 12px;
+    padding: 10px 12px;
+    line-height: 1.5;
+  }
+  .avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    font-size: 11px;
+  }
+  .erpCard {
+    padding: 14px 14px 12px;
+    border-radius: 12px;
+  }
+  .erpGrid {
+    grid-template-columns: 62px 1fr 30px;
+  }
+  .bubble {
+    max-width: 100%;
+  }
+  /* 좁은 화면에서는 규격·단위 열을 접는다 */
+  .hideNarrow {
+    display: none;
+  }
+  .th,
+  .code {
+    font-size: 9px;
+  }
+  .name,
+  .qty {
+    font-size: 11px;
+  }
+  .erpStore {
+    font-size: 15px;
+  }
+  .erpDate,
+  .erpFoot {
+    font-size: 10px;
+  }
+  .td {
+    padding: 7px 0;
+  }
+  .tagBefore,
+  .tagAfter {
+    font-size: 11px;
+    padding: 6px 10px;
+    bottom: 16px;
+  }
+  .tagBefore {
+    left: 12px;
+  }
+  .tagAfter {
+    right: 12px;
+  }
+}

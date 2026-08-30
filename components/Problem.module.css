@@ -1,0 +1,192 @@
+/* §4.2 문제 섹션 (다크, #111317)
+   §1-3 배경색은 애니메이션하지 않는다 — 섹션 경계에서 그냥 바뀐다.
+   대신 내부 요소의 진입 거리를 --y-lg 로 크게 준다. */
+
+.section {
+  background: var(--dark);
+  color: #fff;
+}
+
+.headline {
+  font: 800 52px/1.24 Pretendard, sans-serif;
+  letter-spacing: -0.04em;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.lead {
+  font: 400 21px/1.7 Pretendard, sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 24px 0 0;
+  max-width: 800px;
+  word-break: keep-all;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 22px;
+  padding: 34px 32px 38px;
+  transition:
+    transform var(--d-base) var(--ease-inout),
+    border-color var(--d-base) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+}
+
+.cardTitle {
+  font: 800 26px Pretendard, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.cardBody {
+  font: 400 17px/1.72 Pretendard, sans-serif;
+  color: rgba(255, 255, 255, 0.58);
+  margin: 14px 0 0;
+  word-break: keep-all;
+}
+
+.cardBody b {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* --- 1번 카드: 반복 입력 아이콘 --- */
+.repeatIcons {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 26px;
+}
+
+.repeatIcon {
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 5px;
+  flex: none;
+}
+
+/* 아이콘 5개가 좌→우 순차 등장, 각 90ms 간격.
+   마지막 아이콘까지 들어온 뒤 아무것도 하지 않는다 (반복 루프 금지). */
+:global(.js-anim) .repeatIconAnimated {
+  opacity: 0;
+  transform: translateY(var(--y-sm));
+  transition:
+    opacity var(--d-enter) var(--ease-out),
+    transform var(--d-enter) var(--ease-out);
+  transition-delay: var(--icon-delay, 0ms);
+}
+
+:global(.js-anim) .repeatIconAnimated.iconIn {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.js-anim) .repeatIconAnimated {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* --- 2번 카드: 오입력 --- */
+.typo {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.typoOld {
+  font: 700 22px ui-monospace, Menlo, monospace;
+  color: rgba(255, 255, 255, 0.35);
+  text-decoration: line-through;
+}
+
+.typoNew {
+  font: 700 22px ui-monospace, Menlo, monospace;
+  color: #fff;
+}
+
+.typoUnit {
+  font: 500 15px Pretendard, sans-serif;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* --- 3번 카드: 주문 누락 --- */
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 26px;
+}
+
+.bar {
+  height: 8px;
+  border-radius: 4px;
+}
+
+/* --- 마무리 한 줄 --- */
+.closer {
+  font: 700 30px/1.5 Pretendard, sans-serif;
+  letter-spacing: -0.03em;
+  margin-top: 56px;
+  word-break: keep-all;
+}
+
+.closerAccent {
+  color: var(--cyan);
+}
+
+@media (max-width: 1023px) {
+  .headline {
+    font-size: 40px;
+  }
+  .lead {
+    font-size: 18px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 44px;
+  }
+  .closer {
+    font-size: 24px;
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .headline {
+    font-size: 30px;
+    line-height: 1.3;
+  }
+  .lead {
+    font-size: 16px;
+  }
+  .card {
+    padding: 26px 24px 30px;
+  }
+  .cardTitle {
+    font-size: 22px;
+  }
+  .cardBody {
+    font-size: 15px;
+  }
+  .closer {
+    font-size: 20px;
+  }
+}

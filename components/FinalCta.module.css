@@ -1,0 +1,434 @@
+/* §4.10 최종 CTA (브랜드 풀블리드) — 페이지에서 가장 강한 대비 구간 */
+
+.section {
+  background: var(--violet);
+  color: #fff;
+  padding: 104px 60px 116px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 520px;
+  gap: 80px;
+  align-items: start;
+}
+
+.kicker {
+  font: 700 14px Pretendard, sans-serif;
+  color: rgba(255, 255, 255, 0.62);
+  letter-spacing: 0.02em;
+}
+
+.title {
+  font: 800 56px/1.24 Pretendard, sans-serif;
+  letter-spacing: -0.042em;
+  margin: 16px 0 0;
+  word-break: keep-all;
+}
+
+.sub {
+  font: 400 21px/1.7 Pretendard, sans-serif;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 24px 0 0;
+  max-width: 560px;
+  word-break: keep-all;
+}
+
+.sub b {
+  color: #fff;
+  font-weight: 700;
+}
+
+.pills {
+  display: flex;
+  gap: 8px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  font: 700 14px Pretendard, sans-serif;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+  padding: 9px 15px;
+  border-radius: 999px;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  margin-top: 44px;
+  max-width: 520px;
+}
+
+.step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.stepLast {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.stepNo {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font: 700 12px Pretendard, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  margin-top: 2px;
+}
+
+.stepTitle {
+  font: 700 18px Pretendard, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.stepBody {
+  font: 400 16px/1.6 Pretendard, sans-serif;
+  color: rgba(255, 255, 255, 0.62);
+  margin-top: 5px;
+  word-break: keep-all;
+}
+
+/* --- 폼 --- */
+.card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 34px 34px 30px;
+  color: var(--ink);
+  box-shadow: 0 40px 80px -40px rgba(16, 24, 40, 0.5);
+}
+
+.cardTitle {
+  font: 800 24px Pretendard, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.cardSub {
+  font: 400 15px/1.6 Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.5);
+  margin-top: 8px;
+}
+
+/* 폼 필드 5개: 개별 스태거 없이 폼 블록 단위로 한 번에 (§4.10) */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* 라벨 플로팅 애니메이션 없음 — 라벨 상단 고정형 */
+.label {
+  display: block;
+  font: 700 13px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.6);
+  margin-bottom: 7px;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid rgba(16, 24, 40, 0.14);
+  border-radius: 12px;
+  padding: 15px 16px;
+  font: 400 16px Pretendard, sans-serif;
+  color: var(--ink);
+  background: #fff;
+  outline: none;
+  box-shadow: 0 0 0 0 rgba(86, 48, 227, 0);
+  /* 필드 포커스: 테두리 색 + 2px 링, --d-fast */
+  transition:
+    border-color var(--d-fast) var(--ease-inout),
+    box-shadow var(--d-fast) var(--ease-inout);
+}
+
+.input::placeholder {
+  color: rgba(26, 26, 26, 0.32);
+}
+
+.input:focus {
+  border-color: var(--violet);
+  box-shadow: 0 0 0 2px rgba(86, 48, 227, 0.35);
+}
+
+/* 유효성 오류: 필드 테두리 색 전환만. shake 애니메이션 금지 (§4.10). */
+.inputError {
+  border-color: rgba(180, 116, 10, 0.75);
+}
+
+.inputError:focus {
+  border-color: rgba(180, 116, 10, 0.9);
+  box-shadow: 0 0 0 2px rgba(245, 166, 35, 0.28);
+}
+
+.errorText {
+  font: 500 13px Pretendard, sans-serif;
+  color: #b4740a;
+  margin-top: 6px;
+}
+
+.choices {
+  display: flex;
+  gap: 8px;
+}
+
+.choice {
+  flex: 1;
+  border: 1px solid rgba(16, 24, 40, 0.14);
+  border-radius: 12px;
+  padding: 13px 0;
+  text-align: center;
+  font: 600 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+  min-height: 44px;
+  transition:
+    border-color var(--d-base) var(--ease-inout),
+    background var(--d-base) var(--ease-inout),
+    color var(--d-base) var(--ease-inout);
+}
+
+.choiceOn {
+  border: 1.5px solid var(--violet);
+  background: rgba(86, 48, 227, 0.06);
+  font-weight: 700;
+  color: var(--violet);
+}
+
+.submit {
+  width: 100%;
+  margin-top: 24px;
+  background: var(--violet);
+  color: #fff;
+  font: 700 18px Pretendard, sans-serif;
+  text-align: center;
+  padding: 19px;
+  border-radius: 14px;
+  box-shadow: 0 14px 30px -14px rgba(86, 48, 227, 0.6);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition:
+    transform var(--d-fast) var(--ease-inout),
+    background var(--d-base) var(--ease-inout),
+    box-shadow var(--d-base) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  .submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px -14px rgba(86, 48, 227, 0.66);
+  }
+}
+
+/* 제출 버튼: 클릭 시 scale(.985) --d-fast */
+.submit:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.submit:disabled {
+  cursor: default;
+  background: rgba(86, 48, 227, 0.72);
+}
+
+/* 로딩 스피너 — 회전 linear 900ms 루프 */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  animation: spin 900ms var(--ease-linear) infinite;
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2400ms;
+  }
+}
+
+.fineprint {
+  font: 500 13px/1.6 Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.4);
+  margin-top: 12px;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.fineprintLink {
+  color: rgba(26, 26, 26, 0.6);
+  text-decoration: underline;
+}
+
+.cardRule {
+  height: 1px;
+  background: rgba(16, 24, 40, 0.08);
+  margin: 22px 0 18px;
+}
+
+.consult {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.consultText {
+  font: 500 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+  word-break: keep-all;
+}
+
+.consultBtns {
+  display: flex;
+  gap: 8px;
+  flex: none;
+}
+
+.consultBtn {
+  border: 1px solid rgba(16, 24, 40, 0.14);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font: 700 14px Pretendard, sans-serif;
+  color: var(--ink);
+  min-height: 44px;
+  transition:
+    border-color var(--d-base) var(--ease-inout),
+    background var(--d-base) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  .consultBtn:hover {
+    border-color: rgba(86, 48, 227, 0.4);
+    background: rgba(86, 48, 227, 0.04);
+  }
+}
+
+/* 성공 시 폼 블록이 opacity 크로스페이드로 감사 메시지로 교체 (--d-base).
+   종이비행기·컨페티 금지. */
+@keyframes crossFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.thanks {
+  animation: crossFade var(--d-base) var(--ease-inout) both;
+  text-align: center;
+  padding: 24px 0 10px;
+}
+
+.thanksMark {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(86, 48, 227, 0.1);
+  color: var(--violet);
+  font: 700 24px Pretendard, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.thanksTitle {
+  font: 800 22px Pretendard, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.thanksBody {
+  font: 400 16px/1.7 Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+  margin-top: 10px;
+  word-break: keep-all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thanks {
+    animation: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding: 84px 32px 92px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+  .title {
+    font-size: 38px;
+  }
+  .sub {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 64px 20px 72px;
+  }
+  .title {
+    font-size: 28px;
+  }
+  .sub {
+    font-size: 15px;
+  }
+  .card {
+    padding: 24px 20px 22px;
+    border-radius: 18px;
+  }
+  .cardTitle {
+    font-size: 20px;
+  }
+  .pair {
+    grid-template-columns: 1fr;
+  }
+  .choices {
+    flex-wrap: wrap;
+  }
+  .choice {
+    flex: 1 1 calc(50% - 4px);
+  }
+  .consult {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .consultBtns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .stepTitle {
+    font-size: 16px;
+  }
+  .stepBody {
+    font-size: 14px;
+  }
+}
