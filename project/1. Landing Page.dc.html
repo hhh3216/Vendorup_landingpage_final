@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>body{margin:0;background:#fff;font-family:Pretendard,'Noto Sans KR',system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#5630E3;text-decoration:none}a:hover{color:#3B22A6}</style>
+</helmet>
+
+<div style="width:1440px;margin:0 auto;color:#1A1A1A;text-wrap:pretty">
+
+<div style="position:fixed;left:20px;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;gap:11px;height:34px">
+      <div style="display:flex;flex-direction:column;align-items:center;width:12px;flex:none">
+        <div style="width:6px;height:6px;border-radius:50%;background:rgba(26,26,26,.2);"></div>
+        <div style="width:1.5px;height:24px;background:rgba(26,26,26,.12);margin-top:2px"></div>
+      </div>
+      <div style="font:500 13px Pretendard,sans-serif;color:rgba(26,26,26,.32);white-space:nowrap;letter-spacing:-.01em">문제</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:11px;height:34px">
+      <div style="display:flex;flex-direction:column;align-items:center;width:12px;flex:none">
+        <div style="width:6px;height:6px;border-radius:50%;background:rgba(26,26,26,.2);"></div>
+        <div style="width:1.5px;height:24px;background:rgba(26,26,26,.12);margin-top:2px"></div>
+      </div>
+      <div style="font:500 13px Pretendard,sans-serif;color:rgba(26,26,26,.32);white-space:nowrap;letter-spacing:-.01em">해결</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:11px;height:34px">
+      <div style="display:flex;flex-direction:column;align-items:center;width:12px;flex:none">
+        <div style="width:10px;height:10px;border-radius:50%;background:#5630E3;box-shadow:0 0 0 4px rgba(86,48,227,.14);"></div>
+        <div style="width:1.5px;height:24px;background:rgba(86,48,227,.35);margin-top:2px"></div>
+      </div>
+      <div style="font:700 13px Pretendard,sans-serif;color:#1A1A1A;white-space:nowrap;letter-spacing:-.01em">작동 원리</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:11px;height:34px">
+      <div style="display:flex;flex-direction:column;align-items:center;width:12px;flex:none">
+        <div style="width:6px;height:6px;border-radius:50%;background:rgba(26,26,26,.2);"></div>
+        <div style="width:1.5px;height:24px;background:rgba(26,26,26,.12);margin-top:2px"></div>
+      </div>
+      <div style="font:500 13px Pretendard,sans-serif;color:rgba(26,26,26,.32);white-space:nowrap;letter-spacing:-.01em">접수 방식</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:11px;height:34px">
+      <div style="display:flex;flex-direction:column;align-items:center;width:12px;flex:none">
+        <div style="width:6px;height:6px;border-radius:50%;background:rgba(26,26,26,.2);"></div>
+        <div style="width:1.5px;height:24px;background:rgba(26,26,26,.12);margin-top:2px"></div>
+      </div>
+      <div style="font:500 13px Pretendard,sans-serif;color:rgba(26,26,26,.32);white-space:nowrap;letter-spacing:-.01em">라이브 데모</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:11px;height:34px">
+      <div style="display:flex;flex-direction:column;align-items:center;width:12px;flex:none">
+        <div style="width:6px;height:6px;border-radius:50%;background:rgba(26,26,26,.2);"></div>
+        <div style="width:1.5px;height:24px;background:rgba(26,26,26,.12);margin-top:2px"></div>
+      </div>
+      <div style="font:500 13px Pretendard,sans-serif;color:rgba(26,26,26,.32);white-space:nowrap;letter-spacing:-.01em">로드맵</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:11px;height:34px">
+      <div style="display:flex;flex-direction:column;align-items:center;width:12px;flex:none">
+        <div style="width:6px;height:6px;border-radius:50%;background:rgba(26,26,26,.2);"></div>
+        <div style="width:1.5px;height:24px;background:rgba(26,26,26,.12);margin-top:2px"></div>
+      </div>
+      <div style="font:500 13px Pretendard,sans-serif;color:rgba(26,26,26,.32);white-space:nowrap;letter-spacing:-.01em">요금</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:11px;height:34px">
+      <div style="display:flex;flex-direction:column;align-items:center;width:12px;flex:none">
+        <div style="width:6px;height:6px;border-radius:50%;background:rgba(26,26,26,.2);"></div>
+        
+      </div>
+      <div style="font:500 13px Pretendard,sans-serif;color:rgba(26,26,26,.32);white-space:nowrap;letter-spacing:-.01em">FAQ</div>
+    </div>
+</div>
+
+
+
+
+<div style="height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 60px;border-bottom:1px solid rgba(16,24,40,.07);position:sticky;top:0;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);z-index:20">
+  <div style="display:flex;align-items:center;gap:11px"><img src="assets/logo-mark.png" alt="" style="height:30px;width:27px;display:block"><img src="assets/logo-wordmark.png" alt="Vendor-UP" style="height:18px;width:118px;display:block"></div>
+  <div style="display:flex;align-items:center;gap:32px">
+    <div style="display:flex;gap:26px;font:600 15px Pretendard,sans-serif;color:rgba(26,26,26,.62)"><span>작동 원리</span><span>접수 방식</span><span>요금</span><span>FAQ</span></div>
+    <div style="background:#5630E3;color:#fff;font:700 15px Pretendard,sans-serif;padding:11px 20px;border-radius:12px">7일 무료로 시작하기</div>
+  </div>
+</div>
+
+<div style="background:#fff;padding:14px 40px 0 128px">
+  <div ref="{{ heroCard }}" style="position:relative;width:100%;height:760px;border-radius:28px;overflow:hidden;background:#EBEEF2">
+  <div ref="{{ heroScene }}" style="position:absolute;left:50%;top:0;width:732px;height:412px;transform:translateX(-50%) scale(1.9016);transform-origin:top center">
+<sc-if value="{{ s0 }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;left:68%;top:52px;transform:translateX(-50%) scale(.78);transform-origin:top center;width:170px;height:352px;border-radius:30px;background:#0E0F12;padding:6px;box-sizing:border-box;box-shadow:0 24px 44px -20px rgba(16,24,40,.4)">
+          <div style="position:relative;width:100%;height:100%;border-radius:25px;overflow:hidden;background:linear-gradient(180deg,#E5E9EE 0%,#C7CFD8 100%)">
+            <div style="position:absolute;top:5px;left:50%;transform:translateX(-50%);width:52px;height:15px;border-radius:8px;background:#0E0F12"></div>
+            <div style="position:absolute;top:26px;left:14px;right:14px;border-radius:13px;background:rgba(255,255,255,.8);backdrop-filter:blur(14px);padding:8px 9px;display:flex;gap:7px;align-items:flex-start;box-shadow:0 8px 18px -8px rgba(16,24,40,.3)">
+              <div style="width:24px;height:24px;border-radius:7px;background:#FEE500;flex:none"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font:700 9px -apple-system,'Apple SD Gothic Neo',sans-serif">A매장 사장님</div>
+                <div style="font:400 8.5px/1.35 -apple-system,'Apple SD Gothic Neo',sans-serif;color:rgba(26,26,26,.75);margin-top:1px">안녕하세요, A매장입니다. 내일 주문 넣을게요...</div>
+              </div>
+            </div>
+            <div style="position:absolute;top:112px;left:0;right:0;text-align:center;opacity:.5"><div style="font:200 44px/1 -apple-system,'Apple SD Gothic Neo',sans-serif;letter-spacing:-.04em">9:41</div></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ s1 }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:68%;top:52px;transform:translateX(-50%) scale(.78);transform-origin:top center;width:170px;height:352px;border-radius:30px;background:#0E0F12;padding:6px;box-sizing:border-box;box-shadow:0 24px 44px -20px rgba(16,24,40,.4)">
+          <div style="position:relative;width:100%;height:100%;border-radius:25px;overflow:hidden;background:#B2C7DA">
+            <div style="position:absolute;top:0;left:0;right:0;height:40px;background:rgba(178,199,218,.95);display:flex;align-items:flex-end;padding:0 10px 7px;box-sizing:border-box;font:700 10px -apple-system,'Apple SD Gothic Neo',sans-serif">A매장 사장님</div>
+            <div style="position:absolute;top:48px;left:8px;right:8px;display:flex;gap:5px;align-items:flex-start">
+              <div style="width:20px;height:20px;border-radius:7px;background:#fff;flex:none;display:flex;align-items:center;justify-content:center;font:700 8px Pretendard,sans-serif;color:#6B7684">A</div>
+              <div style="background:#fff;border-radius:3px 11px 11px 11px;padding:9px 10px;font:400 9.5px/1.55 -apple-system,'Apple SD Gothic Neo',sans-serif;white-space:pre-line;word-break:keep-all;width:118px;box-sizing:border-box">안녕하세요~ A매장입니다
+내일 주문 넣을게요
+
+양파 10kg 2박스
+계란 15판
+대파 5단이요
+청상추 2박스도 같이 부탁드려요
+
+세금계산서 발행도 부탁드립니다
+
+감사합니다</div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:0;top:0;right:0;bottom:0;background:#fff;display:flex;align-items:flex-start;justify-content:center;padding-top:66px;box-sizing:border-box"><img src="assets/logo-full.png" alt="Vendor-UP" style="width:232px;height:179px;display:block"></div>
+      </sc-if>
+
+      <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:0;top:0;right:0;bottom:0;background:#F7F8FA;padding:52px 34px 0;box-sizing:border-box">
+          <div style="background:#fff;border-radius:16px;box-shadow:0 16px 40px -22px rgba(16,24,40,.22);padding:22px 24px;transform:scale(.52);transform-origin:top center">
+            <div style="display:flex;align-items:baseline;gap:12px"><div style="font:800 22px Pretendard,sans-serif;letter-spacing:-.035em">A매장</div><div style="font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.5)">2026. 8. 29. 배송</div></div>
+            <div style="display:grid;grid-template-columns:120px 1fr 120px 62px 62px;margin-top:16px;font-family:Pretendard,sans-serif">
+              <div style="font:700 12px Pretendard,sans-serif;color:#5630E3;padding-bottom:8px">품목코드</div>
+              <div style="font:700 12px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding-bottom:8px">품목명</div>
+              <div style="font:700 12px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding-bottom:8px">규격</div>
+              <div style="font:700 12px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding-bottom:8px;text-align:right">수량</div>
+              <div style="font:700 12px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding-bottom:8px;text-align:right">단위</div>
+              <div style="grid-column:1/-1;height:2px;background:rgba(16,24,40,.1)"></div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06)"><span style="font:700 12px ui-monospace,Menlo,monospace;color:#5630E3;background:rgba(86,48,227,.08);padding:3px 7px;border-radius:5px">VG-0142</span></div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 15px Pretendard,sans-serif">양파</div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.6)">10kg</div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 15px Pretendard,sans-serif;text-align:right">2</div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.6);text-align:right">박스</div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06)"><span style="font:700 12px ui-monospace,Menlo,monospace;color:#5630E3;background:rgba(86,48,227,.08);padding:3px 7px;border-radius:5px">EG-0031</span></div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 15px Pretendard,sans-serif">계란</div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.6)">대란 30구</div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 15px Pretendard,sans-serif;text-align:right">15</div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.6);text-align:right">판</div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06)"><span style="font:700 12px ui-monospace,Menlo,monospace;color:#5630E3;background:rgba(86,48,227,.08);padding:3px 7px;border-radius:5px">VG-0088</span></div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 15px Pretendard,sans-serif">대파</div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.6)">1단</div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 15px Pretendard,sans-serif;text-align:right">5</div>
+              <div style="padding:10px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.6);text-align:right">단</div>
+              <div style="padding:10px 0"><span style="font:700 12px ui-monospace,Menlo,monospace;color:#5630E3;background:rgba(86,48,227,.08);padding:3px 7px;border-radius:5px">VG-0210</span></div>
+              <div style="padding:10px 0;font:700 15px Pretendard,sans-serif">청상추</div>
+              <div style="padding:10px 0;font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.6)">2kg</div>
+              <div style="padding:10px 0;font:700 15px Pretendard,sans-serif;text-align:right">2</div>
+              <div style="padding:10px 0;font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.6);text-align:right">박스</div>
+            </div>
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(16,24,40,.08);display:flex;align-items:center;justify-content:space-between">
+              <div style="font:800 17px Pretendard,sans-serif;letter-spacing:-.03em">이대로 승인하시겠습니까?</div>
+              <div style="background:#5630E3;color:#fff;font:700 14px Pretendard,sans-serif;padding:10px 26px;border-radius:10px;box-shadow:0 0 0 4px rgba(86,48,227,.14)">승인</div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+  </div>
+
+    <div style="position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.6) 20%,#fff 42%);pointer-events:none"></div>
+    <div style="position:absolute;right:20px;top:20px;font:600 12px ui-monospace,Menlo,monospace;color:rgba(26,26,26,.42);background:rgba(255,255,255,.72);padding:7px 11px;border-radius:7px">HERO 영상 자리 · {{ slideLabel }}</div>
+    <div style="position:absolute;left:52px;right:52px;bottom:40px;color:#1A1A1A">
+      <h1 style="font:800 54px/1.2 Pretendard,sans-serif;letter-spacing:-.045em;margin:0;max-width:760px;word-break:keep-all">카톡·문자로 온 주문, 오늘도 수기 입력 하셨나요?</h1>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:60px;padding:36px 36px 56px">
+    <p style="font:400 19px/1.72 Pretendard,sans-serif;color:rgba(26,26,26,.66);margin:0;max-width:720px;word-break:keep-all">카톡·문자로 들어온 주문을 Vendor-UP이 읽고, <b style="color:#1A1A1A;font-weight:700">품목과 수량을 뽑아 우리 회사 품목코드에 맞춰 ERP에 올립니다.</b> <b style="color:#5630E3;font-weight:700">거래처는 하던 대로 주문하시면 됩니다.</b> 새로 깔 앱도, 배울 양식도 없습니다.</p>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px;flex:none">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="background:#fff;color:#1A1A1A;font:700 17px Pretendard,sans-serif;padding:16px 24px;border-radius:14px;border:1px solid rgba(16,24,40,.12)">30초 만에 어떻게 되는지 보기</div>
+        <div style="background:#5630E3;color:#fff;font:700 17px Pretendard,sans-serif;padding:16px 28px;border-radius:14px;box-shadow:0 12px 26px -12px rgba(86,48,227,.5)">7일 무료로 시작하기</div>
+      </div>
+      <div style="font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.45)">카드 등록 없이 시작 · 초기 파트너 10개사 마감 시 종료</div>
+    </div>
+  </div>
+
+</div>
+
+<div style="background:#111317;color:#fff;padding:110px 60px 120px">
+  <h2 style="font:800 52px/1.24 Pretendard,sans-serif;letter-spacing:-.04em;margin:0;word-break:keep-all">주문 하나에 손이 몇 번 갑니까?</h2>
+  <p style="font:400 21px/1.7 Pretendard,sans-serif;color:rgba(255,255,255,.6);margin:24px 0 0;max-width:800px;word-break:keep-all">읽고, 품목코드 찾고, 수량 옮겨 적고, ERP에 치고. 주문 한 건마다 이 과정을 사람이 반복합니다.<br>하루 수십, 수백 건이 쌓이면 문제는 여기서 시작됩니다.</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px">
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:34px 32px 38px">
+      <div style="display:flex;gap:7px;margin-bottom:26px">
+        <div style="width:22px;height:22px;border:2px solid rgba(255,255,255,.85);border-radius:5px"></div>
+        <div style="width:22px;height:22px;border:2px solid rgba(255,255,255,.5);border-radius:5px"></div>
+        <div style="width:22px;height:22px;border:2px solid rgba(255,255,255,.3);border-radius:5px"></div>
+        <div style="width:22px;height:22px;border:2px solid rgba(255,255,255,.18);border-radius:5px"></div>
+        <div style="width:22px;height:22px;border:2px solid rgba(255,255,255,.1);border-radius:5px"></div>
+      </div>
+      <div style="font:800 26px Pretendard,sans-serif;letter-spacing:-.03em">끝없는 반복 입력</div>
+      <p style="font:400 17px/1.72 Pretendard,sans-serif;color:rgba(255,255,255,.58);margin:14px 0 0;word-break:keep-all">카톡을 열어 읽고, 우리 품목코드를 찾고, 수량을 옮겨 적고, ERP에 다시 칩니다. 주문 한 건에 같은 동작이 네다섯 번. 머리를 쓰는 일이 아니라 <b style="color:#fff;font-weight:700">손이 버티는 일</b>이 됩니다.</p>
+    </div>
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:34px 32px 38px">
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:24px;font-family:ui-monospace,Menlo,monospace"><span style="font:700 22px ui-monospace,Menlo,monospace;color:rgba(255,255,255,.35);text-decoration:line-through">2</span><span style="font:700 22px ui-monospace,Menlo,monospace;color:#fff">20</span><span style="font:500 15px Pretendard,sans-serif;color:rgba(255,255,255,.4)">박스</span></div>
+      <div style="font:800 26px Pretendard,sans-serif;letter-spacing:-.03em">오입력</div>
+      <p style="font:400 17px/1.72 Pretendard,sans-serif;color:rgba(255,255,255,.58);margin:14px 0 0;word-break:keep-all">같은 작업을 수백 번 반복하면 눈이 흐려집니다. 2박스가 20박스로, 5단이 15단으로 바뀝니다. 오입력은 담당자가 부주의해서가 아니라 <b style="color:#fff;font-weight:700">사람이 계속 옮겨 적기 때문에</b> 생깁니다.</p>
+    </div>
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:34px 32px 38px">
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:26px">
+        <div style="width:96px;height:8px;border-radius:4px;background:rgba(255,255,255,.22)"></div>
+        <div style="width:132px;height:8px;border-radius:4px;background:rgba(255,255,255,.16)"></div>
+        <div style="width:64px;height:8px;border-radius:4px;background:rgba(255,255,255,.4)"></div>
+      </div>
+      <div style="font:800 26px Pretendard,sans-serif;letter-spacing:-.03em">주문 누락</div>
+      <p style="font:400 17px/1.72 Pretendard,sans-serif;color:rgba(255,255,255,.58);margin:14px 0 0;word-break:keep-all">여러 거래처 주문이 한 채팅방, 한 문자함에 뒤섞여 있습니다. 손으로 하나씩 훑다 한 건을 놓치면, 다음 날 배송 사고와 클레임으로 돌아옵니다.</p>
+    </div>
+  </div>
+  <div style="font:700 30px/1.5 Pretendard,sans-serif;letter-spacing:-.03em;margin-top:56px;word-break:keep-all"><span style="color:#03B1D8">반복 입력이 남아 있는 한</span>, 오입력과 누락은 계속 나옵니다.</div>
+</div>
+
+<div style="padding:110px 60px 120px">
+  <h2 style="font:800 52px/1.24 Pretendard,sans-serif;letter-spacing:-.04em;margin:0;word-break:keep-all">받는 방식은 그대로, 입력만 사라집니다.</h2>
+  <div style="margin-top:44px;background:linear-gradient(120deg,#5630E3 0%,#4526C4 60%,#03B1D8 160%);border-radius:26px;padding:46px 48px;color:#fff">
+    <div style="font:800 40px/1.34 Pretendard,sans-serif;letter-spacing:-.038em;word-break:keep-all">거래처는 지금 하던 대로 주문하면 됩니다.</div>
+    <p style="font:400 20px/1.68 Pretendard,sans-serif;color:rgba(255,255,255,.78);margin:16px 0 0;max-width:840px;word-break:keep-all">앱을 새로 깔 필요도, 낯선 양식을 배울 필요도 없습니다. 바뀌는 건 우리 쪽 입력 과정뿐입니다.</p>
+  </div>
+
+  <div style="position:relative;margin-top:24px;height:480px;border-radius:26px;overflow:hidden;box-shadow:0 24px 60px -34px rgba(16,24,40,.24),0 0 0 1px rgba(16,24,40,.06)">
+    <div style="position:absolute;left:0;top:0;bottom:0;width:50%;background:#B2C7DA;padding:28px 34px 76px;box-sizing:border-box;display:flex;align-items:flex-start;gap:10px">
+      <div style="width:32px;height:32px;border-radius:11px;background:#fff;flex:none;display:flex;align-items:center;justify-content:center;font:700 13px Pretendard,sans-serif;color:#6B7684">A</div>
+      <div style="background:#fff;border-radius:5px 18px 18px 18px;padding:18px 20px;font:400 18px/1.62 -apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;letter-spacing:-.012em;white-space:pre-line;word-break:keep-all;max-width:400px">안녕하세요~ A매장입니다
+내일 주문 넣을게요
+
+양파 10kg 2박스
+계란 15판
+대파 5단이요
+청상추 2박스도 같이 부탁드려요
+
+세금계산서 발행도 부탁드립니다
+
+감사합니다</div>
+    </div>
+    <div style="position:absolute;left:50%;top:0;right:0;bottom:0;background:#F7F8FA;padding:28px 34px 76px;box-sizing:border-box">
+      <div style="background:#fff;border-radius:18px;box-shadow:0 12px 32px -20px rgba(16,24,40,.2);padding:22px 24px 20px">
+        <div style="display:flex;align-items:baseline;gap:12px"><div style="font:800 24px Pretendard,sans-serif;letter-spacing:-.035em">A매장</div><div style="font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.5)">2026. 8. 29. 배송</div></div>
+        <div style="display:grid;grid-template-columns:120px 1fr 110px 56px 56px;margin-top:16px">
+        <div style="font:700 13px Pretendard,sans-serif;color:#5630E3;padding-bottom:9px">품목코드</div>
+        <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding-bottom:9px">품목명</div>
+        <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding-bottom:9px">규격</div>
+        <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding-bottom:9px;text-align:right">수량</div>
+        <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding-bottom:9px;text-align:right">단위</div>
+        <div style="grid-column:1/-1;height:2px;background:rgba(16,24,40,.1)"></div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);"><span style="font:700 13px ui-monospace,Menlo,monospace;color:#5630E3;background:rgba(86,48,227,.08);padding:3px 7px;border-radius:5px">VG-0142</span></div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 17px Pretendard,sans-serif">양파</div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.6)">10kg</div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 17px Pretendard,sans-serif;text-align:right">2</div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.6);text-align:right">박스</div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);"><span style="font:700 13px ui-monospace,Menlo,monospace;color:#5630E3;background:rgba(86,48,227,.08);padding:3px 7px;border-radius:5px">EG-0031</span></div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 17px Pretendard,sans-serif">계란</div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.6)">대란 30구</div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 17px Pretendard,sans-serif;text-align:right">15</div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.6);text-align:right">판</div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);"><span style="font:700 13px ui-monospace,Menlo,monospace;color:#5630E3;background:rgba(86,48,227,.08);padding:3px 7px;border-radius:5px">VG-0088</span></div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 17px Pretendard,sans-serif">대파</div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.6)">1단</div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:700 17px Pretendard,sans-serif;text-align:right">5</div>
+        <div style="padding:11px 0;border-bottom:1px solid rgba(16,24,40,.06);font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.6);text-align:right">단</div>
+        <div style="padding:11px 0;"><span style="font:700 13px ui-monospace,Menlo,monospace;color:#5630E3;background:rgba(86,48,227,.08);padding:3px 7px;border-radius:5px">VG-0210</span></div>
+        <div style="padding:11px 0;font:700 17px Pretendard,sans-serif">청상추</div>
+        <div style="padding:11px 0;font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.6)">2kg</div>
+        <div style="padding:11px 0;font:700 17px Pretendard,sans-serif;text-align:right">2</div>
+        <div style="padding:11px 0;font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.6);text-align:right">박스</div>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(16,24,40,.08);font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.55)">세금계산서 발행 요청</div>
+      </div>
+    </div>
+    <div style="position:absolute;left:50%;top:0;bottom:0;width:3px;background:#fff;transform:translateX(-1.5px)"></div>
+    
+    <div style="position:absolute;left:24px;bottom:24px;font:700 14px Pretendard,sans-serif;color:#fff;background:rgba(17,19,23,.7);padding:8px 14px;border-radius:999px">지금 · 카톡 원문</div>
+    <div style="position:absolute;right:24px;bottom:24px;font:700 14px Pretendard,sans-serif;color:#fff;background:#5630E3;padding:8px 14px;border-radius:999px">도입 후 · 정형화된 주문</div>
+  </div>
+  <div style="font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.42);margin-top:12px">코드 단계에서 드래그 가능한 Compare Slider로 구현. 시안은 50% 지점 정지 상태.</div>
+
+  <div style="margin-top:64px;border-radius:20px;overflow:hidden;border:1px solid rgba(16,24,40,.1)">
+  <div style="display:grid;grid-template-columns:minmax(200px,1fr) minmax(0,1.15fr) minmax(0,1.15fr)">
+    <div style="padding:20px 24px;background:#fff"></div>
+    <div style="font:700 15px Pretendard,sans-serif;color:rgba(26,26,26,.45);letter-spacing:.01em;padding:20px 24px;background:#fff">지금</div>
+    <div style="font:700 15px Pretendard,sans-serif;color:#fff;letter-spacing:.01em;padding:20px 24px;background:#5630E3">Vendor-UP 도입 후</div>
+    <div style="font:700 18px Pretendard,sans-serif;letter-spacing:-.022em;padding:22px 24px;word-break:keep-all;align-self:center">거래처가 주문하는 방식</div>
+    <div style="display:flex;align-items:center;gap:10px;font:400 18px Pretendard,sans-serif;color:rgba(26,26,26,.55);padding:22px 24px;word-break:keep-all">
+카톡·문자</div>
+    <div style="display:flex;align-items:center;gap:10px;font:600 18px Pretendard,sans-serif;color:#1A1A1A;padding:22px 24px;background:rgba(86,48,227,.05);word-break:keep-all">
+카톡·문자 <b style="font-weight:800">그대로</b></div>
+    <div style="font:700 18px Pretendard,sans-serif;letter-spacing:-.022em;padding:22px 24px;border-top:1px solid rgba(16,24,40,.09);word-break:keep-all;align-self:center">주문서 읽기</div>
+    <div style="display:flex;align-items:center;gap:10px;font:400 18px Pretendard,sans-serif;color:rgba(26,26,26,.55);padding:22px 24px;border-top:1px solid rgba(16,24,40,.09);word-break:keep-all">
+사람이 하나씩 확인</div>
+    <div style="display:flex;align-items:center;gap:10px;font:600 18px Pretendard,sans-serif;color:#1A1A1A;padding:22px 24px;border-top:1px solid rgba(86,48,227,.14);background:rgba(86,48,227,.05);word-break:keep-all">
+AI가 자동으로 읽음</div>
+    <div style="font:700 18px Pretendard,sans-serif;letter-spacing:-.022em;padding:22px 24px;border-top:1px solid rgba(16,24,40,.09);word-break:keep-all;align-self:center">품목 매칭</div>
+    <div style="display:flex;align-items:center;gap:10px;font:400 18px Pretendard,sans-serif;color:rgba(26,26,26,.55);padding:22px 24px;border-top:1px solid rgba(16,24,40,.09);word-break:keep-all">
+담당자 기억에 의존</div>
+    <div style="display:flex;align-items:center;gap:10px;font:600 18px Pretendard,sans-serif;color:#1A1A1A;padding:22px 24px;border-top:1px solid rgba(86,48,227,.14);background:rgba(86,48,227,.05);word-break:keep-all">
+우리 회사 품목코드로 자동 매칭</div>
+    <div style="font:700 18px Pretendard,sans-serif;letter-spacing:-.022em;padding:22px 24px;border-top:1px solid rgba(16,24,40,.09);word-break:keep-all;align-self:center">ERP 입력</div>
+    <div style="display:flex;align-items:center;gap:10px;font:400 18px Pretendard,sans-serif;color:rgba(26,26,26,.55);padding:22px 24px;border-top:1px solid rgba(16,24,40,.09);word-break:keep-all">
+한 건씩 손으로 타이핑</div>
+    <div style="display:flex;align-items:center;gap:10px;font:600 18px Pretendard,sans-serif;color:#1A1A1A;padding:22px 24px;border-top:1px solid rgba(86,48,227,.14);background:rgba(86,48,227,.05);word-break:keep-all">
+확인 후 자동 등록</div>
+    <div style="font:700 18px Pretendard,sans-serif;letter-spacing:-.022em;padding:22px 24px;border-top:1px solid rgba(16,24,40,.09);word-break:keep-all;align-self:center">반복 작업량</div>
+    <div style="display:flex;align-items:center;gap:10px;font:400 18px Pretendard,sans-serif;color:rgba(26,26,26,.55);padding:22px 24px;border-top:1px solid rgba(16,24,40,.09);word-break:keep-all">
+주문 건수만큼 그대로</div>
+    <div style="display:flex;align-items:center;gap:10px;font:600 18px Pretendard,sans-serif;color:#1A1A1A;padding:22px 24px;border-top:1px solid rgba(86,48,227,.14);background:rgba(86,48,227,.05);word-break:keep-all">
+확인 한 번으로 축소</div>
+  </div>
+</div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px">
+    <div style="border-left:2px solid #5630E3;padding:4px 0 4px 22px;font:700 22px/1.5 Pretendard,sans-serif;letter-spacing:-.025em;word-break:keep-all">거래처는 하던 대로 카톡·문자만 보내면 됩니다.</div>
+    <div style="border-left:2px solid rgba(86,48,227,.3);padding:4px 0 4px 22px;font:700 22px/1.5 Pretendard,sans-serif;letter-spacing:-.025em;word-break:keep-all">읽고 찾고 치는 반복 작업이 사라집니다. <span style="color:rgba(26,26,26,.5);font-weight:500">담당자는 확인만 합니다.</span></div>
+    <div style="border-left:2px solid rgba(86,48,227,.3);padding:4px 0 4px 22px;font:700 22px/1.5 Pretendard,sans-serif;letter-spacing:-.025em;word-break:keep-all">바뀌는 건 사이에 있던 '옮겨 적는 손'뿐입니다.</div>
+  </div>
+</div>
+
+<div style="background:#F7F8FA;padding:0 60px">
+  <div style="display:grid;grid-template-columns:420px minmax(0,1fr);gap:60px;align-items:start">
+    <div style="position:sticky;top:120px;padding:110px 0 40px">
+      <h2 style="font:800 48px/1.24 Pretendard,sans-serif;letter-spacing:-.04em;margin:0 0 34px">어떻게 되는 건가요?</h2>
+      <div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0">
+        <div style="width:2px;height:44px;border-radius:1px;background:#5630E3;flex:none;margin-top:2px"></div>
+        <div>
+          <div style="font:700 12px ui-monospace,Menlo,monospace;color:#5630E3">01</div>
+          <div style="font:700 22px Pretendard,sans-serif;letter-spacing:-.028em;color:#1A1A1A;margin-top:5px">받는다</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0">
+        <div style="width:2px;height:44px;border-radius:1px;background:rgba(16,24,40,.14);flex:none;margin-top:2px"></div>
+        <div>
+          <div style="font:700 12px ui-monospace,Menlo,monospace;color:rgba(26,26,26,.35)">02</div>
+          <div style="font:700 22px Pretendard,sans-serif;letter-spacing:-.028em;color:rgba(26,26,26,.35);margin-top:5px">전달한다</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0">
+        <div style="width:2px;height:44px;border-radius:1px;background:rgba(16,24,40,.14);flex:none;margin-top:2px"></div>
+        <div>
+          <div style="font:700 12px ui-monospace,Menlo,monospace;color:rgba(26,26,26,.35)">03</div>
+          <div style="font:700 22px Pretendard,sans-serif;letter-spacing:-.028em;color:rgba(26,26,26,.35);margin-top:5px">추출한다</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0">
+        <div style="width:2px;height:44px;border-radius:1px;background:rgba(16,24,40,.14);flex:none;margin-top:2px"></div>
+        <div>
+          <div style="font:700 12px ui-monospace,Menlo,monospace;color:rgba(26,26,26,.35)">04</div>
+          <div style="font:700 22px Pretendard,sans-serif;letter-spacing:-.028em;color:rgba(26,26,26,.35);margin-top:5px">맞춘다</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0">
+        <div style="width:2px;height:44px;border-radius:1px;background:rgba(16,24,40,.14);flex:none;margin-top:2px"></div>
+        <div>
+          <div style="font:700 12px ui-monospace,Menlo,monospace;color:rgba(26,26,26,.35)">05</div>
+          <div style="font:700 22px Pretendard,sans-serif;letter-spacing:-.028em;color:rgba(26,26,26,.35);margin-top:5px">확인한다</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:flex-start;padding:14px 0">
+        <div style="width:2px;height:44px;border-radius:1px;background:rgba(16,24,40,.14);flex:none;margin-top:2px"></div>
+        <div>
+          <div style="font:700 12px ui-monospace,Menlo,monospace;color:rgba(26,26,26,.35)">06</div>
+          <div style="font:700 22px Pretendard,sans-serif;letter-spacing:-.028em;color:rgba(26,26,26,.35);margin-top:5px">등록한다</div>
+        </div>
+      </div>
+      <div style="font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.4);margin-top:28px;word-break:keep-all">스크롤에 따라 좌측 스텝이 하나씩 활성화됩니다. 모션은 코드 단계에서 구현.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px;padding:110px 0 120px">
+      <div style="background:#fff;border-radius:24px;padding:38px 40px 40px;box-shadow:0 2px 4px rgba(16,24,40,.04);display:flex;flex-direction:column">
+        <div style="font:700 13px ui-monospace,Menlo,monospace;color:#5630E3">STEP 01</div>
+        <div style="font:800 34px Pretendard,sans-serif;letter-spacing:-.035em;margin-top:14px">받는다</div>
+        <p style="font:400 19px/1.7 Pretendard,sans-serif;color:rgba(26,26,26,.58);margin:14px 0 28px;max-width:600px;word-break:keep-all">카톡·문자로 들어온 주문 문장이 Vendor-UP으로 모입니다. 정해진 양식이 없어도 됩니다.</p>
+        <div style="margin-top:auto;background:#B2C7DA;border-radius:16px;padding:22px;display:flex;gap:9px;align-items:flex-start">
+          <div style="width:28px;height:28px;border-radius:10px;background:#fff;flex:none;display:flex;align-items:center;justify-content:center;font:700 12px Pretendard,sans-serif;color:#6B7684">A</div>
+          <div style="background:#fff;border-radius:4px 15px 15px 15px;padding:14px 16px;font:400 16px/1.6 -apple-system,'Apple SD Gothic Neo',sans-serif;white-space:pre-line;word-break:keep-all">안녕하세요~ A매장입니다
+내일 주문 넣을게요
+
+양파 10kg 2박스
+계란 15판
+대파 5단이요</div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:24px;padding:38px 40px 40px;box-shadow:0 2px 4px rgba(16,24,40,.04);display:flex;flex-direction:column">
+        <div style="font:700 13px ui-monospace,Menlo,monospace;color:#5630E3">STEP 02</div>
+        <div style="font:800 34px Pretendard,sans-serif;letter-spacing:-.035em;margin-top:14px">전달한다</div>
+        <p style="font:400 19px/1.7 Pretendard,sans-serif;color:rgba(26,26,26,.58);margin:14px 0 28px;max-width:600px;word-break:keep-all">주문 원문이 Vendor-UP에 도착하는 방법은 두 가지입니다. 업체 사정에 맞는 쪽을 고르시면 됩니다.</p>
+        <div style="margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div style="background:#F7F8FA;border-radius:16px;padding:24px 24px 26px">
+            <div style="display:inline-flex;font:700 12px Pretendard,sans-serif;color:#5630E3;background:rgba(86,48,227,.09);padding:6px 11px;border-radius:999px">방식 1</div>
+            <div style="font:800 21px Pretendard,sans-serif;letter-spacing:-.028em;margin-top:14px">카톡으로 바로 받기</div>
+            <p style="font:400 16px/1.65 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:8px 0 0;word-break:keep-all">거래처가 Vendor-UP 채널로 주문을 보내면 원문이 그대로 들어옵니다.</p>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:18px;font:600 14px Pretendard,sans-serif;color:rgba(26,26,26,.45)">거래처 카톡<span style="color:rgba(26,26,26,.3)">→</span>Vendor-UP</div>
+          </div>
+          <div style="background:#F7F8FA;border-radius:16px;padding:24px 24px 26px">
+            <div style="display:inline-flex;font:700 12px Pretendard,sans-serif;color:#0186A5;background:rgba(3,177,216,.12);padding:6px 11px;border-radius:999px">방식 2</div>
+            <div style="font:800 21px Pretendard,sans-serif;letter-spacing:-.028em;margin-top:14px">받은 주문 붙여넣기</div>
+            <p style="font:400 16px/1.65 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:8px 0 0;word-break:keep-all">지금 쓰는 카톡·문자로 받은 뒤, 그 내용을 그대로 복사해 붙여넣습니다.</p>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:18px;font:600 14px Pretendard,sans-serif;color:rgba(26,26,26,.45)">우리 카톡<span style="color:rgba(26,26,26,.3)">→</span>복사·붙여넣기</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:24px;padding:38px 40px 40px;box-shadow:0 2px 4px rgba(16,24,40,.04);display:flex;flex-direction:column">
+        <div style="font:700 13px ui-monospace,Menlo,monospace;color:#5630E3">STEP 03</div>
+        <div style="font:800 34px Pretendard,sans-serif;letter-spacing:-.035em;margin-top:14px">추출한다</div>
+        <p style="font:400 19px/1.7 Pretendard,sans-serif;color:rgba(26,26,26,.58);margin:14px 0 28px;max-width:600px;word-break:keep-all">문장에서 품목, 규격, 수량, 납품일, 거래처를 AI가 뽑아냅니다. "어제랑 똑같이" 같은 말도 이전 주문 이력으로 해석합니다.</p>
+        <div style="margin-top:auto;background:#F7F8FA;border-radius:16px;padding:24px;font:400 18px/2 Pretendard,sans-serif;word-break:keep-all">
+          <span style="background:rgba(86,48,227,.12);color:#5630E3;font-weight:700;padding:3px 7px;border-radius:6px">양파</span> <span style="background:rgba(3,177,216,.14);font-weight:700;padding:3px 7px;border-radius:6px">10kg</span> <span style="background:rgba(86,48,227,.12);color:#5630E3;font-weight:700;padding:3px 7px;border-radius:6px">2박스</span><br>
+          <span style="background:rgba(86,48,227,.12);color:#5630E3;font-weight:700;padding:3px 7px;border-radius:6px">계란</span> <span style="background:rgba(86,48,227,.12);color:#5630E3;font-weight:700;padding:3px 7px;border-radius:6px">15판</span> · <span style="background:rgba(86,48,227,.12);color:#5630E3;font-weight:700;padding:3px 7px;border-radius:6px">대파</span> <span style="background:rgba(86,48,227,.12);color:#5630E3;font-weight:700;padding:3px 7px;border-radius:6px">5단</span><br>
+          <span style="color:rgba(26,26,26,.45)">내일 오전 10시 전까지 도착 부탁드리고</span>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:24px;padding:38px 40px 40px;box-shadow:0 2px 4px rgba(16,24,40,.04);display:flex;flex-direction:column">
+        <div style="font:700 13px ui-monospace,Menlo,monospace;color:#5630E3">STEP 04</div>
+        <div style="font:800 34px Pretendard,sans-serif;letter-spacing:-.035em;margin-top:14px">맞춘다</div>
+        <p style="font:400 19px/1.7 Pretendard,sans-serif;color:rgba(26,26,26,.58);margin:14px 0 28px;max-width:600px;word-break:keep-all">거래처가 부르는 이름을 우리 회사 품목코드로 자동 변환합니다. 쓸수록 매칭 정확도가 올라갑니다.</p>
+        <div style="margin-top:auto;background:#F7F8FA;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;gap:14px"><div style="font:600 18px Pretendard,sans-serif;color:rgba(26,26,26,.55);width:120px">양파</div><div style="color:rgba(26,26,26,.3)">→</div><span style="font:700 16px ui-monospace,Menlo,monospace;color:#5630E3;background:rgba(86,48,227,.08);padding:5px 10px;border-radius:7px">VG-0142</span></div>
+          <div style="display:flex;align-items:center;gap:14px"><div style="font:600 18px Pretendard,sans-serif;color:rgba(26,26,26,.55);width:120px">계란</div><div style="color:rgba(26,26,26,.3)">→</div><span style="font:700 16px ui-monospace,Menlo,monospace;color:#5630E3;background:rgba(86,48,227,.08);padding:5px 10px;border-radius:7px">EG-0031</span></div>
+          <div style="display:flex;align-items:center;gap:14px"><div style="font:600 18px Pretendard,sans-serif;color:rgba(26,26,26,.55);width:120px">대파</div><div style="color:rgba(26,26,26,.3)">→</div><span style="font:700 16px ui-monospace,Menlo,monospace;color:#5630E3;background:rgba(86,48,227,.08);padding:5px 10px;border-radius:7px">VG-0088</span></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:24px;padding:38px 40px 40px;box-shadow:0 2px 4px rgba(16,24,40,.04);display:flex;flex-direction:column">
+        <div style="font:700 13px ui-monospace,Menlo,monospace;color:#5630E3">STEP 05</div>
+        <div style="font:800 34px Pretendard,sans-serif;letter-spacing:-.035em;margin-top:14px">확인한다</div>
+        <p style="font:400 19px/1.7 Pretendard,sans-serif;color:rgba(26,26,26,.58);margin:14px 0 28px;max-width:600px;word-break:keep-all">정리된 주문이 화면에 뜹니다. 담당자가 훑어보고 승인하면 됩니다.</p>
+        <div style="background:#F7F8FA;border-radius:16px;padding:24px 24px 22px">
+          <div style="display:grid;grid-template-columns:1fr 110px 130px;gap:0 14px;font-family:Pretendard,sans-serif">
+            <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding-bottom:11px">품목</div>
+            <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding-bottom:11px">수량</div>
+            <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding-bottom:11px">품목코드</div>
+
+            <div style="font:600 17px Pretendard,sans-serif;padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">양파 10kg</div>
+            <div style="font:500 17px Pretendard,sans-serif;color:rgba(26,26,26,.6);padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">2박스</div>
+            <div style="font:600 15px ui-monospace,Menlo,monospace;color:#5630E3;padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">VG-0142</div>
+
+            <div style="font:600 17px Pretendard,sans-serif;padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">계란</div>
+            <div style="font:500 17px Pretendard,sans-serif;color:rgba(26,26,26,.6);padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">15판</div>
+            <div style="font:600 15px ui-monospace,Menlo,monospace;color:#5630E3;padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">EG-0031</div>
+
+            <div style="font:600 17px Pretendard,sans-serif;padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">대파</div>
+            <div style="font:500 17px Pretendard,sans-serif;color:rgba(26,26,26,.6);padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">5단</div>
+            <div style="font:600 15px ui-monospace,Menlo,monospace;color:#5630E3;padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">VG-0088</div>
+
+            <div style="font:600 17px Pretendard,sans-serif;padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">청상추</div>
+            <div style="font:500 17px Pretendard,sans-serif;color:rgba(26,26,26,.6);padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">2박스</div>
+            <div style="font:600 15px ui-monospace,Menlo,monospace;color:#5630E3;padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">VG-0210</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:20px;padding-top:20px;border-top:1px solid rgba(16,24,40,.1)">
+            <div>
+              <div style="font:800 22px Pretendard,sans-serif;letter-spacing:-.03em">이대로 승인하시겠습니까?</div>
+              <div style="font:500 16px Pretendard,sans-serif;color:rgba(26,26,26,.5);margin-top:8px">A매장 주문 4건 · 2026. 8. 29. 배송</div>
+            </div>
+            <div style="background:#5630E3;color:#fff;font:700 17px Pretendard,sans-serif;padding:15px 34px;border-radius:12px;box-shadow:0 0 0 5px rgba(86,48,227,.14);flex:none">승인</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:24px;padding:38px 40px 40px;box-shadow:0 2px 4px rgba(16,24,40,.04);display:flex;flex-direction:column">
+        <div style="font:700 13px ui-monospace,Menlo,monospace;color:#5630E3">STEP 06</div>
+        <div style="font:800 34px Pretendard,sans-serif;letter-spacing:-.035em;margin-top:14px">등록한다</div>
+        <p style="font:400 19px/1.7 Pretendard,sans-serif;color:rgba(26,26,26,.58);margin:14px 0 28px;max-width:600px;word-break:keep-all">승인 즉시 ERP에 반영됩니다. 담당자는 등록된 주문만 확인하면 됩니다.</p>
+        <div style="background:#F7F8FA;border-radius:16px;padding:22px 24px 24px">
+          <div style="display:flex;align-items:center;gap:14px;padding-bottom:18px;border-bottom:1px solid rgba(16,24,40,.09)">
+            <div style="width:34px;height:34px;border-radius:50%;background:#5630E3;color:#fff;display:flex;align-items:center;justify-content:center;font:700 16px Pretendard,sans-serif;flex:none">✓</div>
+            <div style="font:700 20px Pretendard,sans-serif;letter-spacing:-.025em">ERP 등록 완료 · A매장 주문 4건</div>
+          </div>
+          <div style="display:grid;grid-template-columns:150px 1fr 96px 108px;gap:0 14px;margin-top:6px;font-family:Pretendard,sans-serif">
+            <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding:12px 0 11px">전표번호</div>
+            <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding:12px 0 11px">거래처</div>
+            <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding:12px 0 11px">품목수</div>
+            <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding:12px 0 11px;text-align:right">상태</div>
+
+            <div style="font:600 15px ui-monospace,Menlo,monospace;padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">SO-260829-014</div>
+            <div style="font:600 17px Pretendard,sans-serif;padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">A매장</div>
+            <div style="font:500 17px Pretendard,sans-serif;color:rgba(26,26,26,.6);padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">4건</div>
+            <div style="padding:12px 0;border-top:1px solid rgba(16,24,40,.07);text-align:right"><span style="font:700 13px Pretendard,sans-serif;color:#5630E3;background:rgba(86,48,227,.09);padding:5px 10px;border-radius:999px">등록</span></div>
+
+            <div style="font:600 15px ui-monospace,Menlo,monospace;color:rgba(26,26,26,.45);padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">SO-260829-013</div>
+            <div style="font:600 17px Pretendard,sans-serif;color:rgba(26,26,26,.5);padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">B식당</div>
+            <div style="font:500 17px Pretendard,sans-serif;color:rgba(26,26,26,.45);padding:12px 0;border-top:1px solid rgba(16,24,40,.07)">7건</div>
+            <div style="padding:12px 0;border-top:1px solid rgba(16,24,40,.07);text-align:right"><span style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.45);background:rgba(16,24,40,.06);padding:5px 10px;border-radius:999px">등록</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div style="padding:110px 60px 120px">
+  <div style="text-align:center">
+    <div style="font:700 14px Pretendard,sans-serif;color:#5630E3;letter-spacing:.02em">주문 접수 모델</div>
+    <h2 style="font:800 52px/1.28 Pretendard,sans-serif;letter-spacing:-.042em;margin:16px 0 0">주문은 어떻게<br>저희 쪽으로 들어오나요?</h2>
+    <p style="font:400 18px/1.68 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:22px auto 0;max-width:660px;word-break:keep-all">두 가지 방식을 모두 지원합니다. 업체 사정에 맞는 쪽을 고르시면 됩니다. 어느 쪽이든 <b style="color:#1A1A1A;font-weight:700">음식점(거래처)은 하던 대로 카톡·문자로 주문을 보내면 됩니다.</b></p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:52px">
+    <div style="border:1px solid rgba(16,24,40,.12);border-radius:24px;padding:32px 34px 34px;display:flex;flex-direction:column">
+      <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(86,48,227,.08);color:#5630E3;font:700 13px Pretendard,sans-serif;padding:8px 14px;border-radius:999px">방식 1 · 거래처 번호도 그대로</div>
+      <div style="font:800 27px/1.44 Pretendard,sans-serif;letter-spacing:-.032em;margin-top:22px;word-break:keep-all">도매업체가 받은 주문을<br>그대로 옮겨 붙이는 방식</div>
+      <p style="font:400 16px/1.72 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:16px 0 0;word-break:keep-all">도매업체가 지금처럼 자기 카톡·문자로 주문을 받되, 받은 내용을 Vendor-UP 채팅창에 그대로 복사해 붙여넣습니다.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:30px">
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;background:#F7F8FA">
+          <div style="width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 13px Pretendard,sans-serif;background:rgba(16,24,40,.1);color:rgba(26,26,26,.55)">1</div>
+          <div style="min-width:0">
+            <div style="font:700 17px/1.45 Pretendard,sans-serif;letter-spacing:-.022em;color:#1A1A1A;word-break:keep-all">음식점이 카톡·문자로 주문</div>
+            <div style="font:500 15px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.52);margin-top:4px;word-break:keep-all">받는 번호도, 방식도 지금과 같습니다</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;background:rgba(86,48,227,.07)">
+          <div style="width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 13px Pretendard,sans-serif;background:#5630E3;color:#fff">2</div>
+          <div style="min-width:0">
+            <div style="font:700 17px/1.45 Pretendard,sans-serif;letter-spacing:-.022em;color:#5630E3;word-break:keep-all">도매업체가 Vendor-UP에 붙여넣기</div>
+            <div style="font:500 15px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.52);margin-top:4px;word-break:keep-all">받은 주문 문장을 채팅창에 그대로 복사</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;background:#F7F8FA">
+          <div style="width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 13px Pretendard,sans-serif;background:rgba(16,24,40,.1);color:rgba(26,26,26,.55)">3</div>
+          <div style="min-width:0">
+            <div style="font:700 17px/1.45 Pretendard,sans-serif;letter-spacing:-.022em;color:#1A1A1A;word-break:keep-all">품목·수량 추출 후 품목코드 매칭</div>
+            <div style="font:500 15px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.52);margin-top:4px;word-break:keep-all">우리 회사 코드 기준으로 정리됩니다</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;background:#F7F8FA">
+          <div style="width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 13px Pretendard,sans-serif;background:rgba(16,24,40,.1);color:rgba(26,26,26,.55)">4</div>
+          <div style="min-width:0">
+            <div style="font:700 17px/1.45 Pretendard,sans-serif;letter-spacing:-.022em;color:#1A1A1A;word-break:keep-all">담당자가 확인하고 승인</div>
+            <div style="font:500 15px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.52);margin-top:4px;word-break:keep-all">틀린 곳은 승인 전에 고치면 됩니다</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;background:#F7F8FA">
+          <div style="width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 13px Pretendard,sans-serif;background:rgba(16,24,40,.1);color:rgba(26,26,26,.55)">5</div>
+          <div style="min-width:0">
+            <div style="font:700 17px/1.45 Pretendard,sans-serif;letter-spacing:-.022em;color:#1A1A1A;word-break:keep-all">ERP 등록</div>
+            <div style="font:500 15px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.52);margin-top:4px;word-break:keep-all">승인 즉시 전표로 반영됩니다</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:auto;padding-top:30px"><div style="background:rgba(86,48,227,.07);border-radius:14px;padding:18px 20px">
+        <div style="font:700 15px Pretendard,sans-serif;color:#1A1A1A">번호도, 받는 방식도 완전히 그대로입니다.</div>
+        <div style="font:500 15px Pretendard,sans-serif;color:#5630E3;margin-top:6px">도매업체만 저희 채팅창에 붙여넣으면 됩니다.</div>
+      </div></div>
+    </div>
+
+    <div style="border:1px solid rgba(16,24,40,.12);border-radius:24px;padding:32px 34px 34px;display:flex;flex-direction:column">
+      <div style="display:inline-flex;background:rgba(3,177,216,.1);color:#0186A5;font:700 13px Pretendard,sans-serif;padding:8px 14px;border-radius:999px">방식 2 · 추가 입력조차 없이</div>
+      <div style="font:800 27px/1.44 Pretendard,sans-serif;letter-spacing:-.032em;margin-top:22px;word-break:keep-all">음식점이 Vendor-UP 카톡으로<br>직접 보내는 방식</div>
+      <p style="font:400 16px/1.72 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:16px 0 0;word-break:keep-all">음식점이 평소처럼 카톡·문자로 주문을 보내되, 받는 곳이 Vendor-UP 채널입니다. 정리된 주문을 공급업체에 전달합니다.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:30px">
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;background:rgba(3,177,216,.09)">
+          <div style="width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 13px Pretendard,sans-serif;background:#0186A5;color:#fff">1</div>
+          <div style="min-width:0">
+            <div style="font:700 17px/1.45 Pretendard,sans-serif;letter-spacing:-.022em;color:#0186A5;word-break:keep-all">음식점이 Vendor-UP 카톡으로 주문</div>
+            <div style="font:500 15px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.52);margin-top:4px;word-break:keep-all">받는 번호만 Vendor-UP 채널로 바뀝니다</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;background:#F7F8FA">
+          <div style="width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 13px Pretendard,sans-serif;background:rgba(16,24,40,.1);color:rgba(26,26,26,.55)">2</div>
+          <div style="min-width:0">
+            <div style="font:700 17px/1.45 Pretendard,sans-serif;letter-spacing:-.022em;color:#1A1A1A;word-break:keep-all">품목·수량 추출 후 품목코드 매칭</div>
+            <div style="font:500 15px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.52);margin-top:4px;word-break:keep-all">붙여넣는 과정 없이 바로 정리됩니다</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;background:#F7F8FA">
+          <div style="width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 13px Pretendard,sans-serif;background:rgba(16,24,40,.1);color:rgba(26,26,26,.55)">3</div>
+          <div style="min-width:0">
+            <div style="font:700 17px/1.45 Pretendard,sans-serif;letter-spacing:-.022em;color:#1A1A1A;word-break:keep-all">공급업체가 확인하고 승인</div>
+            <div style="font:500 15px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.52);margin-top:4px;word-break:keep-all">틀린 곳은 승인 전에 고치면 됩니다</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;background:#F7F8FA">
+          <div style="width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 13px Pretendard,sans-serif;background:rgba(16,24,40,.1);color:rgba(26,26,26,.55)">4</div>
+          <div style="min-width:0">
+            <div style="font:700 17px/1.45 Pretendard,sans-serif;letter-spacing:-.022em;color:#1A1A1A;word-break:keep-all">ERP 등록</div>
+            <div style="font:500 15px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.52);margin-top:4px;word-break:keep-all">승인 즉시 전표로 반영됩니다</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:auto;padding-top:30px"><div style="background:rgba(3,177,216,.08);border-radius:14px;padding:18px 20px">
+        <div style="font:700 15px Pretendard,sans-serif;color:#1A1A1A">번호는 Vendor-UP으로 바뀌지만, 여전히 카톡·문자입니다.</div>
+        <div style="font:500 15px Pretendard,sans-serif;color:#0186A5;margin-top:6px">앱 설치도, 새 양식도 없습니다.</div>
+      </div></div>
+    </div>
+  </div>
+
+  <p style="font:400 17px Pretendard,sans-serif;color:rgba(26,26,26,.5);margin:30px 0 0;text-align:center;word-break:keep-all">두 방식 모두 음식점 쪽에는 새로운 걸 요구하지 않습니다. 차이는 <b style="color:#1A1A1A;font-weight:700">"누가 Vendor-UP에 원문을 전달하느냐"</b>뿐입니다.</p>
+</div>
+
+<div style="background:linear-gradient(180deg,#F3F1FE 0%,#F7F6FE 62%,#FBFBFE 100%);padding:104px 60px 118px">
+  <div style="text-align:center">
+    <div style="font:600 14px Pretendard,sans-serif;color:rgba(86,48,227,.7);letter-spacing:.02em">직접 확인해보세요</div>
+    <h2 style="font:800 52px/1.32 Pretendard,sans-serif;letter-spacing:-.042em;margin:16px 0 0">실제 주문 문장을 넣으면,<br>몇 초 안에 <span style="color:#5630E3">정리</span>됩니다.</h2>
+  </div>
+
+  <div style="display:flex;justify-content:center;margin-top:46px">
+    <div style="display:flex;gap:4px;background:#fff;border-radius:999px;padding:5px;box-shadow:0 2px 10px -4px rgba(16,24,40,.12)">
+      <div style="background:#5630E3;color:#fff;font:700 15px Pretendard,sans-serif;padding:12px 26px;border-radius:999px">받은 주문 붙여넣기</div>
+      <div style="color:rgba(26,26,26,.5);font:600 15px Pretendard,sans-serif;padding:12px 22px;border-radius:999px">Vendor-UP 카톡으로 받기</div>
+    </div>
+  </div>
+
+  <div style="max-width:840px;margin:26px auto 0;background:#fff;border-radius:999px;box-shadow:0 14px 36px -20px rgba(86,48,227,.28),0 0 0 1px rgba(16,24,40,.04);padding:12px 12px 12px 30px;display:flex;align-items:center;gap:16px">
+    <div style="flex:1;font:400 18px Pretendard,sans-serif;color:rgba(26,26,26,.32)">예) 내일 청상추 2박스, 대파 5단, 계란 15판 부탁드려요</div>
+    <div style="width:52px;height:52px;border-radius:50%;background:#5630E3;color:#fff;flex:none;display:flex;align-items:center;justify-content:center;font:400 22px Pretendard,sans-serif;box-shadow:0 8px 20px -8px rgba(86,48,227,.7)">↑</div>
+  </div>
+
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:20px">
+    <div style="font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.6);background:#fff;border:1px solid rgba(16,24,40,.07);padding:10px 16px;border-radius:999px">내일 청상추 2박스, 대파 5단 부탁드려요</div>
+    <div style="font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.6);background:#fff;border:1px solid rgba(16,24,40,.07);padding:10px 16px;border-radius:999px">오늘 어제꺼랑 똑같이요</div>
+    <div style="font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.6);background:#fff;border:1px solid rgba(16,24,40,.07);padding:10px 16px;border-radius:999px">계란 15판이랑 양파 3망요</div>
+  </div>
+  <div style="text-align:center;font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.42);margin-top:14px">아래 예시를 눌러보시면 어떻게 정리되는지 바로 확인하실 수 있습니다 · 현재는 텍스트만 지원합니다</div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1180px;margin:52px auto 0">
+    <div style="background:#fff;border-radius:20px;box-shadow:0 16px 40px -28px rgba(16,24,40,.2),0 0 0 1px rgba(16,24,40,.04);padding:22px 24px 26px;min-height:238px;box-sizing:border-box">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="font:700 14px Pretendard,sans-serif;color:rgba(26,26,26,.55)">처리 중</div>
+        <div style="font:700 11px Pretendard,sans-serif;color:#5630E3;background:rgba(86,48,227,.09);padding:5px 10px;border-radius:999px">02 · 추출</div>
+      </div>
+      <div style="margin-top:18px;background:#F7F8FA;border-radius:12px;padding:16px 16px 18px">
+        <div style="font:500 12px Pretendard,sans-serif;color:rgba(26,26,26,.5)">문장에서 품목을 뽑는 중…</div>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-top:14px">
+          <div style="height:7px;border-radius:4px;background:rgba(16,24,40,.07)"></div>
+          <div style="height:7px;border-radius:4px;background:rgba(16,24,40,.055);width:82%"></div>
+          <div style="height:7px;border-radius:4px;background:rgba(16,24,40,.04);width:58%"></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:16px">
+          <span style="font:700 11px Pretendard,sans-serif;color:#5630E3;background:rgba(86,48,227,.1);padding:5px 9px;border-radius:6px">청상추 2박스</span>
+          <span style="font:700 11px Pretendard,sans-serif;color:#5630E3;background:rgba(86,48,227,.1);padding:5px 9px;border-radius:6px">대파 5단</span>
+          <span style="font:700 11px Pretendard,sans-serif;color:rgba(26,26,26,.45);background:rgba(16,24,40,.05);padding:5px 9px;border-radius:6px">계란 15판</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:20px;box-shadow:0 16px 40px -28px rgba(16,24,40,.2),0 0 0 1px rgba(16,24,40,.04);padding:22px 24px 26px;min-height:238px;box-sizing:border-box">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="font:700 14px Pretendard,sans-serif;color:rgba(26,26,26,.55)">승인 대기</div>
+        <div style="font:700 11px Pretendard,sans-serif;color:#B4740A;background:rgba(245,166,35,.13);padding:5px 10px;border-radius:999px">04 · 확인</div>
+      </div>
+      <div style="margin-top:18px;background:#F7F8FA;border-radius:12px;padding:14px 16px 16px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="font:600 12px Pretendard,sans-serif;color:rgba(26,26,26,.6)">담당자 확인 대기</div>
+          <div style="font:600 11px Pretendard,sans-serif;color:rgba(26,26,26,.4)">3건</div>
+        </div>
+        <div style="display:grid;grid-template-columns:74px 1fr 88px;margin-top:12px">
+            <div style="font:600 10px Pretendard,sans-serif;color:rgba(26,26,26,.4);padding-bottom:7px">품목코드</div>
+            <div style="font:600 10px Pretendard,sans-serif;color:rgba(26,26,26,.4);padding-bottom:7px">품목명</div>
+            <div style="font:600 10px Pretendard,sans-serif;color:rgba(26,26,26,.4);padding-bottom:7px;text-align:right">수량</div>
+            <div style="grid-column:1/-1;height:1px;background:rgba(16,24,40,.1)"></div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:700 11px ui-monospace,Menlo,monospace;color:#5630E3">VG-0142</div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:500 12px Pretendard,sans-serif">청상추</div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:500 12px Pretendard,sans-serif;text-align:right">2 <span style="color:rgba(26,26,26,.5)">박스</span></div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:700 11px ui-monospace,Menlo,monospace;color:#5630E3">VG-0311</div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:500 12px Pretendard,sans-serif">대파</div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:500 12px Pretendard,sans-serif;text-align:right">5 <span style="color:rgba(26,26,26,.5)">단</span></div>
+            <div style="padding:8px 0;font:700 11px ui-monospace,Menlo,monospace;color:#5630E3">EG-0027</div>
+            <div style="padding:8px 0;font:500 12px Pretendard,sans-serif">계란</div>
+            <div style="padding:8px 0;font:500 12px Pretendard,sans-serif;text-align:right">15 <span style="color:rgba(26,26,26,.5)">판</span></div>
+        </div>
+        <div style="display:flex;gap:7px;justify-content:flex-end;margin-top:14px">
+          <div style="font:600 12px Pretendard,sans-serif;color:rgba(26,26,26,.5);background:#fff;padding:7px 14px;border-radius:8px">수정</div>
+          <div style="font:700 12px Pretendard,sans-serif;color:#fff;background:#5630E3;padding:7px 16px;border-radius:8px">승인</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:20px;box-shadow:0 16px 40px -28px rgba(16,24,40,.2),0 0 0 1px rgba(16,24,40,.04);padding:22px 24px 26px;min-height:238px;box-sizing:border-box">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="font:700 14px Pretendard,sans-serif;color:rgba(26,26,26,.55)">승인 완료</div>
+        <div style="font:700 11px Pretendard,sans-serif;color:#0B7C63;background:rgba(16,185,129,.13);padding:5px 10px;border-radius:999px">05 · 등록</div>
+      </div>
+      <div style="margin-top:18px;background:#F7F8FA;border-radius:12px;padding:14px 16px 16px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="font:600 12px Pretendard,sans-serif;color:rgba(26,26,26,.6)">ERP 등록 완료</div>
+          <div style="font:700 11px Pretendard,sans-serif;color:#0B7C63;background:rgba(16,185,129,.13);padding:4px 9px;border-radius:6px">승인완료</div>
+        </div>
+        <div style="display:grid;grid-template-columns:74px 1fr 88px;margin-top:12px">
+            <div style="font:600 10px Pretendard,sans-serif;color:rgba(26,26,26,.4);padding-bottom:7px">품목코드</div>
+            <div style="font:600 10px Pretendard,sans-serif;color:rgba(26,26,26,.4);padding-bottom:7px">품목명</div>
+            <div style="font:600 10px Pretendard,sans-serif;color:rgba(26,26,26,.4);padding-bottom:7px;text-align:right">수량</div>
+            <div style="grid-column:1/-1;height:1px;background:rgba(16,24,40,.1)"></div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:700 11px ui-monospace,Menlo,monospace;color:#5630E3">VG-0142</div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:500 12px Pretendard,sans-serif">청상추</div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:500 12px Pretendard,sans-serif;text-align:right">2 <span style="color:rgba(26,26,26,.5)">박스</span></div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:700 11px ui-monospace,Menlo,monospace;color:#5630E3">VG-0311</div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:500 12px Pretendard,sans-serif">대파</div>
+            <div style="padding:8px 0;border-bottom:1px solid rgba(16,24,40,.05);font:500 12px Pretendard,sans-serif;text-align:right">5 <span style="color:rgba(26,26,26,.5)">단</span></div>
+            <div style="padding:8px 0;font:700 11px ui-monospace,Menlo,monospace;color:#5630E3">EG-0027</div>
+            <div style="padding:8px 0;font:500 12px Pretendard,sans-serif">계란</div>
+            <div style="padding:8px 0;font:500 12px Pretendard,sans-serif;text-align:right">15 <span style="color:rgba(26,26,26,.5)">판</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(16,24,40,.06);font:600 12px Pretendard,sans-serif;color:rgba(26,26,26,.6)">
+          <span style="color:#0B7C63">✓</span> 한솔식당 · 08-30 납품건으로 등록됨
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="padding:104px 60px 118px">
+  <div style="font:600 14px Pretendard,sans-serif;color:rgba(86,48,227,.7);letter-spacing:.02em">로드맵</div>
+  <h2 style="font:800 52px/1.3 Pretendard,sans-serif;letter-spacing:-.042em;margin:16px 0 0">주문 입력은 <span style="color:#5630E3">시작</span>입니다.</h2>
+  <p style="font:400 18px/1.7 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:22px 0 0;max-width:760px;word-break:keep-all">Vendor-UP은 도매 현장에서 사람 손이 가장 많이 가는 순서대로 자동화하고 있습니다.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:76px">
+    <div>
+      <div style="height:3px;border-radius:2px;background:#5630E3"></div>
+      <div style="margin-top:22px"><div style="display:inline-block;font:700 12px Pretendard,sans-serif;color:#5630E3;background:rgba(86,48,227,.1);padding:6px 12px;border-radius:999px">지금 이용 가능</div></div>
+      <div style="font:800 23px/1.42 Pretendard,sans-serif;letter-spacing:-.03em;margin-top:16px;word-break:keep-all">수·발주 ERP<br>+ AI 주문 자동전산화</div>
+      <p style="font:400 16px/1.72 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:14px 0 0;word-break:keep-all">카톡·문자로 온 주문을 읽어 품목코드로 맞추고, 담당자 승인을 거쳐 ERP에 등록합니다.</p>
+    </div>
+    <div>
+      <div style="height:3px;border-radius:2px;background:repeating-linear-gradient(90deg,rgba(16,24,40,.18) 0 9px,transparent 9px 17px)"></div>
+      <div style="margin-top:22px"><div style="display:inline-block;font:700 12px Pretendard,sans-serif;color:rgba(26,26,26,.5);background:rgba(16,24,40,.06);padding:6px 12px;border-radius:999px">개발 중</div></div>
+      <div style="font:800 23px/1.42 Pretendard,sans-serif;letter-spacing:-.03em;margin-top:16px;word-break:keep-all">시세 변동 자동 반영</div>
+      <p style="font:400 16px/1.72 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:14px 0 0;word-break:keep-all">야채·과일은 매일 시세가 바뀝니다. 시세를 받아 품목별 마진율에 맞춰 판매가를 자동으로 조정합니다.</p>
+      <div style="font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.35);margin-top:14px">시세 데이터 출처: [확정 필요]</div>
+    </div>
+    <div>
+      <div style="height:3px;border-radius:2px;background:repeating-linear-gradient(90deg,rgba(16,24,40,.18) 0 9px,transparent 9px 17px)"></div>
+      <div style="margin-top:22px"><div style="display:inline-block;font:700 12px Pretendard,sans-serif;color:rgba(26,26,26,.5);background:rgba(16,24,40,.06);padding:6px 12px;border-radius:999px">개발 중</div></div>
+      <div style="font:800 23px/1.42 Pretendard,sans-serif;letter-spacing:-.03em;margin-top:16px;word-break:keep-all">AI 재고 관리</div>
+      <p style="font:400 16px/1.72 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:14px 0 0;word-break:keep-all">주문과 입고가 쌓이면 재고는 계산의 문제가 됩니다. 어떤 품목이 언제 부족해질지, 얼마나 발주해야 할지 알려드립니다.</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:60px">
+    <div>
+      <div style="height:3px;border-radius:2px;background:repeating-linear-gradient(90deg,rgba(16,24,40,.18) 0 9px,transparent 9px 17px)"></div>
+      <div style="margin-top:22px"><div style="display:inline-block;font:700 12px Pretendard,sans-serif;color:rgba(26,26,26,.5);background:rgba(16,24,40,.06);padding:6px 12px;border-radius:999px">개발 중</div></div>
+      <div style="font:800 23px/1.42 Pretendard,sans-serif;letter-spacing:-.03em;margin-top:16px;word-break:keep-all">배송기사 추적</div>
+      <p style="font:400 16px/1.72 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:14px 0 0;word-break:keep-all">지금 어느 기사가 어디쯤 가고 있는지, 어떤 거래처에 도착했는지 확인할 수 있습니다.</p>
+    </div>
+    <div>
+      <div style="height:3px;border-radius:2px;background:repeating-linear-gradient(90deg,rgba(16,24,40,.18) 0 9px,transparent 9px 17px)"></div>
+      <div style="margin-top:22px"><div style="display:inline-block;font:700 12px Pretendard,sans-serif;color:rgba(26,26,26,.5);background:rgba(16,24,40,.06);padding:6px 12px;border-radius:999px">개발 중</div></div>
+      <div style="font:800 23px/1.42 Pretendard,sans-serif;letter-spacing:-.03em;margin-top:16px;word-break:keep-all">AI 배송</div>
+      <p style="font:400 16px/1.72 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:14px 0 0;word-break:keep-all">기사 수와 그날 나갈 배송지를 넣기만 하면, 기사별 배송 동선을 자동으로 짜드립니다.</p>
+      <div style="font:500 14px Pretendard,sans-serif;color:rgba(26,26,26,.35);margin-top:14px">지도 서비스 연동이 필요해 별도 요금이 부과됩니다.</div>
+    </div>
+    <div>
+      <div style="height:3px;border-radius:2px;background:repeating-linear-gradient(90deg,rgba(16,24,40,.18) 0 9px,transparent 9px 17px)"></div>
+      <div style="margin-top:22px"><div style="display:inline-block;font:700 12px Pretendard,sans-serif;color:rgba(26,26,26,.5);background:rgba(16,24,40,.06);padding:6px 12px;border-radius:999px">개발 중</div></div>
+      <div style="font:800 23px/1.42 Pretendard,sans-serif;letter-spacing:-.03em;margin-top:16px;word-break:keep-all">사진·캡처·전화 주문 인식</div>
+      <p style="font:400 16px/1.72 Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:14px 0 0;word-break:keep-all">손으로 쓴 발주서를 찍어 보내는 거래처, 전화로 부르는 거래처도 있습니다. 이것들도 자동으로 읽어내는 기능을 준비하고 있습니다.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:64px;background:#F7F8FA;border-radius:16px;padding:24px 28px;font:600 18px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.7);word-break:keep-all">지금 시작하시면, 나중에 나오는 기능도 <b style="color:#1A1A1A">초기 파트너 조건 그대로</b> 쓰실 수 있습니다.</div>
+</div>
+
+<div style="background:#F7F8FA;padding:110px 60px 120px">
+  <div style="text-align:center">
+    <h2 style="font:800 52px/1.24 Pretendard,sans-serif;letter-spacing:-.04em;margin:0">Vendor-UP 요금 안내</h2>
+    <p style="font:600 20px Pretendard,sans-serif;color:rgba(26,26,26,.55);margin:18px 0 0">초기 파트너 한정 · 정가 대비 <b style="color:#5630E3">월 40,000원 할인</b></p>
+    <div style="display:inline-block;margin-top:24px;font:700 16px Pretendard,sans-serif;color:#1A1A1A;background:rgba(3,177,216,.12);padding:11px 20px;border-radius:999px">초기 파트너 10개사 마감 시 종료</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:20px;align-items:center;margin-top:54px">
+    <div style="background:#fff;border-radius:22px;padding:36px 30px 34px;border:1px solid rgba(16,24,40,.08)">
+      <div style="font:800 20px Pretendard,sans-serif;letter-spacing:-.02em">BASIC</div>
+      <div style="font:400 16px Pretendard,sans-serif;color:rgba(26,26,26,.5);margin-top:8px">수·발주 업무를 시스템으로</div>
+      <div style="font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.35);margin-top:24px;text-decoration:line-through">89,000원/월</div>
+      <div style="font:800 34px Pretendard,sans-serif;letter-spacing:-.035em;margin-top:4px">49,000원<span style="font:600 18px Pretendard,sans-serif;color:rgba(26,26,26,.45)">/월</span></div>
+      <div style="font:600 14px Pretendard,sans-serif;color:rgba(26,26,26,.45);margin-top:8px">바로 이용 가능</div>
+      <div style="height:1px;background:rgba(16,24,40,.08);margin:26px 0 20px"></div>
+      <div style="display:flex;flex-direction:column;gap:12px;font:500 16px Pretendard,sans-serif">
+        <div style="display:flex;justify-content:space-between"><span>수·발주 ERP</span><span style="color:#5630E3;font-weight:700">포함</span></div>
+        <div style="display:flex;justify-content:space-between;color:rgba(26,26,26,.35)"><span>AI 주문 자동전산화</span><span>—</span></div>
+        <div style="display:flex;justify-content:space-between;color:rgba(26,26,26,.35)"><span>AI 재고관리</span><span>—</span></div>
+        <div style="display:flex;justify-content:space-between;color:rgba(26,26,26,.35)"><span>시세 변동 자동 반영</span><span>—</span></div>
+        <div style="display:flex;justify-content:space-between;color:rgba(26,26,26,.35)"><span>배송기사 추적</span><span>—</span></div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:24px;padding:44px 36px 42px;border:2px solid #5630E3;box-shadow:0 30px 60px -30px rgba(86,48,227,.4)">
+      <div style="display:flex;align-items:center;gap:10px"><div style="font:800 22px Pretendard,sans-serif;letter-spacing:-.02em">AI ORDER</div><span style="font:700 12px Pretendard,sans-serif;color:#fff;background:#5630E3;padding:5px 10px;border-radius:6px">추천</span></div>
+      <div style="font:600 17px Pretendard,sans-serif;color:#1A1A1A;margin-top:10px">주문 입력을 AI가 대신</div>
+      <div style="font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.35);margin-top:26px;text-decoration:line-through">129,000원/월</div>
+      <div style="font:800 44px Pretendard,sans-serif;letter-spacing:-.04em;margin-top:4px;color:#5630E3">89,000원<span style="font:600 20px Pretendard,sans-serif;color:rgba(26,26,26,.45)">/월</span></div>
+      <div style="font:700 14px Pretendard,sans-serif;color:#5630E3;margin-top:8px">바로 이용 가능</div>
+      <div style="height:1px;background:rgba(16,24,40,.08);margin:28px 0 20px"></div>
+      <div style="display:flex;flex-direction:column;gap:13px;font:500 16px Pretendard,sans-serif">
+        <div style="display:flex;justify-content:space-between"><span>수·발주 ERP</span><span style="color:#5630E3;font-weight:700">포함</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="font-weight:700">AI 주문 자동전산화</span><span style="color:#5630E3;font-weight:700">포함</span></div>
+        <div style="display:flex;justify-content:space-between;color:rgba(26,26,26,.35)"><span>AI 재고관리</span><span>—</span></div>
+        <div style="display:flex;justify-content:space-between;color:rgba(26,26,26,.35)"><span>시세 변동 자동 반영</span><span>—</span></div>
+        <div style="display:flex;justify-content:space-between;color:rgba(26,26,26,.35)"><span>배송기사 추적</span><span>—</span></div>
+      </div>
+      <div style="margin-top:30px;background:#5630E3;color:#fff;font:700 17px Pretendard,sans-serif;text-align:center;padding:17px;border-radius:14px">7일 무료로 시작하기</div>
+    </div>
+
+    <div style="background:#fff;border-radius:22px;padding:36px 30px 34px;border:1px solid rgba(16,24,40,.08)">
+      <div style="font:800 20px Pretendard,sans-serif;letter-spacing:-.02em">AI INVENTORY</div>
+      <div style="font:400 16px Pretendard,sans-serif;color:rgba(26,26,26,.5);margin-top:8px">재고·시세·배송까지</div>
+      <div style="font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.35);margin-top:24px;text-decoration:line-through">169,000원/월</div>
+      <div style="font:800 34px Pretendard,sans-serif;letter-spacing:-.035em;margin-top:4px">129,000원<span style="font:600 18px Pretendard,sans-serif;color:rgba(26,26,26,.45)">/월</span></div>
+      <div style="font:600 14px Pretendard,sans-serif;color:rgba(26,26,26,.45);margin-top:8px">3~6개월 내 출시 예정</div>
+      <div style="height:1px;background:rgba(16,24,40,.08);margin:26px 0 20px"></div>
+      <div style="display:flex;flex-direction:column;gap:12px;font:500 16px Pretendard,sans-serif">
+        <div style="display:flex;justify-content:space-between"><span>수·발주 ERP</span><span style="color:#5630E3;font-weight:700">포함</span></div>
+        <div style="display:flex;justify-content:space-between"><span>AI 주문 자동전산화</span><span style="color:#5630E3;font-weight:700">포함</span></div>
+        <div style="display:flex;justify-content:space-between"><span>AI 재고관리</span><span style="color:#5630E3;font-weight:700">포함</span></div>
+        <div style="display:flex;justify-content:space-between"><span>시세 변동 자동 반영</span><span style="color:#5630E3;font-weight:700">포함</span></div>
+        <div style="display:flex;justify-content:space-between"><span>배송기사 추적</span><span style="color:#5630E3;font-weight:700">포함</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.45);margin-top:22px;text-align:center">AI 배송(배송 동선 자동 세팅)은 지도 서비스 연동 비용이 발생해 플랜과 별개로 추가 과금됩니다. · 기능은 지속적으로 개선됩니다</div>
+
+  <div style="margin-top:64px;background:#fff;border-radius:24px;padding:40px 44px 44px">
+    <div style="font:800 28px Pretendard,sans-serif;letter-spacing:-.03em">함께 드리는 것</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;margin-top:26px">
+      <div style="display:flex;gap:12px;align-items:baseline"><span style="color:#5630E3;font-weight:800">✓</span><div style="font:400 17px/1.6 Pretendard,sans-serif;word-break:keep-all"><b style="font-weight:700">품목코드 초기 세팅 대행</b> — 우리 회사 품목 리스트를 받아 매칭 기준을 함께 잡아드립니다</div></div>
+      <div style="display:flex;gap:12px;align-items:baseline"><span style="color:#5630E3;font-weight:800">✓</span><div style="font:400 17px/1.6 Pretendard,sans-serif;word-break:keep-all"><b style="font-weight:700">카톡·문자 주문 채널 연동 설정</b> — 설정은 저희가 합니다</div></div>
+      <div style="display:flex;gap:12px;align-items:baseline"><span style="color:#5630E3;font-weight:800">✓</span><div style="font:400 17px/1.6 Pretendard,sans-serif;word-break:keep-all"><b style="font-weight:700">7일 무료 체험</b> — 카드 등록 없이</div></div>
+      <div style="display:flex;gap:12px;align-items:baseline"><span style="color:#5630E3;font-weight:800">✓</span><div style="font:400 17px/1.6 Pretendard,sans-serif;word-break:keep-all"><b style="font-weight:700">전담 담당자 직통 상담</b> — 초기 파트너 기간 동안</div></div>
+    </div>
+    <div style="height:1px;background:rgba(16,24,40,.08);margin:34px 0 26px"></div>
+    <div style="font:700 20px/1.6 Pretendard,sans-serif;word-break:keep-all">7일 무료. 카드 등록 없이 시작하고, 안 맞으면 그냥 안 쓰시면 됩니다.<br><span style="font-weight:500;color:rgba(26,26,26,.55)">약정도 없습니다. 월 단위로 언제든 중단하실 수 있습니다.</span></div>
+  </div>
+</div>
+
+<div style="padding:110px 60px 120px;display:grid;grid-template-columns:380px 1fr;gap:60px">
+  <h2 style="font:800 46px/1.26 Pretendard,sans-serif;letter-spacing:-.04em;margin:0">자주 묻는 질문</h2>
+  <div>
+    <div style="border-top:1px solid rgba(16,24,40,.1);padding:26px 0">
+      <div style="display:flex;justify-content:space-between;gap:20px;align-items:baseline"><div style="font:700 21px Pretendard,sans-serif;letter-spacing:-.02em">거래처도 뭔가 새로 설치해야 하나요?</div><div style="font:400 22px Pretendard,sans-serif;color:rgba(26,26,26,.35)">−</div></div>
+      <p style="font:400 17px/1.75 Pretendard,sans-serif;color:rgba(26,26,26,.6);margin:16px 0 0;max-width:800px;word-break:keep-all">아니요. 거래처는 지금 하던 그대로 카톡·문자로 주문을 보내면 됩니다. 앱을 깔거나 새 양식을 배울 필요가 없습니다. 방식 1을 택하시면 거래처가 카톡에 채널 하나를 추가하는 정도이고, 방식 2를 택하시면 그것조차 없습니다.</p>
+    </div>
+    <div style="border-top:1px solid rgba(16,24,40,.1);padding:26px 0;display:flex;justify-content:space-between;gap:20px;align-items:baseline"><div style="font:700 21px Pretendard,sans-serif;letter-spacing:-.02em;word-break:keep-all">ERP는 어떻게 되나요? 기존에 쓰던 ERP를 계속 써야 하나요?</div><div style="font:400 22px Pretendard,sans-serif;color:rgba(26,26,26,.35)">+</div></div>
+    <div style="border-top:1px solid rgba(16,24,40,.1);padding:26px 0;display:flex;justify-content:space-between;gap:20px;align-items:baseline"><div style="font:700 21px Pretendard,sans-serif;letter-spacing:-.02em">AI가 잘못 읽으면 어떡하죠?</div><div style="font:400 22px Pretendard,sans-serif;color:rgba(26,26,26,.35)">+</div></div>
+    <div style="border-top:1px solid rgba(16,24,40,.1);padding:26px 0;display:flex;justify-content:space-between;gap:20px;align-items:baseline"><div style="font:700 21px Pretendard,sans-serif;letter-spacing:-.02em">품목 이름을 거래처마다 다르게 부르는데요.</div><div style="font:400 22px Pretendard,sans-serif;color:rgba(26,26,26,.35)">+</div></div>
+    <div style="border-top:1px solid rgba(16,24,40,.1);padding:26px 0;display:flex;justify-content:space-between;gap:20px;align-items:baseline"><div style="font:700 21px Pretendard,sans-serif;letter-spacing:-.02em">사진이나 캡처, 전화로 온 주문도 처리되나요?</div><div style="font:400 22px Pretendard,sans-serif;color:rgba(26,26,26,.35)">+</div></div>
+    <div style="border-top:1px solid rgba(16,24,40,.1);padding:26px 0;display:flex;justify-content:space-between;gap:20px;align-items:baseline"><div style="font:700 21px Pretendard,sans-serif;letter-spacing:-.02em">주문 데이터가 밖으로 새지 않나요?</div><div style="font:400 22px Pretendard,sans-serif;color:rgba(26,26,26,.35)">+</div></div>
+        <div style="border-top:1px solid rgba(16,24,40,.1)"></div>
+  </div>
+</div>
+
+<div style="background:#5630E3;color:#fff;padding:104px 60px 116px">
+  <div style="display:grid;grid-template-columns:1fr 520px;gap:80px;align-items:start">
+    <div>
+      <div style="font:700 14px Pretendard,sans-serif;color:rgba(255,255,255,.62);letter-spacing:.02em">초기 파트너 10개사 모집 중</div>
+      <h2 style="font:800 56px/1.24 Pretendard,sans-serif;letter-spacing:-.042em;margin:16px 0 0;word-break:keep-all">지금 바로 사용해보십시오.</h2>
+      <p style="font:400 21px/1.7 Pretendard,sans-serif;color:rgba(255,255,255,.78);margin:24px 0 0;max-width:560px;word-break:keep-all">카드 등록 없이 7일 무료로 시작합니다. 지금 초기 파트너 10개사 혜택이 진행 중이며, 이 안에 드시면 AI ORDER를 <b style="color:#fff;font-weight:700">월 89,000원</b>으로 쓰실 수 있습니다.</p>
+
+      <div style="display:flex;gap:8px;margin-top:26px;flex-wrap:wrap">
+        <div style="font:700 14px Pretendard,sans-serif;color:#fff;background:rgba(255,255,255,.16);padding:9px 15px;border-radius:999px">정가 대비 월 40,000원 할인</div>
+        <div style="font:700 14px Pretendard,sans-serif;color:#fff;background:rgba(255,255,255,.16);padding:9px 15px;border-radius:999px">10개사 마감 시 종료</div>
+        <div style="font:700 14px Pretendard,sans-serif;color:#fff;background:rgba(255,255,255,.16);padding:9px 15px;border-radius:999px">약정 없이 월 단위</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:0;margin-top:44px;max-width:520px">
+        <div style="display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-top:1px solid rgba(255,255,255,.18)">
+          <div style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;font:700 12px Pretendard,sans-serif;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px">1</div>
+          <div>
+            <div style="font:700 18px Pretendard,sans-serif;letter-spacing:-.02em">신청서를 남기시면 담당자가 연락드립니다</div>
+            <div style="font:400 16px/1.6 Pretendard,sans-serif;color:rgba(255,255,255,.62);margin-top:5px;word-break:keep-all">주문을 어떻게 받고 계신지 먼저 여쭤봅니다. 통화는 10분이면 충분합니다.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-top:1px solid rgba(255,255,255,.18)">
+          <div style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;font:700 12px Pretendard,sans-serif;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px">2</div>
+          <div>
+            <div style="font:700 18px Pretendard,sans-serif;letter-spacing:-.02em">품목코드·거래처 세팅을 같이 잡습니다</div>
+            <div style="font:400 16px/1.6 Pretendard,sans-serif;color:rgba(255,255,255,.62);margin-top:5px;word-break:keep-all">쓰던 품목 리스트를 주시면 매칭 기준을 저희가 만들어 드립니다.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18)">
+          <div style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;font:700 12px Pretendard,sans-serif;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px">3</div>
+          <div>
+            <div style="font:700 18px Pretendard,sans-serif;letter-spacing:-.02em">7일 동안 실제 주문으로 써보십니다</div>
+            <div style="font:400 16px/1.6 Pretendard,sans-serif;color:rgba(255,255,255,.62);margin-top:5px;word-break:keep-all">카드 등록도, 약정도 없습니다. 안 맞으면 그냥 안 쓰시면 됩니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#fff;border-radius:24px;padding:34px 34px 30px;color:#1A1A1A;box-shadow:0 40px 80px -40px rgba(16,24,40,.5)">
+      <div style="font:800 24px Pretendard,sans-serif;letter-spacing:-.03em">7일 무료 체험 신청</div>
+      <div style="font:400 15px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.5);margin-top:8px">1분이면 끝납니다 · 접수 후 영업일 기준 1일 내 연락</div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;margin-top:26px">
+        <div>
+          <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.6);margin-bottom:7px">업체명</div>
+          <div style="border:1px solid rgba(16,24,40,.14);border-radius:12px;padding:15px 16px;font:400 16px Pretendard,sans-serif;color:rgba(26,26,26,.32)">예) 우리청과</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div>
+            <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.6);margin-bottom:7px">담당자명</div>
+            <div style="border:1px solid rgba(16,24,40,.14);border-radius:12px;padding:15px 16px;font:400 16px Pretendard,sans-serif;color:rgba(26,26,26,.32)">성함</div>
+          </div>
+          <div>
+            <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.6);margin-bottom:7px">연락처</div>
+            <div style="border:1.5px solid #5630E3;border-radius:12px;padding:14.5px 16px;font:400 16px Pretendard,sans-serif;color:rgba(26,26,26,.32);box-shadow:0 0 0 4px rgba(86,48,227,.1)">010-</div>
+          </div>
+        </div>
+        <div>
+          <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.6);margin-bottom:7px">이메일</div>
+          <div style="border:1px solid rgba(16,24,40,.14);border-radius:12px;padding:15px 16px;font:400 16px Pretendard,sans-serif;color:rgba(26,26,26,.32)">example@company.co.kr</div>
+        </div>
+        <div>
+          <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.6);margin-bottom:7px">사업자등록번호</div>
+          <div style="border:1px solid rgba(16,24,40,.14);border-radius:12px;padding:15px 16px;font:400 16px Pretendard,sans-serif;color:rgba(26,26,26,.32)">000-00-00000</div>
+        </div>
+        <div>
+          <div style="font:700 13px Pretendard,sans-serif;color:rgba(26,26,26,.6);margin-bottom:7px">주로 받는 주문 방식</div>
+          <div style="display:flex;gap:8px">
+            <div style="flex:1;border:1.5px solid #5630E3;background:rgba(86,48,227,.06);border-radius:12px;padding:13px 0;text-align:center;font:700 15px Pretendard,sans-serif;color:#5630E3">카톡</div>
+            <div style="flex:1;border:1px solid rgba(16,24,40,.14);border-radius:12px;padding:13.5px 0;text-align:center;font:600 15px Pretendard,sans-serif;color:rgba(26,26,26,.55)">문자</div>
+            <div style="flex:1;border:1px solid rgba(16,24,40,.14);border-radius:12px;padding:13.5px 0;text-align:center;font:600 15px Pretendard,sans-serif;color:rgba(26,26,26,.55)">전화</div>
+            <div style="flex:1;border:1px solid rgba(16,24,40,.14);border-radius:12px;padding:13.5px 0;text-align:center;font:600 15px Pretendard,sans-serif;color:rgba(26,26,26,.55)">복합</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:24px;background:#5630E3;color:#fff;font:700 18px Pretendard,sans-serif;text-align:center;padding:19px;border-radius:14px;box-shadow:0 14px 30px -14px rgba(86,48,227,.6)">무료 체험 신청하기</div>
+      <div style="font:500 13px/1.6 Pretendard,sans-serif;color:rgba(26,26,26,.4);margin-top:12px;text-align:center;word-break:keep-all">카드 등록 없이 시작 · 초기 파트너 10개사 마감 시 종료<br>제출 시 <span style="color:rgba(26,26,26,.6);text-decoration:underline">개인정보 수집·이용</span>에 동의하게 됩니다</div>
+
+      <div style="height:1px;background:rgba(16,24,40,.08);margin:22px 0 18px"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <div style="font:500 15px Pretendard,sans-serif;color:rgba(26,26,26,.55);word-break:keep-all">먼저 물어보고 싶으신가요?</div>
+        <div style="display:flex;gap:8px;flex:none">
+          <div style="border:1px solid rgba(16,24,40,.14);border-radius:10px;padding:10px 16px;font:700 14px Pretendard,sans-serif;color:#1A1A1A">카톡 상담</div>
+          <div style="border:1px solid rgba(16,24,40,.14);border-radius:10px;padding:10px 16px;font:700 14px Pretendard,sans-serif;color:#1A1A1A">전화 상담</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background:#111317;color:#fff;padding:80px 60px 40px">
+  <div style="display:grid;grid-template-columns:1fr 620px;gap:60px">
+    <div>
+      <img src="assets/kyton-logo-white.png" alt="KYTON — Korea Youth Technology" style="height:52px;width:256px;display:block">
+      <div style="font:700 17px Pretendard,sans-serif;margin-top:24px">카이톤(KYTON, Korea Youth Technology)</div>
+      
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+      <div>
+        <div style="font:700 14px Pretendard,sans-serif;color:rgba(255,255,255,.4)">프로덕트</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:18px;font:500 16px Pretendard,sans-serif;color:rgba(255,255,255,.75)"><span>서비스 소개</span><span>요금 안내</span><span>도입 문의</span></div>
+      </div>
+      <div>
+        <div style="font:700 14px Pretendard,sans-serif;color:rgba(255,255,255,.4)">고객 지원</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:18px;font:500 16px Pretendard,sans-serif;color:rgba(255,255,255,.75)"><span>도입 문의</span><span>자주 묻는 질문</span><span>카톡·문자 상담</span></div>
+      </div>
+      <div>
+        <div style="font:700 14px Pretendard,sans-serif;color:rgba(255,255,255,.4)">약관·정책</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:18px;font:500 16px Pretendard,sans-serif;color:rgba(255,255,255,.75)"><span>서비스 이용약관</span><span>개인정보처리방침</span><span>데이터 보안 정책</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="height:1px;background:rgba(255,255,255,.1);margin:56px 0 24px"></div>
+  <div style="font:400 14px/1.9 Pretendard,sans-serif;color:rgba(255,255,255,.4)">카이톤(KYTON, Korea Youth Technology) · 대표 : 성시훈 · 사업자등록번호 : 152-16-03084<br>주소 : 경기도 안산시 단원구 화랑로 402, 3층 (고잔동, 신원빌딩) · 이메일 : account@kyton.co.kr<br>© 2026 KYTON. All rights reserved.</div>
+</div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;heroAutoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
+class Component extends DCLogic {
+  state = { i: 0 };
+  heroCard = React.createRef();
+  heroScene = React.createRef();
+  fitHero = () => {
+    const card = this.heroCard.current, scene = this.heroScene.current;
+    if (!card || !scene) return;
+    const w = card.clientWidth || 1392;
+    const h = Math.max(560, Math.min(w * 9 / 16, window.innerHeight - 108));
+    card.style.height = h + 'px';
+    scene.style.transform = 'translateX(-50%) scale(' + Math.min(w / 732, h / 412) + ')';
+  };
+  componentDidMount() {
+    this.fitHero();
+    window.addEventListener('resize', this.fitHero);
+    if (this.props.heroAutoplay === false) return;
+    this.t = setInterval(() => this.setState(s => ({ i: (s.i + 1) % 4 })), 2400);
+  }
+  componentWillUnmount() { clearInterval(this.t); window.removeEventListener('resize', this.fitHero); }
+  renderVals() {
+    const i = this.props.heroAutoplay === false ? 0 : this.state.i;
+    const labels = ['01 phone-idle', '03b chat-messy', '04a logo', '05b approve'];
+    return { s0: i === 0, s1: i === 1, s2: i === 2, s3: i === 3, slideLabel: labels[i], heroCard: this.heroCard, heroScene: this.heroScene };
+  }
+}
+</script>
+</body>
+</html>
