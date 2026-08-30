@@ -20,8 +20,8 @@ import { smoothScrollTo, usePrefersReducedMotion } from "@/lib/reveal";
    영상이 없는 동안에는 시안과 동일한 4프레임 목업이 자동으로 표시된다.
    ============================================================= */
 const HERO_VIDEO = {
-  mp4: "",
-  webm: "",
+  mp4: "/hero/hero-loop.mp4",
+  webm: "/hero/hero-loop.webm",
   poster: "",
   reducedMotionStill: "",
 };
