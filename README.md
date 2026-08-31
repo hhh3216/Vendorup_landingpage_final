@@ -1,12 +1,23 @@
 ## 배포 담당자에게 (2026-09-01)
 
-문의하기 / 무료로 시작하기 폼을 **구글 시트 + 알림 메일**로 연결해 두었습니다.
-다만 현재 `vendorup.kr`은 S3 정적 호스팅이라 **실제 사이트에서는 아직 접수가 되지 않습니다.**
+문의하기 / 무료로 시작하기 폼을 **구글 시트 + 알림 메일**로 연결했습니다.
+정적 배포(S3) 그대로 동작하도록 브라우저가 구글로 직접 보내는 방식이라 **호스팅은 바꾸지 않아도 됩니다.**
 
-배포 전에 반드시 읽어주세요 → **[project/INQUIRY_WEBHOOK_SETUP.md](project/INQUIRY_WEBHOOK_SETUP.md)**
+**빌드할 때 아래 환경변수가 반드시 있어야 합니다.** 없으면 폼이 동작하지 않습니다.
 
-- 필요한 환경변수: `INQUIRY_WEBHOOK_URL` (저장소에는 없음, 별도 전달)
-- 로컬 실행: `npm install` → `npm run dev`
+```
+NEXT_PUBLIC_INQUIRY_WEBHOOK_URL=<Apps Script /exec 주소>
+```
+
+저장소에는 값이 없으니 별도로 전달받아 `.env.local`에 넣거나 CI 환경변수로 등록하세요.
+
+자세한 내용 → **[project/INQUIRY_WEBHOOK_SETUP.md](project/INQUIRY_WEBHOOK_SETUP.md)**
+
+```bash
+npm install
+npm run dev      # 로컬 개발
+npm run build    # out/ 생성 → 배포
+```
 
 ---
 

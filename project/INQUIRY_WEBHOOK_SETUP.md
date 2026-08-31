@@ -29,11 +29,28 @@
 
 ```javascript
 /** 알림 받을 메일 주소 — 여러 명이면 쉼표로 구분 */
-const ALERT_EMAIL = "account@kyton.co.kr";
+const ALERT_EMAIL = "account@kyton.co.kr, hhh@kyton.co.kr";
 
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
+
+    /* 스팸 봇 차단 — website는 화면에 안 보이는 함정 칸이다.
+       사람은 절대 채울 수 없으므로, 값이 있으면 봇으로 보고 조용히 버린다.
+       (봇에게 실패를 알려주면 우회를 시도하므로 성공한 것처럼 응답한다) */
+    if (data.website) {
+      return ContentService.createTextOutput(
+        JSON.stringify({ ok: true })
+      ).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // 필수값이 없으면 연락 자체가 불가능하다
+    if (!data.company || !data.name || !data.phone) {
+      return ContentService.createTextOutput(
+        JSON.stringify({ ok: false, error: "missing_fields" })
+      ).setMimeType(ContentService.MimeType.JSON);
+    }
+
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
 
     const when = new Date(data.submittedAt || new Date());
@@ -102,8 +119,7 @@ function doPost(e) {
 | 다음 사용자로 실행 | **나(본인 계정)** |
 | 액세스 권한이 있는 사용자 | **모든 사용자** |
 
-> "모든 사용자"로 해야 랜딩페이지 서버가 호출할 수 있습니다.
-> 이 주소를 아는 사람만 접근 가능하고, 주소는 코드에 노출되지 않습니다(4단계 참고).
+> "모든 사용자"로 해야 방문자 브라우저가 호출할 수 있습니다. 반드시 이렇게 설정하세요.
 
 4. **배포** 클릭 → 권한 승인 창이 뜹니다
    - "이 앱은 확인되지 않았습니다" 경고가 나오면 → **고급** → **(안전하지 않음) 이동** 클릭
@@ -118,17 +134,20 @@ function doPost(e) {
 프로젝트 최상위 폴더에 **`.env.local`** 파일을 만들고 아래 한 줄을 넣습니다.
 
 ```
-INQUIRY_WEBHOOK_URL=여기에_3단계에서_복사한_주소_붙여넣기
+NEXT_PUBLIC_INQUIRY_WEBHOOK_URL=여기에_3단계에서_복사한_주소_붙여넣기
 ```
 
 터미널에서 만들려면:
 
 ```bash
-echo 'INQUIRY_WEBHOOK_URL=붙여넣기' > .env.local
+echo 'NEXT_PUBLIC_INQUIRY_WEBHOOK_URL=붙여넣기' > .env.local
 ```
 
-> `.env.local`은 `.gitignore`에 등록되어 있어 깃허브에 올라가지 않습니다.
-> 이 주소는 스팸 방지를 위해 공개하지 마세요.
+> **`NEXT_PUBLIC_` 접두사가 꼭 필요합니다.** 이게 붙어야 브라우저에서 쓸 수 있습니다.
+> 이 사이트는 서버가 없는 정적 배포라 브라우저가 구글로 직접 보내야 하기 때문입니다.
+
+⚠️ **이 주소는 페이지 소스에 그대로 노출됩니다.** 숨길 수 없는 구조이며, 대신 함정 칸(honeypot)으로
+봇을 걸러냅니다. 비밀번호가 아니라 "접수 창구 주소"라고 보시면 됩니다.
 
 그다음 개발 서버를 **껐다가 다시 켭니다** (환경변수는 시작할 때만 읽습니다).
 
@@ -148,52 +167,45 @@ npm run dev
 
 ---
 
-## ⚠️ 배포 담당자에게 — 현재 호스팅으로는 접수가 되지 않습니다
+## 배포 담당자(시훈)에게
 
-**2026-09-01 확인 기준, `vendorup.kr`은 S3 + CloudFront 정적 호스팅입니다.**
+**정적 배포(`output: "export"` + S3/CloudFront) 그대로 두시면 됩니다.** 호스팅을 바꿀 필요 없습니다.
+
+서버가 없는 환경이라, 브라우저가 구글 Apps Script로 **직접** 접수를 보내도록 구현했습니다.
+`app/api/...` 같은 서버 경로는 쓰지 않습니다.
+
+### 배포할 때 딱 하나만 확인해 주세요
+
+빌드하는 환경에 아래 환경변수가 있어야 합니다.
 
 ```
-$ curl -sI https://vendorup.kr/
-server: AmazonS3
-via: ... cloudfront.net (CloudFront)
-
-$ curl -X POST https://vendorup.kr/api/inquiry
-HTTP 403        ← 서버 경로가 없음
+NEXT_PUBLIC_INQUIRY_WEBHOOK_URL=<Apps Script /exec 주소>
 ```
 
-정적 호스팅은 HTML·CSS·JS 파일만 내려줄 뿐 **서버 코드를 실행하지 않습니다.**
-그래서 이 접수 기능(`app/api/inquiry/route.ts`)이 실제 사이트에서는 동작하지 않습니다.
+- 이 값은 **빌드 시점에 JS 번들 안으로 들어갑니다.** 빌드할 때 없으면 폼이 동작하지 않습니다.
+- 저장소에는 올라가 있지 않으니 현호에게 값을 받아서 `.env.local`에 넣거나, CI 환경변수로 등록해 주세요.
+- 값이 없으면 방문자 화면에 "접수 중 문제가 생겼습니다 · 전화번호" 안내가 뜹니다.
+  (성공한 척하지 않으므로 문의가 조용히 유실되지는 않습니다.)
 
-> 이 상태로 두면 방문자에게는 "접수되었습니다"가 뜨는데 아무 데도 기록이 남지 않습니다.
-> **문의를 남긴 사장님이 오지 않을 연락을 기다리게 됩니다.** 배포 전에 아래 중 하나를 반드시 처리해 주세요.
+### 빌드·확인
 
-### 방법 A — Next.js 서버가 도는 곳으로 옮기기 (권장)
+```bash
+npm ci
+npm run build          # out/ 폴더 생성
+npx serve out          # 배포와 동일한 조건으로 로컬 확인
+```
 
-Vercel, AWS Amplify(SSR 모드), Cloudflare Workers 등.
-이 프로젝트는 Next.js App Router라 서버가 있는 환경이 원래 맞는 구성입니다.
+빌드 후 아래로 값이 잘 들어갔는지 확인할 수 있습니다.
 
-Vercel 기준:
-1. 깃허브 저장소 연결 → 자동 배포
-2. **Settings → Environment Variables** 에 `INQUIRY_WEBHOOK_URL` 등록
-   (값은 `.env.local`에 있는 Apps Script `/exec` 주소 — 저장소에는 올라가 있지 않으니 따로 전달받으세요)
-3. `vendorup.kr` DNS를 Vercel로 변경
+```bash
+grep -rl "script.google.com" out/_next/static/chunks/ | head -1
+```
 
-이렇게 하면 코드 수정 없이 그대로 동작하고, 웹훅 주소도 브라우저에 노출되지 않습니다.
+### 스팸 대비
 
-### 방법 B — 정적 호스팅을 유지해야 한다면
-
-브라우저에서 Apps Script `/exec` 주소를 **직접** 호출하도록 바꿔야 합니다.
-`app/api/inquiry/route.ts`를 지우고, 두 폼의 `fetch("/api/inquiry", ...)`를 웹훅 주소 직접 호출로 교체합니다.
-
-이때 감수해야 하는 것:
-
-| 항목 | 내용 |
-| --- | --- |
-| 웹훅 주소 노출 | 페이지 소스에 그대로 박힙니다. 주소를 아는 사람은 누구나 시트에 행을 넣을 수 있어 스팸에 취약합니다 |
-| 오류 감지 | Apps Script는 CORS 응답이 불안정해, 실패해도 성공처럼 보일 수 있습니다 |
-| 스팸 대비 | Apps Script 쪽에 간단한 검증(허용 도메인 확인 등)을 추가하는 게 좋습니다 |
-
-리드(문의) 유실 위험 때문에 **방법 A를 권합니다.**
+웹훅 주소는 페이지 소스에 노출됩니다(정적 배포에서는 숨길 수 없는 구조).
+대신 두 폼 모두 **함정 칸(honeypot)** 을 두었고, Apps Script가 그 칸이 채워진 요청을 버립니다.
+문의가 급증하면 Apps Script 쪽에 IP·시간 기준 제한을 추가하면 됩니다.
 
 ---
 
@@ -201,7 +213,7 @@ Vercel 기준:
 
 | 이름 | 값 | 어디에 |
 | --- | --- | --- |
-| `INQUIRY_WEBHOOK_URL` | Apps Script 웹 앱 `/exec` 주소 | 로컬은 `.env.local`, 배포는 호스팅 설정 |
+| `NEXT_PUBLIC_INQUIRY_WEBHOOK_URL` | Apps Script 웹 앱 `/exec` 주소 | 로컬·빌드 환경 모두 |
 
 `.env.local`은 `.gitignore`에 등록되어 저장소에 올라가지 않습니다.
 배포 담당자에게는 별도로(메신저 등) 전달해 주세요.
@@ -212,7 +224,8 @@ Vercel 기준:
 
 | 증상 | 원인·해결 |
 | --- | --- |
-| 화면에 빨간 실패 안내가 뜬다 | `.env.local`을 만든 뒤 개발 서버를 재시작했는지 확인 |
+| 화면에 빨간 실패 안내가 뜬다 | `.env.local`에 `NEXT_PUBLIC_` 접두사가 붙었는지, 만든 뒤 서버를 재시작했는지 확인 |
+| 배포한 사이트에서만 실패한다 | 빌드 환경에 `NEXT_PUBLIC_INQUIRY_WEBHOOK_URL`이 없었던 것. 넣고 다시 빌드·배포 |
 | 시트엔 쌓이는데 메일이 안 온다 | `ALERT_EMAIL` 주소 오타 확인. 구글 무료 계정은 하루 메일 100통 제한 |
 | 권한 승인 창이 계속 뜬다 | 3단계에서 "고급 → 이동"으로 승인해야 합니다 |
 | 코드를 고쳤는데 반영이 안 된다 | Apps Script는 **배포 → 배포 관리 → 편집(✏️) → 버전: 새 버전 → 배포**를 해야 반영됩니다 |

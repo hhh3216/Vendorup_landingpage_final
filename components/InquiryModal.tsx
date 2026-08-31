@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "./InquiryModal.module.css";
+import { submitInquiry } from "@/lib/submitInquiry";
 
 /* 네이티브 <dialog>를 쓴다. 배경 딤(::backdrop), ESC 닫기, 포커스 가둠,
    바깥 스크롤 잠금을 브라우저가 이미 해준다 — 직접 만들 이유가 없다. */
@@ -33,6 +34,8 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [failed, setFailed] = useState(false);
+  /** 스팸 봇 함정 — 사람 눈에는 안 보이므로 값이 차 있으면 봇이다 */
+  const [honeypot, setHoneypot] = useState("");
 
   useEffect(() => {
     const el = ref.current;
@@ -74,26 +77,19 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
     setSending(true);
     setFailed(false);
 
-    try {
-      const res = await fetch("/api/inquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "inquiry",
-          ...fields,
-          channel,
-          source: source === "기타" ? `기타: ${sourceOther}`.trim() : source,
-        }),
-      });
-      if (!res.ok) throw new Error(String(res.status));
-      setSent(true);
-    } catch {
-      /* 접수에 실패했으면 접수됐다고 하지 않는다.
-         문의를 남긴 사람이 연락을 기다리다 놓치는 게 최악이다. */
-      setFailed(true);
-    } finally {
-      setSending(false);
-    }
+    const ok = await submitInquiry({
+      type: "inquiry",
+      ...fields,
+      channel,
+      source: source === "기타" ? `기타: ${sourceOther}`.trim() : source,
+      website: honeypot,
+    });
+
+    /* 접수에 실패했으면 접수됐다고 하지 않는다.
+       문의를 남긴 사람이 연락을 기다리다 놓치는 게 최악이다. */
+    if (ok) setSent(true);
+    else setFailed(true);
+    setSending(false);
   };
 
   const close = () => {
@@ -129,6 +125,19 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
         </div>
       ) : (
         <form onSubmit={submit} noValidate>
+          {/* 스팸 봇 함정. 사람에게는 보이지도, 탭으로 닿지도 않는다.
+              자동 입력 봇은 이 칸을 채우므로 Apps Script가 걸러낸다. */}
+          <input
+            className={styles.honeypot}
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+          />
+
           <h2 className={styles.title} id="inquiry-title">
             Vendor-UP 도입 문의
           </h2>

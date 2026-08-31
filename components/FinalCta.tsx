@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "./FinalCta.module.css";
 import { stagger } from "@/lib/reveal";
+import { submitInquiry } from "@/lib/submitInquiry";
 
 type Status = "idle" | "submitting" | "done";
 
@@ -39,6 +40,8 @@ export default function FinalCta() {
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
   const [failed, setFailed] = useState(false);
+  /** 스팸 봇 함정 — 사람 눈에는 안 보이므로 값이 차 있으면 봇이다 */
+  const [honeypot, setHoneypot] = useState("");
 
   const set = (key: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFields((prev) => ({ ...prev, [key]: e.target.value }));
@@ -69,16 +72,12 @@ export default function FinalCta() {
     setStatus("submitting");
     setFailed(false);
 
-    try {
-      const res = await fetch("/api/inquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "trial", ...fields, channel }),
-      });
-      if (!res.ok) throw new Error(String(res.status));
+    const ok = await submitInquiry({ type: "trial", ...fields, channel, website: honeypot });
+
+    /* 접수 실패를 성공으로 보여주면 신청자는 오지 않을 연락을 기다린다. */
+    if (ok) {
       setStatus("done");
-    } catch {
-      /* 접수 실패를 성공으로 보여주면 신청자는 오지 않을 연락을 기다린다. */
+    } else {
       setFailed(true);
       setStatus("idle");
     }
@@ -135,6 +134,18 @@ export default function FinalCta() {
             </div>
           ) : (
             <form onSubmit={submit} noValidate>
+              {/* 스팸 봇 함정. 사람에게는 보이지도, 탭으로 닿지도 않는다. */}
+              <input
+                className={styles.honeypot}
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+
               <div className={styles.cardTitle}>7일 무료 체험 신청</div>
               <div className={styles.cardSub}>
                 1분이면 끝납니다 · 접수 후 영업일 기준 1일 내 연락
