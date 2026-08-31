@@ -1,3 +1,15 @@
+## 배포 담당자에게 (2026-09-01)
+
+문의하기 / 무료로 시작하기 폼을 **구글 시트 + 알림 메일**로 연결해 두었습니다.
+다만 현재 `vendorup.kr`은 S3 정적 호스팅이라 **실제 사이트에서는 아직 접수가 되지 않습니다.**
+
+배포 전에 반드시 읽어주세요 → **[project/INQUIRY_WEBHOOK_SETUP.md](project/INQUIRY_WEBHOOK_SETUP.md)**
+
+- 필요한 환경변수: `INQUIRY_WEBHOOK_URL` (저장소에는 없음, 별도 전달)
+- 로컬 실행: `npm install` → `npm run dev`
+
+---
+
 # CODING AGENTS: READ THIS FIRST
 
 This is a **handoff bundle** from Claude Design (claude.ai/design).

@@ -209,6 +209,24 @@
   color: var(--violet);
 }
 
+/* 접수 실패 안내 — 성공한 척하지 않고 대체 연락처를 준다.
+   이 섹션은 다크 배경이라 밝은 레드로 읽는다. */
+.sendFail {
+  margin-top: 20px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(249, 112, 102, 0.14);
+  font: 500 13px/1.6 Pretendard, sans-serif;
+  color: #f97066;
+  word-break: keep-all;
+}
+
+.sendFail a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
 .submit {
   width: 100%;
   margin-top: 24px;

@@ -31,6 +31,8 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
   const [agree, setAgree] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof Fields | "agree", string>>>({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -53,8 +55,9 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
     setErrors((prev) => (prev[key] ? { ...prev, [key]: undefined } : prev));
   };
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (sending) return;
 
     const next: Partial<Record<keyof Fields | "agree", string>> = {};
     if (!fields.company.trim()) next.company = "업체명을 입력해 주세요.";
@@ -68,15 +71,36 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
     setErrors(next);
     if (Object.keys(next).length) return;
 
-    /* ⚠️ 연동 지점: 문의 접수 엔드포인트가 정해지면 여기에 붙인다.
-       지금은 접수 화면으로만 전환한다 (FinalCta의 신청 폼과 같은 방식). */
-    setSent(true);
+    setSending(true);
+    setFailed(false);
+
+    try {
+      const res = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "inquiry",
+          ...fields,
+          channel,
+          source: source === "기타" ? `기타: ${sourceOther}`.trim() : source,
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setSent(true);
+    } catch {
+      /* 접수에 실패했으면 접수됐다고 하지 않는다.
+         문의를 남긴 사람이 연락을 기다리다 놓치는 게 최악이다. */
+      setFailed(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   const close = () => {
     onClose();
     // 닫는 애니메이션이 없으므로 즉시 초기화해도 사용자에게 보이지 않는다
     setSent(false);
+    setFailed(false);
     setFields(EMPTY);
     setChannel("카톡");
     setSource("");
@@ -257,8 +281,15 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
             </div>
           </div>
 
-          <button className={styles.submit} type="submit">
-            문의 남기기
+          {failed && (
+            <div className={styles.sendFail} role="alert">
+              접수 중 문제가 생겼습니다. 잠시 후 다시 시도하시거나{" "}
+              <a href="tel:01029155311">010-2915-5311</a>로 연락 주세요.
+            </div>
+          )}
+
+          <button className={styles.submit} type="submit" disabled={sending}>
+            {sending ? "접수 중…" : "문의 남기기"}
           </button>
         </form>
       )}

@@ -76,8 +76,12 @@
 .input,
 .textarea {
   width: 100%;
-  font: 400 15px Pretendard, sans-serif;
+  /* font 단축 속성 + font-family: inherit 조합은 빌드 과정에서 크기 지정이 사라져
+     브라우저 기본값(13.3px)으로 렌더된다. 개별 속성으로 명시한다.
+     16px인 이유: iOS 사파리는 16px 미만 입력칸을 탭하면 화면을 확대해버린다. */
   font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
   color: var(--ink);
   background: #fff;
   border: 1px solid rgba(16, 24, 40, 0.14);
@@ -164,6 +168,23 @@
   text-underline-offset: 2px;
 }
 
+/* 접수 실패 안내 — 성공한 척하지 않고 대체 연락처를 준다 */
+.sendFail {
+  margin-top: 20px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(217, 45, 32, 0.07);
+  font: 500 13px/1.6 Pretendard, sans-serif;
+  color: #b42318;
+  word-break: keep-all;
+}
+
+.sendFail a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
 .submit {
   width: 100%;
   margin-top: 24px;
@@ -179,7 +200,7 @@
 }
 
 @media (hover: hover) {
-  .submit:hover {
+  .submit:not(:disabled):hover {
     transform: translateY(-2px);
     box-shadow: 0 14px 28px -14px rgba(86, 48, 227, 0.7);
   }
@@ -188,6 +209,11 @@
 .submit:active {
   transform: translateY(0) scale(0.99);
   transition-duration: var(--d-fast);
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 
 /* --- 접수 완료 --- */

@@ -38,6 +38,7 @@ export default function FinalCta() {
   const [channel, setChannel] = useState<string>("카톡");
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
+  const [failed, setFailed] = useState(false);
 
   const set = (key: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFields((prev) => ({ ...prev, [key]: e.target.value }));
@@ -66,13 +67,21 @@ export default function FinalCta() {
     if (Object.keys(found).length) return;
 
     setStatus("submitting");
+    setFailed(false);
 
-    /* ⚠️ 연동 지점: 실제 신청 접수 엔드포인트가 정해지면 여기에 붙인다.
-       기획서 권장 흐름은 "제출 후 담당자가 전화로 이관 상담"이므로,
-       접수만 하고 즉시 감사 메시지로 전환한다. */
-    await new Promise((resolve) => setTimeout(resolve, 900));
-
-    setStatus("done");
+    try {
+      const res = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "trial", ...fields, channel }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setStatus("done");
+    } catch {
+      /* 접수 실패를 성공으로 보여주면 신청자는 오지 않을 연락을 기다린다. */
+      setFailed(true);
+      setStatus("idle");
+    }
   };
 
   return (
@@ -227,6 +236,13 @@ export default function FinalCta() {
                   </div>
                 </div>
               </div>
+
+              {failed && (
+                <div className={styles.sendFail} role="alert">
+                  접수 중 문제가 생겼습니다. 잠시 후 다시 시도하시거나{" "}
+                  <a href="tel:01029155311">010-2915-5311</a>로 연락 주세요.
+                </div>
+              )}
 
               <button className={styles.submit} type="submit" disabled={status === "submitting"}>
                 {status === "submitting" ? (

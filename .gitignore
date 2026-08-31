@@ -4,3 +4,8 @@
 next-env.d.ts
 *.tsbuildinfo
 .DS_Store
+
+# 접수 웹훅 주소 등 — 저장소에 올리지 않는다
+.env
+.env.local
+.env*.local

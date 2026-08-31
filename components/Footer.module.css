@@ -114,6 +114,9 @@
   color: rgba(255, 255, 255, 0.62);
   text-decoration: underline;
   text-underline-offset: 2px;
+  /* 인라인 요소의 세로 패딩은 줄 간격을 밀지 않는다 —
+     문단 레이아웃은 그대로 두고 손가락으로 누를 영역만 넓힌다. */
+  padding: 10px 2px;
 }
 
 @media (hover: hover) {

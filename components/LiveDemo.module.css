@@ -475,9 +475,13 @@
 
 /* 승인 전 수량 직접 고치기 */
 .qtyInput {
-  width: 46px;
+  width: 52px;
   text-align: right;
-  font: 700 14px Pretendard, sans-serif;
+  font-family: inherit;
+  /* iOS 사파리는 16px 미만 입력칸을 탭하면 화면을 확대한다 */
+  font-size: 16px;
+  font-weight: 700;
+  min-height: 36px;
   color: var(--ink);
   background: #fff;
   border: 1px solid rgba(86, 48, 227, 0.35);

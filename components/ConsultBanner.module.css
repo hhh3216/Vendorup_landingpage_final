@@ -156,3 +156,19 @@
   color: rgba(26, 26, 26, 0.5);
   word-break: keep-all;
 }
+
+/* §7 모바일: 좁은 화면에서 좌우 32px 여백은 과하다. 카드 내용 폭을 확보한다. */
+@media (max-width: 767px) {
+  .dialog {
+    width: min(420px, calc(100vw - 24px));
+    padding: 30px 20px 24px;
+    border-radius: 18px;
+  }
+  .option {
+    padding: 14px 12px;
+    gap: 12px;
+  }
+  .title {
+    font-size: 20px;
+  }
+}
