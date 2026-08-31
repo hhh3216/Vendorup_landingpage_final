@@ -148,7 +148,7 @@
 }
 
 .closerAccent {
-  color: var(--cyan);
+  color: var(--violet);
 }
 
 @media (max-width: 1023px) {

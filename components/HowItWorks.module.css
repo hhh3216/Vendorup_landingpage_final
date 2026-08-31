@@ -24,7 +24,7 @@
 }
 
 .title {
-  font: 800 48px/1.24 Pretendard, sans-serif;
+  font: 800 54px/1.24 Pretendard, sans-serif;
   letter-spacing: -0.04em;
   margin: 0 0 34px;
 }
@@ -64,7 +64,7 @@
 
 .stepTitle {
   display: block;
-  font: 700 22px Pretendard, sans-serif;
+  font: 700 24px Pretendard, sans-serif;
   letter-spacing: -0.028em;
   color: rgba(26, 26, 26, 0.35);
   margin-top: 5px;
@@ -165,13 +165,13 @@
 }
 
 .cardTitle {
-  font: 800 34px Pretendard, sans-serif;
+  font: 800 38px Pretendard, sans-serif;
   letter-spacing: -0.035em;
   margin-top: 14px;
 }
 
 .cardBody {
-  font: 400 19px/1.7 Pretendard, sans-serif;
+  font: 400 20px/1.7 Pretendard, sans-serif;
   color: rgba(26, 26, 26, 0.58);
   margin: 14px 0 28px;
   max-width: 600px;

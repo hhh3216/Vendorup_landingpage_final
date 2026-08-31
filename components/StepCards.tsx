@@ -125,7 +125,7 @@ function Step05() {
       <div className={styles.confirmFoot}>
         <div>
           <div className={styles.confirmAsk}>이대로 승인하시겠습니까?</div>
-          <div className={styles.confirmMeta}>A매장 주문 4건 · 2026. 8. 29. 배송</div>
+          <div className={styles.confirmMeta}>A매장 주문 4건 · 내일 배송</div>
         </div>
         <div className={styles.confirmApprove}>승인</div>
       </div>
@@ -149,14 +149,14 @@ function Step06() {
         <div className={styles.registerTh}>품목수</div>
         <div className={`${styles.registerTh} ${styles.registerThRight}`}>상태</div>
 
-        <div className={styles.registerSlip}>SO-260829-014</div>
+        <div className={styles.registerSlip}>SO-00214</div>
         <div className={styles.registerStore}>A매장</div>
         <div className={styles.registerCount}>4건</div>
         <div className={styles.registerStatusCell}>
           <span className={styles.registerBadge}>등록</span>
         </div>
 
-        <div className={`${styles.registerSlip} ${styles.dim}`}>SO-260829-013</div>
+        <div className={`${styles.registerSlip} ${styles.dim}`}>SO-00213</div>
         <div className={`${styles.registerStore} ${styles.dim}`}>B식당</div>
         <div className={`${styles.registerCount} ${styles.dim}`}>7건</div>
         <div className={styles.registerStatusCell}>

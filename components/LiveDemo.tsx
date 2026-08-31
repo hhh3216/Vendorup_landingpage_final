@@ -404,7 +404,7 @@ export default function LiveDemo() {
 
                 {state.phase === "done" && (
                   <div className={styles.doneFoot}>
-                    <span className={styles.doneCheck}>✓</span> A매장 · 2026. 8. 29. 납품건으로
+                    <span className={styles.doneCheck}>✓</span> A매장 · 내일 납품건으로
                     등록됨
                   </div>
                 )}

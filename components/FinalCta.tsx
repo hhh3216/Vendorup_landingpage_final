@@ -235,7 +235,7 @@ export default function FinalCta() {
                     접수 중…
                   </>
                 ) : (
-                  "무료 체험 신청하기"
+                  "무료로 시작하기"
                 )}
               </button>
 

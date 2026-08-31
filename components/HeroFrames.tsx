@@ -258,7 +258,7 @@ function FrameApprove() {
         <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
           <div style={{ font: "800 22px Pretendard,sans-serif", letterSpacing: "-.035em" }}>A매장</div>
           <div style={{ font: "500 14px Pretendard,sans-serif", color: "rgba(26,26,26,.5)" }}>
-            2026. 8. 29. 배송
+            내일 배송
           </div>
         </div>
 

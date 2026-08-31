@@ -42,7 +42,7 @@ export default function CompareSlider() {
           <div className={styles.erpCard}>
             <div className={styles.erpHead}>
               <div className={styles.erpStore}>A매장</div>
-              <div className={styles.erpDate}>2026. 8. 29. 배송</div>
+              <div className={styles.erpDate}>내일 배송</div>
             </div>
 
             <div className={styles.erpGrid}>

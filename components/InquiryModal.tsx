@@ -27,6 +27,7 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [channel, setChannel] = useState<string>("카톡");
   const [source, setSource] = useState<string>("");
+  const [sourceOther, setSourceOther] = useState("");
   const [agree, setAgree] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof Fields | "agree", string>>>({});
   const [sent, setSent] = useState(false);
@@ -79,6 +80,7 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
     setFields(EMPTY);
     setChannel("카톡");
     setSource("");
+    setSourceOther("");
     setAgree(false);
     setErrors({});
   };
@@ -211,6 +213,15 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
                   </button>
                 ))}
               </div>
+              {source === "기타" && (
+                <input
+                  className={`${styles.input} ${styles.sourceOther}`}
+                  placeholder="어떻게 알고 오셨는지 적어주세요"
+                  value={sourceOther}
+                  onChange={(e) => setSourceOther(e.target.value)}
+                  autoFocus
+                />
+              )}
             </div>
 
             <div>

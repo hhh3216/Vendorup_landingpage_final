@@ -1,0 +1,158 @@
+/* 푸터 링크와 시각적으로 동일하게 — Footer.module.css의 .link/.linkSoon과 맞춘다.
+   <button>은 font-size를 상속하지 않는 브라우저가 있어 명시적으로 지정한다
+   (안 하면 UA 기본값인 13.3px로 렌더돼 옆 <a> 항목들과 크기가 어긋난다). */
+.trigger {
+  position: relative;
+  font-size: inherit;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color var(--d-fast) var(--ease-inout);
+}
+
+.trigger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--d-fast) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  .trigger:hover {
+    color: #fff;
+  }
+  .trigger:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* §7 터치 타겟 최소 44px — Footer.module.css의 .link 모바일 규칙과 맞춘다 */
+@media (max-width: 767px) {
+  .trigger {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+/* --- 배너 (네이티브 <dialog>) --- */
+.dialog {
+  width: min(420px, calc(100vw - 32px));
+  padding: 36px 32px 32px;
+  border: none;
+  border-radius: 20px;
+  background: #fff;
+  color: var(--ink);
+  position: relative;
+}
+
+.dialog::backdrop {
+  background: rgba(16, 18, 24, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font: 400 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.45);
+  background: none;
+  transition: background var(--d-base) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  .close:hover {
+    background: rgba(16, 24, 40, 0.06);
+  }
+}
+
+.title {
+  font: 800 22px Pretendard, sans-serif;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+
+.lead {
+  font: 400 14px/1.6 Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.55);
+  margin: 8px 0 0;
+  word-break: keep-all;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 16px;
+  border: 1px solid rgba(16, 24, 40, 0.1);
+  border-radius: 14px;
+  min-height: 44px;
+  transition:
+    border-color var(--d-base) var(--ease-inout),
+    background var(--d-base) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  a.option:hover {
+    border-color: rgba(86, 48, 227, 0.35);
+    background: rgba(86, 48, 227, 0.04);
+  }
+}
+
+.optionSoon {
+  background: rgba(16, 24, 40, 0.03);
+  cursor: default;
+}
+
+.optionIcon {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(86, 48, 227, 0.09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.optionSoon .optionIcon {
+  background: rgba(16, 24, 40, 0.06);
+}
+
+.optionBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.optionTitle {
+  font: 700 15px Pretendard, sans-serif;
+  color: var(--ink);
+}
+
+.optionSoon .optionTitle {
+  color: rgba(26, 26, 26, 0.5);
+}
+
+.optionNote {
+  font: 400 13px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.5);
+  word-break: keep-all;
+}

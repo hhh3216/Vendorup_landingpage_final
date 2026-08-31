@@ -163,8 +163,14 @@ export default function Hero() {
           <div className={styles.slot}>HERO 영상 자리 · {HERO_FRAMES[frame].id}</div>
         )}
 
+        {/* 헤드라인을 셋으로 끊어 좌 / 폰 위 / 우로 벌린다.
+            가운데 조각이 폰 목업 정중앙에 오도록 space-between으로 배치한다. */}
         <div className={styles.copy}>
-          <h1 className={styles.headline}>카톡·문자로 온 주문, 오늘도 수기로 입력하셨나요?</h1>
+          <h1 className={styles.headline}>
+            <span>카톡·문자로 온 주문</span>
+            <span>오늘도</span>
+            <span>수기로 입력하셨나요?</span>
+          </h1>
         </div>
       </div>
 

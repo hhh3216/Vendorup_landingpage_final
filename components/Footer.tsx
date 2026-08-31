@@ -1,8 +1,12 @@
 import styles from "./Footer.module.css";
+import ConsultBanner from "./ConsultBanner";
+
+type FooterLink = { label: string; href?: string; special?: "consult" };
 
 /* href가 있는 항목만 페이지 내 실제 섹션으로 연결한다.
-   href 없는 항목(카톡·문자 상담, 약관류)은 아직 만들어진 페이지가 없어 비활성으로 둔다. */
-const COLUMNS = [
+   "카톡·문자 상담"은 연락 방법 배너(ConsultBanner)로 특별 처리하고,
+   나머지 href 없는 항목(약관류)은 아직 만들어진 페이지가 없어 비활성으로 둔다. */
+const COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
     title: "프로덕트",
     links: [
@@ -16,7 +20,7 @@ const COLUMNS = [
     links: [
       { label: "도입 문의", href: "#apply" },
       { label: "자주 묻는 질문", href: "#faq" },
-      { label: "카톡·문자 상담" },
+      { label: "카톡·문자 상담", special: "consult" as const },
     ],
   },
   {
@@ -70,8 +74,9 @@ export default function Footer() {
             <div key={col.title}>
               <div className={styles.colTitle}>{col.title}</div>
               <div className={styles.colLinks}>
-                {col.links.map((link) =>
-                  link.href ? (
+                {col.links.map((link) => {
+                  if (link.special === "consult") return <ConsultBanner key={link.label} />;
+                  return link.href ? (
                     <a key={link.label} className={styles.link} href={link.href}>
                       {link.label}
                     </a>
@@ -79,8 +84,8 @@ export default function Footer() {
                     <span key={link.label} className={`${styles.link} ${styles.linkSoon}`}>
                       {link.label}
                     </span>
-                  ),
-                )}
+                  );
+                })}
               </div>
             </div>
           ))}

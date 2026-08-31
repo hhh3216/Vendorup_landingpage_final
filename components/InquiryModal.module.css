@@ -115,6 +115,10 @@
   flex-wrap: wrap;
 }
 
+.sourceOther {
+  margin-top: 8px;
+}
+
 .choice {
   font: 600 14px Pretendard, sans-serif;
   color: rgba(26, 26, 26, 0.6);
