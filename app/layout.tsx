@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Vendor-UP — 카톡·문자로 온 주문, 오늘도 수기 입력 하셨나요?",
+  title: "Vendor-UP — 카톡·문자로 온 주문, 오늘도 수기로 입력하셨나요?",
   description:
     "카톡·문자로 들어온 주문을 Vendor-UP이 읽고, 품목과 수량을 뽑아 우리 회사 품목코드에 맞춰 ERP에 올립니다. 거래처는 하던 대로 주문하시면 됩니다.",
   openGraph: {
@@ -28,7 +28,7 @@ const JS_ANIM_BOOTSTRAP = `document.documentElement.classList.add('js-anim');`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"

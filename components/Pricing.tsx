@@ -8,7 +8,7 @@ type Feature = { label: string; on: boolean; strong?: boolean };
 const FEATURES = [
   "수·발주 ERP",
   "AI 주문 자동전산화",
-  "AI 재고관리",
+  "AI 재고 관리",
   "시세 변동 자동 반영",
   "배송기사 추적",
 ] as const;
@@ -17,7 +17,7 @@ const make = (onCount: number, strongIndex?: number): Feature[] =>
   FEATURES.map((label, i) => ({ label, on: i < onCount, strong: i === strongIndex }));
 
 const BONUS = [
-  { title: "품목코드 초기 세팅 대행", body: "우리 회사 품목 리스트를 받아 매칭 기준을 함께 잡아드립니다" },
+  { title: "품목코드 초기 세팅 대행", body: "고객사 품목 리스트를 받아 매칭 기준을 함께 잡아드립니다" },
   { title: "카톡·문자 주문 채널 연동 설정", body: "설정은 저희가 합니다" },
   { title: "7일 무료 체험", body: "카드 등록 없이" },
   { title: "전담 담당자 직통 상담", body: "초기 파트너 기간 동안" },
@@ -53,7 +53,7 @@ export default function Pricing() {
 
   const goToApply = () => {
     const el = document.getElementById("apply");
-    if (el) smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 76);
+    if (el) smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 56);
   };
 
   return (
@@ -113,7 +113,7 @@ export default function Pricing() {
             <Features items={make(2, 1)} />
           </div>
           <button className={styles.planCta} onClick={goToApply}>
-            7일 무료로 시작하기
+            무료로 시작하기
           </button>
         </div>
 
@@ -139,7 +139,7 @@ export default function Pricing() {
 
       <div className={styles.footnote} data-reveal="sm">
         AI 배송(배송 동선 자동 세팅)은 지도 서비스 연동 비용이 발생해 플랜과 별개로 추가
-        과금됩니다. · 기능은 지속적으로 개선됩니다
+        과금됩니다 · 기능은 지속적으로 개선됩니다
       </div>
 
       <div className={styles.bonus} data-reveal>

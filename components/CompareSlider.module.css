@@ -1,24 +1,21 @@
-/* 시안 주석: "코드 단계에서 드래그 가능한 Compare Slider로 구현. 시안은 50% 지점 정지 상태."
-   → 기본값 50%에서 시안과 픽셀 동일하고, 드래그로 좌우를 비교한다.
-   드래그는 사용자 입력이므로 §8.3-7(width 애니메이션 금지)의 대상이 아니다.
-   clip-path만 갱신하고 레이아웃은 건드리지 않는다. */
+/* 좌: 지금 받는 카톡 원문 / 우: Vendor-UP이 정리한 주문서.
+   손잡이 없이 2열 그리드로 나란히 둔다. */
 
 .wrap {
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin-top: 24px;
-  height: 480px;
+  min-height: 480px;
   border-radius: 26px;
   overflow: hidden;
   box-shadow:
     0 24px 60px -34px rgba(16, 24, 40, 0.24),
     0 0 0 1px rgba(16, 24, 40, 0.06);
-  touch-action: pan-y;
-  user-select: none;
 }
 
-.layer {
-  position: absolute;
-  inset: 0;
+.pane {
+  position: relative;
 }
 
 /* 지금 · 카톡 원문 */
@@ -26,20 +23,12 @@
   background: #b2c7da;
 }
 
-/* 도입 후 · 정형화된 주문 — 좌측 경계가 핸들 위치를 따라 잘린다 */
+/* 도입 후 · 정형화된 주문 */
 .after {
   background: #f7f8fa;
-  clip-path: inset(0 0 0 var(--pos, 50%));
 }
 
-/* 각 레이어의 내용은 시안대로 화면의 절반 폭에 자리를 잡고 움직이지 않는다.
-   움직이는 것은 잘리는 경계뿐이다. */
 .beforeInner {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 50%;
   padding: 28px 34px 76px;
   display: flex;
   align-items: flex-start;
@@ -47,11 +36,6 @@
 }
 
 .afterInner {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 50%;
   padding: 28px 34px 76px;
 }
 
@@ -173,53 +157,6 @@
   color: rgba(26, 26, 26, 0.55);
 }
 
-/* --- 핸들 --- */
-.handle {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: var(--pos, 50%);
-  width: 3px;
-  background: #fff;
-  transform: translateX(-1.5px);
-  cursor: ew-resize;
-  z-index: 3;
-}
-
-.grip {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 44px; /* §7 터치 타겟 최소 44px */
-  height: 44px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 6px 18px -6px rgba(16, 24, 40, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  color: rgba(26, 26, 26, 0.5);
-  font: 700 13px Pretendard, sans-serif;
-  transition: transform var(--d-base) var(--ease-inout);
-}
-
-@media (hover: hover) {
-  .handle:hover .grip {
-    transform: translate(-50%, -50%) scale(1.06);
-  }
-}
-
-.handle:focus-visible {
-  outline: none;
-}
-
-.handle:focus-visible .grip {
-  outline: 2px solid var(--violet);
-  outline-offset: 3px;
-}
-
 /* --- 캡션 --- */
 .tagBefore,
 .tagAfter {
@@ -243,15 +180,9 @@
   background: var(--violet);
 }
 
-.hint {
-  font: 500 15px Pretendard, sans-serif;
-  color: rgba(26, 26, 26, 0.42);
-  margin-top: 12px;
-}
-
 @media (max-width: 1023px) {
   .wrap {
-    height: 420px;
+    min-height: 420px;
   }
   .bubble {
     font-size: 15px;
@@ -278,15 +209,17 @@
 }
 
 @media (max-width: 767px) {
+  /* 좁은 화면에서 두 패널을 반씩 나누면 표가 글자 단위로 줄바꿈된다. 위아래로 쌓는다. */
   .wrap {
-    height: 380px;
+    grid-template-columns: 1fr;
+    min-height: 0;
     border-radius: 18px;
   }
-  /* 좁은 화면에서 각 패널을 화면의 절반에 욱여넣으면 표가 글자 단위로 줄바꿈된다.
-     패널을 넓게 잡고 잘리는 경계만 가운데에 두어 내용이 읽히게 한다. */
+  .pane {
+    min-height: 300px;
+  }
   .beforeInner,
   .afterInner {
-    width: 84%;
     padding: 18px 14px 60px;
   }
   .bubble {

@@ -48,6 +48,25 @@
 
 html {
   scroll-behavior: auto; /* §8.3-10 스무스 스크롤은 JS scrollTo로만 */
+
+  /* 토스식 "한 장씩 넘어가는" 스크롤.
+     mandatory가 아니라 proximity인 이유: 섹션 높이가 제각각이고 뷰포트보다 긴 섹션
+     (데모·요금·FAQ)이 있어서, 강제로 물리면 그 안을 읽는 중에 스크롤이 튕긴다.
+     proximity는 섹션 경계 근처에서만 붙어서, 긴 섹션은 자유롭게 읽힌다. */
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 56px; /* sticky 헤더 높이 */
+}
+
+/* 각 섹션의 윗변이 스냅 지점이 된다. */
+.shell > section {
+  scroll-snap-align: start;
+}
+
+/* 모션 축소 사용자에게는 스냅을 걸지 않는다 — 의도치 않은 스크롤 이동이 된다. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+  }
 }
 
 body {
@@ -160,9 +179,22 @@ p {
 }
 
 /* ---------- 공통 레이아웃 ---------- */
+/* 좌측 섹션 레일이 앉을 자리. 레일이 뜨는 폭에서만 본문을 그만큼 오른쪽으로 민다.
+   (SideRail.module.css의 노출 분기와 이 값이 짝이다.) */
+:root {
+  --rail-gutter: 0px;
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --rail-gutter: 150px;
+  }
+}
+
 .shell {
   max-width: 1440px;
   margin: 0 auto;
+  padding-left: var(--rail-gutter);
 }
 
 .section-pad {

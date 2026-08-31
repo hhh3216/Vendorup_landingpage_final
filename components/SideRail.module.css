@@ -1,7 +1,9 @@
 /* 좌측 고정 섹션 인디케이터 (시안: position:fixed; left:20px; top:50%) */
+/* 본문(.shell)의 왼쪽 끝에 붙는다. 화면이 넓어져 본문이 가운데로 밀리면 레일도 같이 따라간다.
+   본문은 --rail-gutter 만큼 오른쪽으로 밀려 있으므로 이 자리는 항상 비어 있다. */
 .rail {
   position: fixed;
-  left: 20px;
+  left: max(20px, calc((100vw - 1440px) / 2 + 16px));
   top: 50%;
   transform: translateY(-50%);
   z-index: 30;
@@ -9,9 +11,8 @@
   flex-direction: column;
 }
 
-/* 본문(최대 1440px) 바깥 여백에 레일이 들어갈 자리가 생기는 폭에서만 노출한다.
-   그보다 좁으면 좌측 섹션 콘텐츠와 겹친다. */
-@media (max-width: 1639px) {
+/* 레일 자리(--rail-gutter)가 생기지 않는 폭에서는 본문과 겹치므로 감춘다. */
+@media (max-width: 1199px) {
   .rail {
     display: none;
   }

@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./Header.module.css";
+import InquiryModal from "./InquiryModal";
 import { smoothScrollTo } from "@/lib/reveal";
 
 const NAV = [
@@ -12,36 +13,17 @@ const NAV = [
 ];
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
-
-  /* §4.0 스크롤 0 → 8px 구간에서만 상태가 바뀐다.
-     §8.2 페이지 전체에서 스크롤 이벤트 리스너는 이것 하나뿐. passive + rAF 스로틀. */
-  useEffect(() => {
-    let ticking = false;
-
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 8);
-        ticking = false;
-      });
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const [inquiryOpen, setInquiryOpen] = useState(false);
 
   const jump = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
     // §8.3-10 scrollIntoView 금지 — scrollTo 스무스 스크롤
-    smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 76);
+    smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 56);
   };
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
+    <header className={styles.header}>
       <a className={styles.brand} href="#top" aria-label="Vendor-UP 홈">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/assets/logo-mark.png" alt="" className={styles.brandMark} />
@@ -57,10 +39,15 @@ export default function Header() {
             </button>
           ))}
         </nav>
+        <button className={styles.ctaGhost} onClick={() => setInquiryOpen(true)}>
+          문의하기
+        </button>
         <button className={styles.cta} onClick={() => jump("apply")}>
-          7일 무료로 시작하기
+          무료로 시작하기
         </button>
       </div>
+
+      <InquiryModal open={inquiryOpen} onClose={() => setInquiryOpen(false)} />
     </header>
   );
 }

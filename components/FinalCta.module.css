@@ -315,15 +315,27 @@
   font: 700 14px Pretendard, sans-serif;
   color: var(--ink);
   min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
   transition:
     border-color var(--d-base) var(--ease-inout),
     background var(--d-base) var(--ease-inout);
 }
 
+/* 아직 열리지 않은 채널 — 누를 수 없다는 걸 색으로 알린다 */
+.consultBtnSoon {
+  color: rgba(26, 26, 26, 0.38);
+  background: rgba(16, 24, 40, 0.03);
+  font-weight: 600;
+  cursor: default;
+}
+
 @media (hover: hover) {
-  .consultBtn:hover {
+  .consultBtn:not(.consultBtnSoon):hover {
     border-color: rgba(86, 48, 227, 0.4);
     background: rgba(86, 48, 227, 0.04);
+    color: var(--ink);
   }
 }
 

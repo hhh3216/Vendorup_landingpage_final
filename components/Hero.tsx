@@ -94,14 +94,14 @@ export default function Hero() {
   const goToDemo = () => {
     const el = document.getElementById("demo");
     if (!el) return;
-    smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 76, 800, () => {
+    smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 56, 800, () => {
       window.dispatchEvent(new CustomEvent("vendorup:demo-focus-ping"));
     });
   };
 
   const goToApply = () => {
     const el = document.getElementById("apply");
-    if (el) smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 76);
+    if (el) smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 56);
   };
 
   const Active = HERO_FRAMES[frame].Frame;
@@ -164,7 +164,7 @@ export default function Hero() {
         )}
 
         <div className={styles.copy}>
-          <h1 className={styles.headline}>카톡·문자로 온 주문, 오늘도 수기 입력 하셨나요?</h1>
+          <h1 className={styles.headline}>카톡·문자로 온 주문, 오늘도 수기로 입력하셨나요?</h1>
         </div>
       </div>
 
@@ -184,10 +184,9 @@ export default function Hero() {
               30초 만에 어떻게 되는지 보기
             </button>
             <button className="btn btn-primary" onClick={goToApply}>
-              7일 무료로 시작하기
+              무료로 시작하기
             </button>
           </div>
-          <div className={styles.trust}>카드 등록 없이 시작 · 초기 파트너 10개사 마감 시 종료</div>
         </div>
       </div>
     </section>

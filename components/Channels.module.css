@@ -26,6 +26,10 @@
   word-break: keep-all;
 }
 
+.sub + .sub {
+  margin-top: 10px;
+}
+
 .sub b {
   color: var(--ink);
   font-weight: 700;

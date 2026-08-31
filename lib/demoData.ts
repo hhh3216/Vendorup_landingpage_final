@@ -26,11 +26,13 @@ type ItemDef = {
   defaultUnit: string;
 };
 
+/* 코드 값은 StepCards·CompareSlider의 목업과 **반드시 같아야 한다**.
+   같은 코드가 섹션마다 다른 품목을 가리키면 "품목코드 자동 매칭"이라는 주장이 무너진다. */
 const ITEMS: ItemDef[] = [
-  { aliases: ["청상추", "상추"], code: "VG-0142", defaultUnit: "박스" },
-  { aliases: ["대파", "파"], code: "VG-0311", defaultUnit: "단" },
-  { aliases: ["계란", "달걀"], code: "EG-0027", defaultUnit: "판" },
-  { aliases: ["양파"], code: "VG-0203", defaultUnit: "망" },
+  { aliases: ["청상추", "상추"], code: "VG-0210", defaultUnit: "박스" },
+  { aliases: ["대파", "파"], code: "VG-0088", defaultUnit: "단" },
+  { aliases: ["계란", "달걀"], code: "EG-0031", defaultUnit: "판" },
+  { aliases: ["양파"], code: "VG-0142", defaultUnit: "망" },
 ];
 
 const UNITS = ["박스", "단", "판", "망", "개", "kg", "봉", "묶음"];
@@ -46,9 +48,9 @@ export type ParseResult =
 const REPEAT_PATTERNS = ["어제", "저번", "지난번", "똑같", "동일하게", "같은거", "같은 거"];
 
 const PREVIOUS_ORDER: DemoRow[] = [
-  { code: "VG-0142", name: "청상추", qty: "2", unit: "박스" },
-  { code: "VG-0311", name: "대파", qty: "5", unit: "단" },
-  { code: "EG-0027", name: "계란", qty: "15", unit: "판" },
+  { code: "VG-0210", name: "청상추", qty: "2", unit: "박스" },
+  { code: "VG-0088", name: "대파", qty: "5", unit: "단" },
+  { code: "EG-0031", name: "계란", qty: "15", unit: "판" },
 ];
 
 /** 시안의 예시 칩 3개 */

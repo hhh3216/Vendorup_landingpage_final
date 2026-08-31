@@ -25,6 +25,23 @@
   margin-top: 24px;
 }
 
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font: 600 14px Pretendard, sans-serif;
+  color: rgba(255, 255, 255, 0.55);
+  min-height: 44px;
+  transition: color var(--d-base) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  .social:hover {
+    color: #fff;
+  }
+}
+
 .cols {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -66,13 +83,19 @@
 }
 
 @media (hover: hover) {
-  .link:hover {
+  .link:not(.linkSoon):hover {
     color: #fff;
   }
 
-  .link:hover::after {
+  .link:not(.linkSoon):hover::after {
     transform: scaleX(1);
   }
+}
+
+/* 아직 연결할 페이지가 없는 항목 — 링크처럼 보이지 않게 톤을 낮추고 커서를 바꾼다 */
+.linkSoon {
+  color: rgba(255, 255, 255, 0.38);
+  cursor: default;
 }
 
 .rule {
@@ -84,6 +107,19 @@
 .legal {
   font: 400 14px/1.9 Pretendard, sans-serif;
   color: rgba(255, 255, 255, 0.4);
+}
+
+/* 다크 배경이라 기본 링크색(보라)이 묻힌다. 본문과 같은 톤으로 두고 밑줄로만 구분한다. */
+.legal a {
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .legal a:hover {
+    color: #fff;
+  }
 }
 
 @media (max-width: 1023px) {

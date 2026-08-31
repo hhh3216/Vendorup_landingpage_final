@@ -1,6 +1,6 @@
 /* §4.0 헤더 (sticky) */
 .header {
-  height: 76px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,21 +11,8 @@
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   z-index: 20;
-
-  /* 스크롤 0 → 8px 구간에서만 border-bottom 투명도 0 → .07, 섀도 없음 → 있음 */
-  border-bottom: 1px solid rgba(16, 24, 40, 0);
-  box-shadow: 0 0 0 0 rgba(16, 24, 40, 0);
-  transition:
-    border-color var(--d-base) var(--ease-inout),
-    box-shadow var(--d-base) var(--ease-inout);
 }
-
-/* 스크롤 방향에 따라 헤더를 숨기지 않는다. 항상 붙어 있다.
-   다크 섹션 위를 지날 때도 색을 반전시키지 않는다. 반투명 화이트 그대로. */
-.scrolled {
-  border-bottom-color: rgba(16, 24, 40, 0.07);
-  box-shadow: 0 6px 20px -14px rgba(16, 24, 40, 0.4);
-}
+/* 스크롤해도 경계선·그림자를 만들지 않는다. 반투명 화이트만으로 떠 있는다. */
 
 .brand {
   display: flex;
@@ -49,7 +36,7 @@
 .right {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 20px;
 }
 
 .nav {
@@ -87,6 +74,35 @@
   .navLink:hover::after {
     transform: scaleX(1);
   }
+}
+
+/* 보조 CTA — 보라 버튼 왼쪽에 흰색으로. 무게가 같아지지 않게 테두리만 준다. */
+.ctaGhost {
+  background: #fff;
+  color: var(--ink);
+  font: 700 15px Pretendard, sans-serif;
+  padding: 11px 18px;
+  border: 1px solid rgba(16, 24, 40, 0.14);
+  border-radius: 12px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  transition:
+    border-color var(--d-base) var(--ease-inout),
+    background var(--d-base) var(--ease-inout);
+}
+
+@media (hover: hover) {
+  .ctaGhost:hover {
+    border-color: rgba(86, 48, 227, 0.4);
+    background: rgba(86, 48, 227, 0.04);
+  }
+}
+
+.ctaGhost:active {
+  transform: scale(0.985);
+  transition-duration: var(--d-fast);
 }
 
 .cta {
@@ -128,8 +144,12 @@
   .header {
     padding: 0 20px;
   }
-  .cta {
-    font-size: 14px;
-    padding: 11px 16px;
+  .right {
+    gap: 8px;
+  }
+  .cta,
+  .ctaGhost {
+    font-size: 13px;
+    padding: 11px 12px;
   }
 }

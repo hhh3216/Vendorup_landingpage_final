@@ -28,7 +28,7 @@ const WAY_2: Node[] = [
     accent: true,
   },
   { title: "품목·수량 추출 후 품목코드 매칭", body: "붙여넣는 과정 없이 바로 정리됩니다" },
-  { title: "공급업체가 확인하고 승인", body: "틀린 곳은 승인 전에 고치면 됩니다" },
+  { title: "담당자가 확인하고 승인", body: "틀린 곳은 승인 전에 고치면 됩니다" },
   { title: "ERP 등록", body: "승인 즉시 전표로 반영됩니다" },
 ];
 
@@ -88,8 +88,10 @@ export default function Channels() {
           저희 쪽으로 들어오나요?
         </h2>
         <p className={styles.sub} data-reveal>
-          두 가지 방식을 모두 지원합니다. 업체 사정에 맞는 쪽을 고르시면 됩니다. 어느 쪽이든{" "}
-          <b>음식점(거래처)은 하던 대로 카톡·문자로 주문을 보내면 됩니다.</b>
+          두 가지 방식을 모두 지원합니다. 업체 사정에 맞는 쪽을 고르시면 됩니다.
+        </p>
+        <p className={styles.sub} data-reveal>
+          <b>어느 쪽이든 음식점(거래처)은 하던 대로 카톡·문자로 주문을 보내면 됩니다.</b>
         </p>
       </div>
 
@@ -126,7 +128,7 @@ export default function Channels() {
           </h3>
           <p className={styles.cardBody}>
             음식점이 평소처럼 카톡·문자로 주문을 보내되, 받는 곳이 Vendor-UP 채널입니다. 정리된
-            주문을 공급업체에 전달합니다.
+            주문을 도매업체에 전달합니다.
           </p>
 
           <Flow nodes={WAY_2} fired={fired} cyan />

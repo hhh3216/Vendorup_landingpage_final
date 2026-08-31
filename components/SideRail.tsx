@@ -46,7 +46,7 @@ export default function SideRail() {
         }
         setActive(best);
       },
-      { threshold: [0, 0.15, 0.35, 0.6, 0.9], rootMargin: "-76px 0px -40% 0px" },
+      { threshold: [0, 0.15, 0.35, 0.6, 0.9], rootMargin: "-56px 0px -40% 0px" },
     );
 
     for (const el of els) io.observe(el);
@@ -64,7 +64,7 @@ export default function SideRail() {
             aria-current={isActive ? "true" : undefined}
             onClick={() => {
               const el = document.getElementById(section.id);
-              if (el) smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 76);
+              if (el) smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 56);
             }}
           >
             <span className={styles.marker}>

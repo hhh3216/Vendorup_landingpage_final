@@ -18,7 +18,7 @@ const STEPS = [
     body: "쓰던 품목 리스트를 주시면 매칭 기준을 저희가 만들어 드립니다.",
   },
   {
-    title: "7일 동안 실제 주문으로 써보십니다",
+    title: "7일 동안 실제 주문으로 직접 써보세요",
     body: "카드 등록도, 약정도 없습니다. 안 맞으면 그냥 안 쓰시면 됩니다.",
   },
 ];
@@ -87,7 +87,7 @@ export default function FinalCta() {
             지금 바로 사용해보십시오.
           </h2>
           <p className={styles.sub} data-reveal="lg" style={stagger(2)}>
-            카드 등록 없이 7일 무료로 시작합니다. 지금 초기 파트너 10개사 혜택이 진행 중이며, 이
+            카드 등록 없이 7일 무료로 시작합니다. 지금 초기 파트너 10개사를 모집 중이며, 10개사
             안에 드시면 AI ORDER를 <b>월 89,000원</b>으로 쓰실 수 있습니다.
           </p>
 
@@ -250,12 +250,13 @@ export default function FinalCta() {
               <div className={styles.consult}>
                 <div className={styles.consultText}>먼저 물어보고 싶으신가요?</div>
                 <div className={styles.consultBtns}>
-                  <button type="button" className={styles.consultBtn}>
-                    카톡 상담
-                  </button>
-                  <button type="button" className={styles.consultBtn}>
+                  {/* ⚠️ 연동 지점: 카카오톡 상담 채널이 열리면 여기를 <a href>로 바꾼다. */}
+                  <span className={`${styles.consultBtn} ${styles.consultBtnSoon}`}>
+                    카톡 상담 준비 중
+                  </span>
+                  <a href="tel:01029155311" className={styles.consultBtn}>
                     전화 상담
-                  </button>
+                  </a>
                 </div>
               </div>
             </form>

@@ -2,16 +2,16 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./LiveDemo.module.css";
-import { EXAMPLES, PLACEHOLDER, parseOrder, type DemoRow, type Segment } from "@/lib/demoData";
+import { EXAMPLES, parseOrder, type DemoRow, type Segment } from "@/lib/demoData";
 import { smoothScrollTo, useIsMobile, usePrefersReducedMotion } from "@/lib/reveal";
 
 /* =============================================================
    §6.1 상태 머신
-   idle ─(전송/예시)→ sending → extracting → matching → pending ─(승인)→ done
-     ▲                                                              │
-     └──────────────────── (다시 해보기) ───────────────────────────┘
-   ============================================================= */
-type Phase = "idle" | "sending" | "extracting" | "matching" | "pending" | "done" | "nudge";
+   idle ─(예시 칩)→ sending → extracting → matching → pending ─(승인)→ done
+     ▲                                                          │
+     └──────────────── (다시 해보기) ───────────────────────────┘
+   자유 입력을 받지 않으므로 파싱 실패 경로는 없다. */
+type Phase = "idle" | "sending" | "extracting" | "matching" | "pending" | "done";
 
 /* §6.2 상태별 지속 시간. 총 처리 약 1.9초. */
 const T = {
@@ -20,8 +20,6 @@ const T = {
   matching: 700,
   tokenStep: 120, // 토큰당 하이라이트 점등 간격
   rowStep: 120, // 결과 행당 교체 간격
-  failAfter: 300, // §6.3 실패 시 extracting 300ms 후 중단
-  nudge: 2400, // 예시 칩 하이라이트 유지 시간
 } as const;
 
 type TabState = {
@@ -31,6 +29,8 @@ type TabState = {
   segments: Segment[];
   litTokens: number;
   codesLit: boolean;
+  /** 승인 전 수량을 직접 고쳐볼 수 있는 상태 (§6 "틀린 곳은 승인 전에 고치면 됩니다") */
+  editing: boolean;
 };
 
 const EMPTY: TabState = {
@@ -40,6 +40,7 @@ const EMPTY: TabState = {
   segments: [],
   litTokens: 0,
   codesLit: false,
+  editing: false,
 };
 
 /* 시안의 탭 순서 그대로.
@@ -61,7 +62,6 @@ const STATUS: Record<Phase, { title: string; badge: string; step: string }> = {
   matching: { title: "처리 중", badge: "", step: "03 · 매칭" },
   pending: { title: "승인 대기", badge: "pending", step: "04 · 확인" },
   done: { title: "승인 완료", badge: "done", step: "05 · 등록" },
-  nudge: { title: "입력 전", badge: "", step: "01 · 대기" },
 };
 
 export default function LiveDemo() {
@@ -71,11 +71,10 @@ export default function LiveDemo() {
     paste: { ...EMPTY },
     kakao: { ...EMPTY },
   });
-  const [input, setInput] = useState("");
   const [ping, setPing] = useState(false);
   const [pulse, setPulse] = useState(false);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const isMobile = useIsMobile();
@@ -101,13 +100,12 @@ export default function LiveDemo() {
 
   useEffect(() => clearTimers, [clearTimers]);
 
-  /* §4.1 히어로 2차 CTA로 도착했을 때 포커스 링 1회 점등(0.6s 후 소멸).
+  /* §4.1 히어로 2차 CTA로 도착했을 때 입력창 링 1회 점등(0.6s 후 소멸).
      자동 재생은 하지 않는다. */
   useEffect(() => {
     const onPing = () => {
       setPing(true);
       setTimeout(() => setPing(false), 600);
-      inputRef.current?.focus({ preventScroll: true });
     };
     window.addEventListener("vendorup:demo-focus-ping", onPing);
     return () => window.removeEventListener("vendorup:demo-focus-ping", onPing);
@@ -116,21 +114,22 @@ export default function LiveDemo() {
   const run = useCallback(
     (raw: string) => {
       const text = raw.trim();
-      // §6.3 빈 입력 전송: 아무 일도 일어나지 않는다. 흔들기·경고 금지.
       if (!text) return;
 
       clearTimers();
       const id = tab;
       const parsed = parseOrder(text);
+      // 예시 칩만 실행되므로 파싱은 항상 성공한다.
+      if (!parsed.ok) return;
 
-      setInput(""); // 입력창은 즉시 비워짐
       patch(id, {
         phase: "sending",
         text,
         rows: [],
-        segments: parsed.ok ? parsed.segments : [{ text, hit: false }],
+        segments: parsed.segments,
         litTokens: 0,
         codesLit: false,
+        editing: false,
       });
 
       /* §7 모바일: 전송 시 결과 영역으로 스무스 스크롤 400ms (이때만 허용) */
@@ -140,16 +139,6 @@ export default function LiveDemo() {
       }
 
       after(T.sending, () => patch(id, { phase: "extracting" }));
-
-      /* §6.3 자유 입력 실패: 처리 애니메이션을 끝까지 돌리지 않는다.
-         extracting 300ms 후 중단 → 안내 한 줄 + 예시 칩 하이라이트. */
-      if (!parsed.ok) {
-        after(T.sending + T.failAfter, () => {
-          patch(id, { phase: "nudge" });
-          after(T.nudge, () => patch(id, { phase: "idle", text: "", segments: [] }));
-        });
-        return;
-      }
 
       // extracting: 토큰에 하이라이트 배경이 좌→우 순차 점등 (토큰당 120ms)
       const hits = parsed.segments.filter((s) => s.hit).length;
@@ -177,14 +166,27 @@ export default function LiveDemo() {
 
   const approve = () => {
     clearTimers();
-    patch(tab, { phase: "done" });
+    patch(tab, { phase: "done", editing: false });
+  };
+
+  /** 승인 전 수량 고치기. 숫자만 받고, 비우면 1로 되돌린다. */
+  const setQty = (index: number, next: string) => {
+    const qty = next.replace(/[^0-9]/g, "").slice(0, 4);
+    patch(tab, {
+      rows: state.rows.map((row, i) => (i === index ? { ...row, qty } : row)),
+    });
+  };
+
+  const commitEdit = () => {
+    patch(tab, {
+      editing: false,
+      rows: state.rows.map((row) => (row.qty ? row : { ...row, qty: "1" })),
+    });
   };
 
   const reset = () => {
     clearTimers();
     patch(tab, { ...EMPTY });
-    setInput("");
-    inputRef.current?.focus({ preventScroll: true });
   };
 
   const busy = ["sending", "extracting", "matching"].includes(state.phase);
@@ -195,13 +197,11 @@ export default function LiveDemo() {
   const liveMessage =
     state.phase === "idle"
       ? ""
-      : state.phase === "nudge"
-        ? "주문 문장을 알아보지 못했습니다. 아래 예시를 눌러보세요."
-        : state.phase === "pending"
-          ? `주문 ${state.rows.length}건이 정리되었습니다. 승인 대기 중입니다.`
-          : state.phase === "done"
-            ? "ERP 등록이 완료되었습니다."
-            : "주문 문장을 처리하고 있습니다.";
+      : state.phase === "pending"
+        ? `주문 ${state.rows.length}건이 정리되었습니다. 승인 대기 중입니다.`
+        : state.phase === "done"
+          ? "ERP 등록이 완료되었습니다."
+          : "주문 문장을 처리하고 있습니다.";
 
   return (
     <section className={styles.section} id="demo">
@@ -210,9 +210,9 @@ export default function LiveDemo() {
           직접 확인해보세요
         </div>
         <h2 className={styles.title} data-reveal>
-          실제 주문 문장을 넣으면,
+          실제 주문 문장이 몇 초 안에
           <br />
-          몇 초 안에 <span className={styles.titleAccent}>정리</span>됩니다.
+          이렇게 <span className={styles.titleAccent}>정리</span>됩니다.
         </h2>
       </div>
 
@@ -233,47 +233,27 @@ export default function LiveDemo() {
         </div>
       </div>
 
+      {/* 자유 입력은 받지 않는다. 모든 문장을 정형화할 수 있는 구조가 아니라서,
+          아래 예시 칩으로만 맛보게 한다. 입력창은 맥락을 보여주는 UI로만 둔다. */}
       <div
+        ref={inputRef}
         className={`${styles.inputBar} ${ping ? styles.inputBarPing : ""}`}
         data-reveal="sm"
+        aria-hidden="true"
       >
-        <input
-          ref={inputRef}
-          className={styles.input}
-          value={input}
-          placeholder={PLACEHOLDER}
-          aria-label="주문 문장 입력"
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") run(input);
-          }}
-        />
-        <button className={styles.send} onClick={() => run(input)} aria-label="주문 문장 보내기">
-          ↑
-        </button>
-      </div>
-
-      {state.phase === "nudge" && (
-        <div className={styles.nudge} role="status">
-          주문 문장으로 읽지 못했습니다. 아래 예시처럼 품목과 수량을 함께 적어주세요.
+        <div className={styles.input}>
+          아래 예시를 눌러보시면 어떻게 정리되는지 바로 확인하실 수 있습니다 · 현재는 텍스트만
+          지원합니다
         </div>
-      )}
+        <div className={styles.send}>↑</div>
+      </div>
 
       <div className={styles.chips}>
         {EXAMPLES.map((example) => (
-          <button
-            key={example}
-            className={`${styles.chip} ${state.phase === "nudge" ? styles.chipNudge : ""}`}
-            onClick={() => run(example)}
-          >
+          <button key={example} className={styles.chip} onClick={() => run(example)}>
             {example}
           </button>
         ))}
-      </div>
-
-      <div className={styles.hint}>
-        아래 예시를 눌러보시면 어떻게 정리되는지 바로 확인하실 수 있습니다 · 현재는 텍스트만
-        지원합니다
       </div>
 
       <div className={styles.stage} ref={stageRef}>
@@ -309,7 +289,8 @@ export default function LiveDemo() {
                 </div>
               ) : (
                 <div className={styles.idleNote}>
-                  받은 주문을 그대로 붙여넣고 보내보세요. 품목과 수량을 뽑아 품목코드에 맞춥니다.
+                  받은 주문 원문이 여기에 표시됩니다. 아래 예시를 누르면 품목과 수량을 뽑아
+                  품목코드에 맞춥니다.
                 </div>
               )}
             </div>
@@ -372,7 +353,21 @@ export default function LiveDemo() {
                           {row.name}
                         </div>
                         <div className={`${cell} ${styles.rQty}`} style={delay}>
-                          {row.qty} <span className={styles.rUnit}>{row.unit}</span>
+                          {state.editing ? (
+                            <input
+                              className={styles.qtyInput}
+                              value={row.qty}
+                              inputMode="numeric"
+                              aria-label={`${row.name} 수량`}
+                              onChange={(e) => setQty(i, e.target.value)}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") commitEdit();
+                              }}
+                            />
+                          ) : (
+                            row.qty
+                          )}{" "}
+                          <span className={styles.rUnit}>{row.unit}</span>
                         </div>
                       </div>
                     );
@@ -387,7 +382,14 @@ export default function LiveDemo() {
                 >
                   <div className={styles.approveInner}>
                     <div className={styles.approveBar}>
-                      <button className={styles.btnEdit}>수정</button>
+                      <button
+                        className={styles.btnEdit}
+                        onClick={() =>
+                          state.editing ? commitEdit() : patch(tab, { editing: true })
+                        }
+                      >
+                        {state.editing ? "수정 완료" : "수정"}
+                      </button>
                       <button
                         className={`${styles.btnApprove} ${
                           pulse && !reduced ? styles.approvePulse : ""
@@ -402,13 +404,14 @@ export default function LiveDemo() {
 
                 {state.phase === "done" && (
                   <div className={styles.doneFoot}>
-                    <span className={styles.doneCheck}>✓</span> 한솔식당 · 08-30 납품건으로 등록됨
+                    <span className={styles.doneCheck}>✓</span> A매장 · 2026. 8. 29. 납품건으로
+                    등록됨
                   </div>
                 )}
               </>
             ) : (
               <div className={styles.idleNote}>
-                주문 문장을 보내면 품목코드가 매겨진 주문서가 여기에 만들어집니다.
+                아래 예시를 누르면 품목코드가 매겨진 주문서가 여기에 만들어집니다.
               </div>
             )}
           </div>
