@@ -13,7 +13,7 @@
 
 export type InquiryPayload = {
   /** 시트에서 두 폼을 구분하는 값 */
-  type: "inquiry" | "trial";
+  type: 'inquiry' | 'trial';
   company: string;
   name: string;
   phone: string;
@@ -37,31 +37,29 @@ export async function submitInquiry(payload: InquiryPayload): Promise<boolean> {
     /* 빌드할 때 NEXT_PUBLIC_INQUIRY_WEBHOOK_URL이 없으면 여기로 온다.
        조용히 성공을 반환하면 문의가 통째로 유실되므로 반드시 실패로 둔다. */
     console.error(
-      "[inquiry] NEXT_PUBLIC_INQUIRY_WEBHOOK_URL이 설정되지 않았습니다. " +
-        "project/INQUIRY_WEBHOOK_SETUP.md 참고.",
+      '[inquiry] NEXT_PUBLIC_INQUIRY_WEBHOOK_URL이 설정되지 않았습니다. ' +
+        'project/INQUIRY_WEBHOOK_SETUP.md 참고.'
     );
     return false;
   }
 
+  //정적 랜딩페이지에서 App Script로 직접 전송을 위해 mode를 수정하였고, 응답내용을 읽지 않도록 수정함//
   try {
-    const res = await fetch(WEBHOOK, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ ...payload, submittedAt: new Date().toISOString() }),
-      redirect: "follow",
+    await fetch(WEBHOOK, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      },
+      body: JSON.stringify({
+        ...payload,
+        submittedAt: new Date().toISOString(),
+      }),
     });
-    if (!res.ok) return false;
 
-    /* Apps Script는 {ok:true}를 돌려준다. 다만 리다이렉트 과정에서
-       본문을 못 읽는 경우가 있어, 파싱에 실패해도 200이면 성공으로 본다. */
-    try {
-      const data = await res.json();
-      return data?.ok !== false;
-    } catch {
-      return true;
-    }
+    return true;
   } catch (error) {
-    console.error("[inquiry] 전송 실패", error);
+    console.error('[inquiry] 전송 실패', error);
     return false;
   }
 }
