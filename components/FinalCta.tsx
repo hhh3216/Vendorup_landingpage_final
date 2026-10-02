@@ -89,19 +89,19 @@ export default function FinalCta() {
         <div>
           {/* 다크/브랜드 구간이므로 y 거리 --y-lg */}
           <div className={styles.kicker} data-reveal="lg">
-            초기 파트너 10개사 모집 중
+            초기 파트너 30개사 모집 중
           </div>
           <h2 className={styles.title} data-reveal="lg" style={stagger(1)}>
             지금 바로 사용해보십시오.
           </h2>
           <p className={styles.sub} data-reveal="lg" style={stagger(2)}>
-            신청하시면 세팅까지 함께 잡아드립니다. 지금 초기 파트너 10개사를 모집 중이며, 10개사
+            신청하시면 세팅까지 함께 잡아드립니다. 지금 초기 파트너 30개사를 모집 중이며, 30개사
             안에 드시면 AI ORDER를 <b>월 89,000원</b>으로 쓰실 수 있습니다.
           </p>
 
           <div className={styles.pills} data-reveal="lg" style={stagger(3)}>
             <span className={styles.pill}>정가 대비 월 40,000원 할인</span>
-            <span className={styles.pill}>10개사 마감 시 종료</span>
+            <span className={styles.pill}>30개사 마감 시 종료</span>
             <span className={styles.pill}>약정 없이 월 단위</span>
           </div>
 
@@ -267,7 +267,7 @@ export default function FinalCta() {
               </button>
 
               <div className={styles.fineprint}>
-                약정 없이 월 단위 · 초기 파트너 10개사 마감 시 종료
+                약정 없이 월 단위 · 초기 파트너 30개사 마감 시 종료
                 <br />
                 제출 시 <span className={styles.fineprintLink}>개인정보 수집·이용</span>에 동의하게
                 됩니다

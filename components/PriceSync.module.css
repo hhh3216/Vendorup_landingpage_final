@@ -1,5 +1,16 @@
 /* 원가 연동 판매가 자동 조정 — 주인공은 상품, 거래처는 보조 */
 
+/* 두 문장짜리 제목 — balance 가 없으면 "조정합니다."만 둘째 줄에 떨어진다 */
+.title {
+  text-wrap: balance;
+}
+
+/* 브랜드명이 하이픈에서 "Vendor-" / "UP" 으로 갈라지는 걸 막는다.
+   "Vendor-UP" 만 묶고 뒤 토큰은 풀어둬야 좁은 화면에서 넘치지 않는다 */
+.brand {
+  white-space: nowrap;
+}
+
 .titleAccent {
   color: var(--violet);
 }
@@ -8,8 +19,10 @@
   font: 400 19px/1.75 Pretendard, sans-serif;
   color: rgba(26, 26, 26, 0.55);
   margin: 22px 0 0;
-  max-width: 820px;
+  max-width: 940px;
   word-break: keep-all;
+  /* 마지막 줄에 "15초로 끝납니다." 같은 조각만 떨어지는 걸 막는다 */
+  text-wrap: pretty;
 }
 
 .lead b {

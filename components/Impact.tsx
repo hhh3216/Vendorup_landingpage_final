@@ -66,7 +66,8 @@ export default function Impact() {
   return (
     <section className="section-pad" id="impact">
       <h2 className="h2" data-reveal>
-        줄어드는 시간을 <span className={styles.titleAccent}>숫자로</span> 계산해봤습니다.
+        <span className={styles.brand}>Vendor-UP</span>이{" "}
+        <span className={styles.titleAccent}>아껴드리는</span> 시간과 비용
       </h2>
       <p className={styles.lead} data-reveal style={stagger(1)}>
         품목 {A.itemsPerOrder}개짜리 주문 하나를 사람이 치면 {Math.round(manualSecPerOrder / 60)}분이

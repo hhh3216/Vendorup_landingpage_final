@@ -1,5 +1,11 @@
 /* 도입 효과 — 숫자 3장 */
 
+/* 브랜드명이 하이픈에서 "Vendor-" / "UP" 으로 갈라지는 걸 막는다.
+   "Vendor-UP" 만 묶고 뒤 토큰은 풀어둬야 좁은 화면에서 넘치지 않는다 */
+.brand {
+  white-space: nowrap;
+}
+
 .titleAccent {
   color: var(--violet);
 }
@@ -8,8 +14,10 @@
   font: 400 19px/1.75 Pretendard, sans-serif;
   color: rgba(26, 26, 26, 0.55);
   margin: 22px 0 0;
-  max-width: 760px;
+  max-width: 940px;
   word-break: keep-all;
+  /* 마지막 줄에 "15초로 끝납니다." 같은 조각만 떨어지는 걸 막는다 */
+  text-wrap: pretty;
 }
 
 .grid {

@@ -70,8 +70,11 @@ export default function PriceSync() {
 
   return (
     <section className="section-pad" id="price-sync">
-      <h2 className="h2" data-reveal>
-        시세가 바뀌면, 판매가도 <span className={styles.titleAccent}>마진 그대로</span> 따라갑니다.
+      <h2 className={`h2 ${styles.title}`} data-reveal>
+        시세는 매일 바뀝니다. 판매가는 <span className={styles.titleAccent}>
+          <span className={styles.brand}>Vendor-UP</span> AI
+        </span>가
+        조정합니다.
       </h2>
       <p className={styles.lead} data-reveal style={stagger(1)}>
         야채·과일은 매일 시세가 바뀝니다. 상품마다 남길 마진을 한 번 정해두면, 원가가 움직일 때

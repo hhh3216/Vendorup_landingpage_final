@@ -66,7 +66,7 @@ export default function Pricing() {
           초기 파트너 한정 · 정가 대비 <b>월 40,000원 할인</b>
         </p>
         <div className={styles.urgency} data-reveal="sm" style={{ ["--reveal-delay" as string]: "140ms" }}>
-          초기 파트너 10개사 마감 시 종료
+          초기 파트너 30개사 마감 시 종료
         </div>
       </div>
 
