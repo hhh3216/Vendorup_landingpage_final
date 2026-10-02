@@ -115,6 +115,9 @@
   position: sticky;
   top: 120px;
   display: grid;
+  /* 컬럼을 명시하지 않으면 암시적 트랙이 max-content 라서 카드가
+     제 칸을 밀고 나간다 → 좁은 데스크탑에서 페이지 가로 스크롤. */
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .card {
