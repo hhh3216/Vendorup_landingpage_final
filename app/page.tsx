@@ -34,16 +34,16 @@ export default function Page() {
         <Problem />
         {/* §4.3 */}
         <Solution />
+        {/* 해결의 일부 — 원가 연동 판매가 자동 조정 */}
+        <PriceSync />
+        {/* 해결 바로 밑 — 도입 효과 */}
+        <Impact />
         {/* §4.4 — 이 페이지 모션의 핵심 */}
         <HowItWorks />
         {/* §4.5 */}
         <Channels />
         {/* §6 */}
         <LiveDemo />
-        {/* 도입 효과 — 자체 산출 추정치 */}
-        <Impact />
-        {/* 원가 연동 판매가 자동 조정 */}
-        <PriceSync />
         {/* §4.7 */}
         <Roadmap />
         {/* §4.8 */}

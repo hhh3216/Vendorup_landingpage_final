@@ -1,4 +1,4 @@
-/* 원가 연동 판매가 자동 조정 */
+/* 원가 연동 판매가 자동 조정 — 주인공은 상품, 거래처는 보조 */
 
 .titleAccent {
   color: var(--violet);
@@ -25,91 +25,33 @@
   background: #fff;
 }
 
-/* --- 원가 변경 헤더 --- */
 .costBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding: 24px 28px;
+  gap: 16px;
+  padding: 22px 28px;
   background: var(--violet);
   color: #fff;
 }
 
 .costLabel {
-  font: 700 17px Pretendard, sans-serif;
-  letter-spacing: -0.02em;
+  font: 700 18px Pretendard, sans-serif;
+  letter-spacing: -0.022em;
 }
 
-.costValues {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-}
-
-.costOld {
-  font: 500 19px Pretendard, sans-serif;
-  color: rgba(255, 255, 255, 0.6);
-  text-decoration: line-through;
-}
-
-.costArrow {
-  font: 500 17px Pretendard, sans-serif;
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.costNew {
-  font: 800 26px Pretendard, sans-serif;
-  letter-spacing: -0.03em;
-}
-
-/* --- 전체 적용 툴바 --- */
-.toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px 28px;
-  background: rgba(86, 48, 227, 0.05);
-  border-bottom: 1px solid rgba(86, 48, 227, 0.12);
-}
-
-.toolbarText {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  font: 700 15px Pretendard, sans-serif;
-  color: var(--ink);
-}
-
-.toolbarCount {
-  font: 400 14px Pretendard, sans-serif;
-  color: rgba(26, 26, 26, 0.5);
-}
-
-.toolbarBtn {
+.costCount {
   font: 600 14px Pretendard, sans-serif;
-  color: var(--violet);
-  background: #fff;
-  border: 1px solid rgba(86, 48, 227, 0.28);
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.16);
   border-radius: 999px;
-  padding: 7px 16px;
-  cursor: pointer;
-  transition:
-    background var(--d-base) var(--ease-inout),
-    border-color var(--d-base) var(--ease-inout);
+  padding: 6px 14px;
 }
 
-.toolbarBtn:hover {
-  background: rgba(86, 48, 227, 0.07);
-  border-color: rgba(86, 48, 227, 0.5);
-}
-
-/* --- 거래처 표 --- */
+/* --- 상품 표 --- */
 .row {
   display: grid;
-  grid-template-columns: minmax(96px, 0.8fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr) 104px;
+  grid-template-columns: minmax(110px, 0.85fr) minmax(0, 0.85fr) minmax(0, 1fr) minmax(0, 1.15fr);
   align-items: center;
 }
 
@@ -118,10 +60,6 @@
   color: rgba(26, 26, 26, 0.45);
   letter-spacing: 0.01em;
   padding: 16px 20px;
-}
-
-.thToggle {
-  text-align: center;
 }
 
 .bodyRow {
@@ -134,106 +72,144 @@
   padding: 20px;
 }
 
-.policy {
-  font: 400 16px Pretendard, sans-serif;
-  color: rgba(26, 26, 26, 0.6);
-  padding: 20px;
-}
-
-.now {
-  font: 400 17px Pretendard, sans-serif;
-  color: rgba(26, 26, 26, 0.55);
-  padding: 20px;
-}
-
-.next {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  flex-wrap: wrap;
-  font: 800 19px Pretendard, sans-serif;
-  letter-spacing: -0.02em;
-  padding: 20px;
-  /* 값이 바뀔 때 색만 전환한다 — 레이아웃을 건드리면 표가 출렁인다 */
-  transition: color var(--d-base) var(--ease-inout);
-}
-
-.nextOn {
+.margin {
+  font: 600 15px Pretendard, sans-serif;
   color: var(--violet);
+  background: rgba(86, 48, 227, 0.07);
+  border-radius: 999px;
+  justify-self: start;
+  margin: 0 20px;
+  padding: 6px 13px;
 }
 
-.nextOff {
+.cost,
+.price {
+  padding: 20px;
+}
+
+/* 전 → 후 한 덩어리 */
+.shift {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.before {
+  font: 400 16px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.4);
+  text-decoration: line-through;
+}
+
+.arrow {
+  font: 400 15px Pretendard, sans-serif;
   color: rgba(26, 26, 26, 0.35);
 }
 
-.delta {
-  font: 600 13px Pretendard, sans-serif;
-  color: #fff;
-  background: var(--cyan-deep);
-  border-radius: 999px;
-  padding: 3px 9px;
-  white-space: nowrap;
+.after {
+  font: 600 17px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.75);
 }
 
-.toggleCell {
+/* 판매가가 이 섹션의 결론이다 — 여기만 브랜드 컬러로 세운다 */
+.afterStrong {
+  font: 800 20px Pretendard, sans-serif;
+  letter-spacing: -0.022em;
+  color: var(--violet);
+}
+
+/* --- 거래처 (보조) --- */
+.clients {
+  padding: 20px 28px 22px;
+  border-top: 1px solid rgba(16, 24, 40, 0.09);
+  background: rgba(16, 24, 40, 0.02);
+}
+
+.clientsHead {
   display: flex;
-  justify-content: center;
-  padding: 20px 12px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-/* --- 토글 --- */
-.toggle {
+.clientsTitle {
+  font: 700 15px Pretendard, sans-serif;
+  color: rgba(26, 26, 26, 0.6);
+}
+
+.clientsAll {
+  font: 600 13px Pretendard, sans-serif;
+  color: var(--violet);
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.chip {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
+  font: 700 15px Pretendard, sans-serif;
+  letter-spacing: -0.018em;
+  color: rgba(26, 26, 26, 0.45);
+  background: #fff;
   border: 1px solid rgba(16, 24, 40, 0.16);
-  background: rgba(16, 24, 40, 0.04);
   border-radius: 999px;
-  padding: 5px 12px 5px 6px;
+  padding: 9px 16px 9px 11px;
   cursor: pointer;
   transition:
+    color var(--d-base) var(--ease-inout),
     background var(--d-base) var(--ease-inout),
     border-color var(--d-base) var(--ease-inout);
 }
 
-.toggle:hover {
+.chip:hover {
   border-color: rgba(86, 48, 227, 0.4);
 }
 
-.toggleOn {
-  background: rgba(86, 48, 227, 0.1);
-  border-color: rgba(86, 48, 227, 0.35);
+.chipOn {
+  color: var(--ink);
+  background: rgba(86, 48, 227, 0.08);
+  border-color: rgba(86, 48, 227, 0.38);
 }
 
 .knob {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  background: rgba(26, 26, 26, 0.3);
+  background: rgba(26, 26, 26, 0.22);
   transition: background var(--d-base) var(--ease-inout);
 }
 
-.toggleOn .knob {
+.chipOn .knob {
   background: var(--violet);
 }
 
-.toggleText {
-  font: 700 12px Pretendard, sans-serif;
-  letter-spacing: 0.04em;
-  color: rgba(26, 26, 26, 0.45);
+.chipState {
+  font: 700 11px Pretendard, sans-serif;
+  letter-spacing: 0.05em;
+  color: rgba(26, 26, 26, 0.35);
   transition: color var(--d-base) var(--ease-inout);
 }
 
-.toggleOn .toggleText {
+.chipOn .chipState {
   color: var(--violet);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .next,
-  .toggle,
+  .chip,
   .knob,
-  .toggleText,
-  .toolbarBtn {
+  .chipState {
     transition: none !important;
   }
 }
@@ -247,7 +223,6 @@
   flex-wrap: wrap;
   padding: 18px 28px;
   border-top: 1px solid rgba(16, 24, 40, 0.09);
-  background: rgba(16, 24, 40, 0.02);
 }
 
 .footNote {
@@ -305,19 +280,29 @@
     margin-top: 40px;
   }
   .row {
-    grid-template-columns: minmax(80px, 0.7fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 1.1fr) 88px;
-  }
-  .name,
-  .policy,
-  .now,
-  .next {
-    font-size: 15px;
-    padding: 16px 14px;
+    grid-template-columns: minmax(90px, 0.8fr) minmax(0, 0.8fr) minmax(0, 1fr) minmax(0, 1.1fr);
   }
   .headRow > * {
     padding: 14px;
   }
-  .next {
+  .name {
+    font-size: 16px;
+    padding: 16px 14px;
+  }
+  .margin {
+    font-size: 13px;
+    margin: 0 14px;
+    padding: 5px 10px;
+  }
+  .cost,
+  .price {
+    padding: 16px 14px;
+  }
+  .before,
+  .after {
+    font-size: 14px;
+  }
+  .afterStrong {
     font-size: 17px;
   }
   .steps {
@@ -325,61 +310,54 @@
   }
 }
 
-/* §7 모바일: 표를 거래처별 카드로 세로 스택 */
+/* §7 모바일: 상품별 카드로 세로 스택 */
 @media (max-width: 767px) {
-  .costBar {
-    padding: 20px;
+  .costBar,
+  .clients,
+  .foot {
+    padding-left: 20px;
+    padding-right: 20px;
   }
-  .toolbar {
-    padding: 14px 20px;
-  }
+
   .row {
     display: block;
-    position: relative;
   }
   /* .row 와 명시도가 같다 — 반드시 .row 뒤에 선언해야 헤더가 숨는다 */
   .headRow {
     display: none;
   }
+
   .bodyRow {
     padding: 16px 20px 18px;
   }
+
   .name {
     padding: 0;
     font-size: 17px;
-    /* 토글이 카드 우상단에 겹치지 않도록 이름 폭을 비워둔다 */
-    padding-right: 104px;
   }
-  .policy,
-  .now,
-  .next {
+
+  .margin {
+    margin: 8px 0 0;
+    display: inline-block;
+  }
+
+  .cost,
+  .price {
     display: flex;
     align-items: baseline;
     gap: 10px;
-    padding: 7px 0 0;
-    font-size: 15px;
+    padding: 9px 0 0;
   }
-  .policy::before,
-  .now::before,
-  .next::before {
+
+  .cost::before,
+  .price::before {
     content: attr(data-col);
     font: 400 13px Pretendard, sans-serif;
     color: rgba(26, 26, 26, 0.42);
-    /* 라벨은 왼쪽, 값과 델타 뱃지는 한 덩어리로 오른쪽에 붙는다 */
+    /* 라벨은 왼쪽, 전→후 한 덩어리는 오른쪽에 붙는다 */
     margin-right: auto;
   }
-  .next {
-    font-size: 17px;
-  }
-  .toggleCell {
-    position: absolute;
-    top: 14px;
-    right: 18px;
-    padding: 0;
-  }
-  .foot {
-    padding: 16px 20px;
-  }
+
   .steps {
     grid-template-columns: 1fr;
     gap: 10px;
