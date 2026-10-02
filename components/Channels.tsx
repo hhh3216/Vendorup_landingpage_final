@@ -13,7 +13,7 @@ const WAY_1: Node[] = [
   { title: "음식점이 카톡·문자로 주문", body: "받는 번호도, 방식도 지금과 같습니다" },
   {
     title: "도매업체가 Vendor-UP에 붙여넣기",
-    body: "받은 주문 문장을 채팅창에 그대로 복사",
+    body: "받은 주문 문장을 그대로 복사하면 됩니다",
     accent: true,
   },
   { title: "품목·수량 추출 후 품목코드 매칭", body: "우리 회사 코드 기준으로 정리됩니다" },
@@ -23,8 +23,8 @@ const WAY_1: Node[] = [
 
 const WAY_2: Node[] = [
   {
-    title: "음식점이 Vendor-UP 카톡으로 주문",
-    body: "받는 번호만 Vendor-UP 채널로 바뀝니다",
+    title: "음식점이 Vendor-UP으로 바로 주문",
+    body: "받는 번호만 Vendor-UP으로 바뀝니다",
     accent: true,
   },
   { title: "품목·수량 추출 후 품목코드 매칭", body: "붙여넣는 과정 없이 바로 정리됩니다" },
@@ -105,8 +105,8 @@ export default function Channels() {
             그대로 옮겨 붙이는 방식
           </h3>
           <p className={styles.cardBody}>
-            도매업체가 지금처럼 자기 카톡·문자로 주문을 받되, 받은 내용을 Vendor-UP 채팅창에 그대로
-            복사해 붙여넣습니다.
+            도매업체가 지금처럼 자기 카톡·문자로 주문을 받되, 받은 내용을 Vendor-UP에 그대로 복사해
+            붙여넣습니다.
           </p>
 
           <Flow nodes={WAY_1} fired={fired} />
@@ -114,7 +114,7 @@ export default function Channels() {
           <div className={styles.foot}>
             <div className={styles.footInner}>
               <div className={styles.footTitle}>번호도, 받는 방식도 완전히 그대로입니다.</div>
-              <div className={styles.footNote}>도매업체만 저희 채팅창에 붙여넣으면 됩니다.</div>
+              <div className={styles.footNote}>도매업체가 붙여넣기만 하면 됩니다.</div>
             </div>
           </div>
         </article>
@@ -122,13 +122,13 @@ export default function Channels() {
         <article className={styles.card}>
           <div className={`${styles.badge} ${styles.badgeCyan}`}>방식 2 · 추가 입력조차 없이</div>
           <h3 className={styles.cardTitle}>
-            음식점이 Vendor-UP 카톡으로
+            음식점이 Vendor-UP으로
             <br />
             직접 보내는 방식
           </h3>
           <p className={styles.cardBody}>
-            음식점이 평소처럼 카톡·문자로 주문을 보내되, 받는 곳이 Vendor-UP 채널입니다. 정리된
-            주문을 도매업체에 전달합니다.
+            음식점이 평소처럼 카톡·문자로 주문을 보내되, 받는 곳만 Vendor-UP입니다. 정리된 주문을
+            도매업체에 전달합니다.
           </p>
 
           <Flow nodes={WAY_2} fired={fired} cyan />

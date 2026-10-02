@@ -50,7 +50,7 @@ const EMPTY: TabState = {
      kakao  → 말풍선이 채팅 영역으로 팝인 */
 const TABS = [
   { id: "paste", label: "받은 주문 붙여넣기" },
-  { id: "kakao", label: "Vendor-UP 카톡으로 받기" },
+  { id: "kakao", label: "Vendor-UP으로 바로 받기" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -261,7 +261,7 @@ export default function LiveDemo() {
         <div className={styles.panel}>
           <div className={styles.panelHead}>
             <div className={styles.panelTitle}>
-              {tab === "kakao" ? "Vendor-UP 채널" : "받은 주문 원문"}
+              {tab === "kakao" ? "Vendor-UP으로 받은 주문" : "받은 주문 원문"}
             </div>
           </div>
 

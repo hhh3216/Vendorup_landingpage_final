@@ -32,7 +32,7 @@ function Step02() {
   return (
     /* SCREENSHOT SLOT — 채널 연동 / 붙여넣기 화면 스크린샷으로 교체 */
     <div className={styles.twoWays}>
-      {/* 번호는 §4.5 Channels 섹션이 기준이다 — 1=붙여넣기, 2=Vendor-UP 카톡. */}
+      {/* 번호는 §4.5 Channels 섹션이 기준이다 — 1=붙여넣기, 2=Vendor-UP 직접 수신. */}
       <div className={styles.way}>
         <div className={styles.wayBadge}>방식 1</div>
         <div className={styles.wayTitle}>받은 주문 붙여넣기</div>
@@ -45,9 +45,9 @@ function Step02() {
       </div>
       <div className={styles.way}>
         <div className={`${styles.wayBadge} ${styles.wayBadgeCyan}`}>방식 2</div>
-        <div className={styles.wayTitle}>카톡으로 바로 받기</div>
+        <div className={styles.wayTitle}>Vendor-UP으로 바로 받기</div>
         <p className={styles.wayBody}>
-          거래처가 Vendor-UP 채널로 주문을 보내면 원문이 그대로 들어옵니다.
+          거래처가 Vendor-UP으로 주문을 보내면 원문이 그대로 들어옵니다.
         </p>
         <div className={styles.wayFlow}>
           거래처 카톡<span className={styles.wayArrow}>→</span>Vendor-UP
