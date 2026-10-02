@@ -62,6 +62,13 @@ html {
   scroll-snap-align: start;
 }
 
+/* 단, 히어로는 제외한다. 위에 최상단 배너가 있어서 스냅을 걸어두면
+   스크롤 0에서도 히어로 윗변으로 당겨져 배너가 화면 밖으로 밀려난다.
+   페이지 맨 위라 스냅이 주는 이득도 없다. */
+.shell > section:first-child {
+  scroll-snap-align: none;
+}
+
 /* 모션 축소 사용자에게는 스냅을 걸지 않는다 — 의도치 않은 스크롤 이동이 된다. */
 @media (prefers-reduced-motion: reduce) {
   html {

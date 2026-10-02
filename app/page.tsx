@@ -1,6 +1,7 @@
 "use client";
 
 import { useRevealObserver } from "@/lib/reveal";
+import TopBanner from "@/components/TopBanner";
 import SideRail from "@/components/SideRail";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -24,6 +25,8 @@ export default function Page() {
 
   return (
     <>
+      {/* 헤더보다 위 — 스크롤하면 흘러 올라가고 헤더만 남는다 */}
+      <TopBanner />
       <SideRail />
       <Header />
 

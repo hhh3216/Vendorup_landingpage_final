@@ -1,0 +1,89 @@
+/* 최상단 모집 배너 — sticky 아님 (헤더보다 위에서 흘러 올라간다) */
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 40px;
+  padding: 9px 20px;
+  border: none;
+  background: var(--violet);
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  transition: background var(--d-base) var(--ease-inout);
+}
+
+.bar:hover {
+  background: var(--violet-deep);
+}
+
+/* 모집이 "지금 돌아가고 있다"는 신호. 진행 루프라 --ease-linear 대상이다. */
+.dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  animation: bannerPulse 2s var(--ease-inout) infinite;
+}
+
+@keyframes bannerPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.lead {
+  font: 700 14px Pretendard, sans-serif;
+  letter-spacing: -0.015em;
+}
+
+.note {
+  font: 400 14px Pretendard, sans-serif;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.note::before {
+  content: "·";
+  margin-right: 10px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.cta {
+  font: 700 14px Pretendard, sans-serif;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding-bottom: 1px;
+  margin-left: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    animation: none;
+  }
+  .bar {
+    transition: none;
+  }
+}
+
+/* 좁은 화면에서는 부연을 접는다 — 모집 사실과 행동만 남긴다 */
+@media (max-width: 719px) {
+  .bar {
+    gap: 8px;
+    padding: 9px 16px;
+  }
+  .note {
+    display: none;
+  }
+  .lead,
+  .cta {
+    font-size: 13px;
+  }
+}
