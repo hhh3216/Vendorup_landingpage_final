@@ -19,8 +19,8 @@ const STEPS = [
     body: "쓰던 품목 리스트를 주시면 매칭 기준을 저희가 만들어 드립니다.",
   },
   {
-    title: "7일 동안 실제 주문으로 직접 써보세요",
-    body: "카드 등록도, 약정도 없습니다. 안 맞으면 그냥 안 쓰시면 됩니다.",
+    title: "다음 날부터 실제 주문으로 쓰십니다",
+    body: "약정은 없습니다. 월 단위로 언제든 중단하실 수 있습니다.",
   },
 ];
 
@@ -95,7 +95,7 @@ export default function FinalCta() {
             지금 바로 사용해보십시오.
           </h2>
           <p className={styles.sub} data-reveal="lg" style={stagger(2)}>
-            카드 등록 없이 7일 무료로 시작합니다. 지금 초기 파트너 10개사를 모집 중이며, 10개사
+            신청하시면 세팅까지 함께 잡아드립니다. 지금 초기 파트너 10개사를 모집 중이며, 10개사
             안에 드시면 AI ORDER를 <b>월 89,000원</b>으로 쓰실 수 있습니다.
           </p>
 
@@ -146,7 +146,7 @@ export default function FinalCta() {
                 onChange={(e) => setHoneypot(e.target.value)}
               />
 
-              <div className={styles.cardTitle}>7일 무료 체험 신청</div>
+              <div className={styles.cardTitle}>도입 신청</div>
               <div className={styles.cardSub}>
                 1분이면 끝납니다 · 접수 후 영업일 기준 1일 내 연락
               </div>
@@ -262,12 +262,12 @@ export default function FinalCta() {
                     접수 중…
                   </>
                 ) : (
-                  "무료로 시작하기"
+                  "지금 시작하기"
                 )}
               </button>
 
               <div className={styles.fineprint}>
-                카드 등록 없이 시작 · 초기 파트너 10개사 마감 시 종료
+                약정 없이 월 단위 · 초기 파트너 10개사 마감 시 종료
                 <br />
                 제출 시 <span className={styles.fineprintLink}>개인정보 수집·이용</span>에 동의하게
                 됩니다

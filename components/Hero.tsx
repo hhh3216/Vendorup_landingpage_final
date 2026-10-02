@@ -104,8 +104,6 @@ export default function Hero() {
     if (el) smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 56);
   };
 
-  const Active = HERO_FRAMES[frame].Frame;
-
   return (
     <section className={styles.hero} id="top">
       <div className={styles.card} ref={cardRef}>
@@ -190,7 +188,7 @@ export default function Hero() {
               30초 만에 어떻게 되는지 보기
             </button>
             <button className="btn btn-primary" onClick={goToApply}>
-              무료로 시작하기
+              지금 시작하기
             </button>
           </div>
         </div>

@@ -10,6 +10,8 @@ const SECTIONS = [
   { id: "how-it-works", label: "작동 원리" },
   { id: "channels", label: "접수 방식" },
   { id: "demo", label: "라이브 데모" },
+  { id: "impact", label: "도입 효과" },
+  { id: "price-sync", label: "원가 연동" },
   { id: "roadmap", label: "로드맵" },
   { id: "pricing", label: "요금" },
   { id: "faq", label: "FAQ" },

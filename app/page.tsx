@@ -9,6 +9,8 @@ import Solution from "@/components/Solution";
 import HowItWorks from "@/components/HowItWorks";
 import Channels from "@/components/Channels";
 import LiveDemo from "@/components/LiveDemo";
+import Impact from "@/components/Impact";
+import PriceSync from "@/components/PriceSync";
 import Roadmap from "@/components/Roadmap";
 import Pricing from "@/components/Pricing";
 import Faq from "@/components/Faq";
@@ -38,6 +40,10 @@ export default function Page() {
         <Channels />
         {/* §6 */}
         <LiveDemo />
+        {/* 도입 효과 — 자체 산출 추정치 */}
+        <Impact />
+        {/* 원가 연동 판매가 자동 조정 */}
+        <PriceSync />
         {/* §4.7 */}
         <Roadmap />
         {/* §4.8 */}

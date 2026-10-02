@@ -8,8 +8,8 @@ type Feature = { label: string; on: boolean; strong?: boolean };
 const FEATURES = [
   "수·발주 ERP",
   "AI 주문 자동전산화",
+  "원가 연동 판매가 자동 조정",
   "AI 재고 관리",
-  "시세 변동 자동 반영",
   "배송기사 추적",
 ] as const;
 
@@ -19,7 +19,7 @@ const make = (onCount: number, strongIndex?: number): Feature[] =>
 const BONUS = [
   { title: "품목코드 초기 세팅 대행", body: "고객사 품목 리스트를 받아 매칭 기준을 함께 잡아드립니다" },
   { title: "카톡·문자 주문 채널 연동 설정", body: "설정은 저희가 합니다" },
-  { title: "7일 무료 체험", body: "카드 등록 없이" },
+  { title: "도입 첫 달 밀착 지원", body: "세팅부터 안정화까지 함께 봅니다" },
   { title: "전담 담당자 직통 상담", body: "초기 파트너 기간 동안" },
 ];
 
@@ -46,7 +46,7 @@ export default function Pricing() {
 
   // 데스크탑: 가운데(0) → 좌우(70ms) / 모바일: AI ORDER(0) → BASIC(70) → INVENTORY(140)
   const delay = {
-    basic: isMobile ? STAGGER : STAGGER,
+    basic: STAGGER,
     main: 0,
     inventory: isMobile ? STAGGER * 2 : STAGGER,
   };
@@ -102,7 +102,7 @@ export default function Pricing() {
             {/* 카드와 함께 등장 — 뱃지 단독 팝인 없음 */}
             <span className={styles.recommend}>추천</span>
           </div>
-          <div className={styles.planDescMain}>주문 입력을 AI가 대신</div>
+          <div className={styles.planDescMain}>주문 입력과 가격 관리를 AI가 대신</div>
           <div className={`${styles.listPrice} ${styles.listPriceMain}`}>129,000원/월</div>
           <div className={`${styles.price} ${styles.priceMain}`}>
             89,000원<span className={`${styles.per} ${styles.perMain}`}>/월</span>
@@ -110,10 +110,10 @@ export default function Pricing() {
           <div className={`${styles.avail} ${styles.availMain}`}>바로 이용 가능</div>
           <div className={`${styles.rule} ${styles.ruleMain}`} />
           <div className={`${styles.features} ${styles.featuresMain}`}>
-            <Features items={make(2, 1)} />
+            <Features items={make(3, 1)} />
           </div>
           <button className={styles.planCta} onClick={goToApply}>
-            무료로 시작하기
+            지금 시작하기
           </button>
         </div>
 
@@ -124,7 +124,7 @@ export default function Pricing() {
           style={{ ["--reveal-delay" as string]: `${delay.inventory}ms` }}
         >
           <div className={styles.planName}>AI INVENTORY</div>
-          <div className={styles.planDesc}>재고·시세·배송까지</div>
+          <div className={styles.planDesc}>재고·배송까지</div>
           <div className={styles.listPrice}>169,000원/월</div>
           <div className={styles.price}>
             129,000원<span className={styles.per}>/월</span>
@@ -165,7 +165,7 @@ export default function Pricing() {
 
         <div className={styles.bonusRule} />
         <div className={styles.bonusFoot}>
-          7일 무료. 카드 등록 없이 시작하고, 안 맞으면 그냥 안 쓰시면 됩니다.
+          신청하시면 담당자가 세팅까지 함께 잡아드립니다. 바로 쓰실 수 있습니다.
           <br />
           <span className={styles.bonusFootMuted}>
             약정도 없습니다. 월 단위로 언제든 중단하실 수 있습니다.

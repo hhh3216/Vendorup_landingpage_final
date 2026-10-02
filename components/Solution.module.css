@@ -195,13 +195,15 @@
     border-radius: 16px;
   }
 
-  /* 헤더 행은 감추고, 각 셀이 자기 라벨을 달고 세로로 쌓인다 */
-  .headRow {
-    display: none;
-  }
-
   .row {
     display: block;
+  }
+
+  /* 헤더 행은 감추고, 각 셀이 자기 라벨을 달고 세로로 쌓인다.
+     .row 와 명시도가 같으므로 반드시 .row 뒤에 와야 한다 — 앞에 두면
+     .row{display:block} 에 밀려 헤더가 그대로 노출된다. */
+  .headRow {
+    display: none;
   }
 
   .divided {

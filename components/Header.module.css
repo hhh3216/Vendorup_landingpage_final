@@ -114,7 +114,7 @@
   min-height: 44px;
   display: inline-flex;
   align-items: center;
-  /* 좁은 화면에서 "무료로 시작 / 하기"로 쪼개져 버튼이 2줄이 되는 걸 막는다 */
+  /* 좁은 화면에서 "지금 시작 / 하기"로 쪼개져 버튼이 2줄이 되는 걸 막는다 */
   white-space: nowrap;
   transition:
     transform var(--d-base) var(--ease-inout),

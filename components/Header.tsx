@@ -43,7 +43,7 @@ export default function Header() {
           문의하기
         </button>
         <button className={styles.cta} onClick={() => jump("apply")}>
-          무료로 시작하기
+          지금 시작하기
         </button>
       </div>
 
