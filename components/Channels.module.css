@@ -217,19 +217,6 @@
   color: var(--cyan-deep);
 }
 
-.closer {
-  font: 400 17px Pretendard, sans-serif;
-  color: rgba(26, 26, 26, 0.5);
-  margin: 30px 0 0;
-  text-align: center;
-  word-break: keep-all;
-}
-
-.closer b {
-  color: var(--ink);
-  font-weight: 700;
-}
-
 @media (max-width: 1023px) {
   .title {
     font-size: 36px;
@@ -269,8 +256,5 @@
   }
   .nodeBody {
     font-size: 13px;
-  }
-  .closer {
-    font-size: 15px;
   }
 }

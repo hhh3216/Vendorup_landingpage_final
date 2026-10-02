@@ -145,11 +145,6 @@ export default function Channels() {
           </div>
         </article>
       </div>
-
-      <p className={styles.closer} data-reveal="sm">
-        두 방식 모두 음식점 쪽에는 새로운 걸 요구하지 않습니다. 차이는{" "}
-        <b>&ldquo;누가 Vendor-UP에 원문을 전달하느냐&rdquo;</b>뿐입니다.
-      </p>
     </section>
   );
 }
