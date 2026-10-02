@@ -96,7 +96,9 @@ export default function FinalCta() {
           </h2>
           <p className={styles.sub} data-reveal="lg" style={stagger(2)}>
             신청하시면 세팅까지 함께 잡아드립니다. 지금 초기 파트너 30개사를 모집 중이며, 30개사
-            안에 드시면 AI ORDER를 <b>월 89,000원</b>으로 쓰실 수 있습니다.
+            안에 드시면 AI ORDER를 월{" "}
+            <span className={styles.listPrice}>129,000원</span>{" "}
+            <b>89,000원</b>에 쓰실 수 있습니다.
           </p>
 
           <div className={styles.pills} data-reveal="lg" style={stagger(3)}>

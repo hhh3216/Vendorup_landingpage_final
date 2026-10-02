@@ -39,6 +39,12 @@
   font-weight: 700;
 }
 
+/* 할인 전 정가. 취소선만으로는 다크 배경에서 잘 안 읽혀 명도도 함께 낮춘다. */
+.listPrice {
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: line-through;
+}
+
 .pills {
   display: flex;
   gap: 8px;
