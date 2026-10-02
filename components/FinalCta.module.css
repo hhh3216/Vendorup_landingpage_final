@@ -14,20 +14,26 @@
 }
 
 .kicker {
-  font: 700 14px Pretendard, sans-serif;
+  font:
+    700 14px Pretendard,
+    sans-serif;
   color: rgba(255, 255, 255, 0.62);
   letter-spacing: 0.02em;
 }
 
 .title {
-  font: 800 56px/1.24 Pretendard, sans-serif;
+  font:
+    800 56px/1.24 Pretendard,
+    sans-serif;
   letter-spacing: -0.042em;
   margin: 16px 0 0;
   word-break: keep-all;
 }
 
 .sub {
-  font: 400 21px/1.7 Pretendard, sans-serif;
+  font:
+    400 21px/1.7 Pretendard,
+    sans-serif;
   color: rgba(255, 255, 255, 0.78);
   margin: 24px 0 0;
   max-width: 560px;
@@ -53,7 +59,9 @@
 }
 
 .pill {
-  font: 700 14px Pretendard, sans-serif;
+  font:
+    700 14px Pretendard,
+    sans-serif;
   color: #fff;
   background: rgba(255, 255, 255, 0.16);
   padding: 9px 15px;
@@ -85,7 +93,9 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.16);
   color: #fff;
-  font: 700 12px Pretendard, sans-serif;
+  font:
+    700 12px Pretendard,
+    sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,12 +104,16 @@
 }
 
 .stepTitle {
-  font: 700 18px Pretendard, sans-serif;
+  font:
+    700 18px Pretendard,
+    sans-serif;
   letter-spacing: -0.02em;
 }
 
 .stepBody {
-  font: 400 16px/1.6 Pretendard, sans-serif;
+  font:
+    400 16px/1.6 Pretendard,
+    sans-serif;
   color: rgba(255, 255, 255, 0.62);
   margin-top: 5px;
   word-break: keep-all;
@@ -115,12 +129,16 @@
 }
 
 .cardTitle {
-  font: 800 24px Pretendard, sans-serif;
+  font:
+    800 24px Pretendard,
+    sans-serif;
   letter-spacing: -0.03em;
 }
 
 .cardSub {
-  font: 400 15px/1.6 Pretendard, sans-serif;
+  font:
+    400 15px/1.6 Pretendard,
+    sans-serif;
   color: rgba(26, 26, 26, 0.5);
   margin-top: 8px;
 }
@@ -142,7 +160,9 @@
 /* 라벨 플로팅 애니메이션 없음 — 라벨 상단 고정형 */
 .label {
   display: block;
-  font: 700 13px Pretendard, sans-serif;
+  font:
+    700 13px Pretendard,
+    sans-serif;
   color: rgba(26, 26, 26, 0.6);
   margin-bottom: 7px;
 }
@@ -152,7 +172,9 @@
   border: 1px solid rgba(16, 24, 40, 0.14);
   border-radius: 12px;
   padding: 15px 16px;
-  font: 400 16px Pretendard, sans-serif;
+  font:
+    400 16px Pretendard,
+    sans-serif;
   color: var(--ink);
   background: #fff;
   outline: none;
@@ -183,7 +205,9 @@
 }
 
 .errorText {
-  font: 500 13px Pretendard, sans-serif;
+  font:
+    500 13px Pretendard,
+    sans-serif;
   color: #b4740a;
   margin-top: 6px;
 }
@@ -199,7 +223,9 @@
   border-radius: 12px;
   padding: 13px 0;
   text-align: center;
-  font: 600 15px Pretendard, sans-serif;
+  font:
+    600 15px Pretendard,
+    sans-serif;
   color: rgba(26, 26, 26, 0.55);
   min-height: 44px;
   transition:
@@ -232,7 +258,9 @@
   padding: 12px 14px;
   border-radius: 10px;
   background: rgba(249, 112, 102, 0.14);
-  font: 500 13px/1.6 Pretendard, sans-serif;
+  font:
+    500 13px/1.6 Pretendard,
+    sans-serif;
   color: #f97066;
   word-break: keep-all;
 }
@@ -248,7 +276,9 @@
   margin-top: 24px;
   background: var(--violet);
   color: #fff;
-  font: 700 18px Pretendard, sans-serif;
+  font:
+    700 18px Pretendard,
+    sans-serif;
   text-align: center;
   padding: 19px;
   border-radius: 14px;
@@ -305,7 +335,9 @@
 }
 
 .fineprint {
-  font: 500 13px/1.6 Pretendard, sans-serif;
+  font:
+    500 13px/1.6 Pretendard,
+    sans-serif;
   color: rgba(26, 26, 26, 0.4);
   margin-top: 12px;
   text-align: center;
@@ -331,7 +363,9 @@
 }
 
 .consultText {
-  font: 500 15px Pretendard, sans-serif;
+  font:
+    500 15px Pretendard,
+    sans-serif;
   color: rgba(26, 26, 26, 0.55);
   word-break: keep-all;
 }
@@ -346,7 +380,9 @@
   border: 1px solid rgba(16, 24, 40, 0.14);
   border-radius: 10px;
   padding: 10px 16px;
-  font: 700 14px Pretendard, sans-serif;
+  font:
+    700 14px Pretendard,
+    sans-serif;
   color: var(--ink);
   min-height: 44px;
   display: inline-flex;
@@ -358,19 +394,36 @@
 }
 
 /* 아직 열리지 않은 채널 — 누를 수 없다는 걸 색으로 알린다 */
+/* 카카오톡 상담 — 메인 CTA와 동일한 브랜드 버튼 */
 .consultBtnSoon {
-  color: rgba(26, 26, 26, 0.38);
-  background: rgba(16, 24, 40, 0.03);
-  font-weight: 600;
-  cursor: default;
+  background: var(--violet);
+  color: #fff;
+  border-color: var(--violet);
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    transform var(--d-base) var(--ease-inout),
+    box-shadow var(--d-base) var(--ease-inout),
+    background var(--d-base) var(--ease-inout);
 }
 
 @media (hover: hover) {
+  .consultBtnSoon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -12px rgba(86, 48, 227, 0.6);
+  }
+
   .consultBtn:not(.consultBtnSoon):hover {
     border-color: rgba(86, 48, 227, 0.4);
     background: rgba(86, 48, 227, 0.04);
     color: var(--ink);
   }
+}
+
+.consultBtnSoon:active {
+  transform: translateY(0) scale(0.985);
+  transition-duration: var(--d-fast);
 }
 
 /* 성공 시 폼 블록이 opacity 크로스페이드로 감사 메시지로 교체 (--d-base).
@@ -396,7 +449,9 @@
   border-radius: 50%;
   background: rgba(86, 48, 227, 0.1);
   color: var(--violet);
-  font: 700 24px Pretendard, sans-serif;
+  font:
+    700 24px Pretendard,
+    sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -404,12 +459,16 @@
 }
 
 .thanksTitle {
-  font: 800 22px Pretendard, sans-serif;
+  font:
+    800 22px Pretendard,
+    sans-serif;
   letter-spacing: -0.03em;
 }
 
 .thanksBody {
-  font: 400 16px/1.7 Pretendard, sans-serif;
+  font:
+    400 16px/1.7 Pretendard,
+    sans-serif;
   color: rgba(26, 26, 26, 0.55);
   margin-top: 10px;
   word-break: keep-all;

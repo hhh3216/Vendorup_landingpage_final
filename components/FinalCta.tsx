@@ -32,28 +32,38 @@ type Fields = {
   bizNo: string;
 };
 
-const EMPTY: Fields = { company: "", name: "", phone: "", email: "", bizNo: "" };
+const EMPTY: Fields = {
+  company: "",
+  name: "",
+  phone: "",
+  email: "",
+  bizNo: "",
+};
 
 export default function FinalCta() {
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [channel, setChannel] = useState<string>("카톡");
-  const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>(
+    {},
+  );
   const [status, setStatus] = useState<Status>("idle");
   const [failed, setFailed] = useState(false);
   /** 스팸 봇 함정 — 사람 눈에는 안 보이므로 값이 차 있으면 봇이다 */
   const [honeypot, setHoneypot] = useState("");
 
-  const set = (key: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFields((prev) => ({ ...prev, [key]: e.target.value }));
-    // 입력을 시작하면 그 필드의 오류 표시를 거둔다
-    setErrors((prev) => (prev[key] ? { ...prev, [key]: undefined } : prev));
-  };
+  const set =
+    (key: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFields((prev) => ({ ...prev, [key]: e.target.value }));
+      // 입력을 시작하면 그 필드의 오류 표시를 거둔다
+      setErrors((prev) => (prev[key] ? { ...prev, [key]: undefined } : prev));
+    };
 
   const validate = () => {
     const next: Partial<Record<keyof Fields, string>> = {};
     if (!fields.company.trim()) next.company = "업체명을 입력해 주세요.";
     if (!fields.name.trim()) next.name = "담당자명을 입력해 주세요.";
-    if (!/^[0-9-]{9,}$/.test(fields.phone.trim())) next.phone = "연락 가능한 번호를 입력해 주세요.";
+    if (!/^[0-9-]{9,}$/.test(fields.phone.trim()))
+      next.phone = "연락 가능한 번호를 입력해 주세요.";
     if (fields.email.trim() && !/^\S+@\S+\.\S+$/.test(fields.email.trim())) {
       next.email = "이메일 형식을 확인해 주세요.";
     }
@@ -72,7 +82,12 @@ export default function FinalCta() {
     setStatus("submitting");
     setFailed(false);
 
-    const ok = await submitInquiry({ type: "trial", ...fields, channel, website: honeypot });
+    const ok = await submitInquiry({
+      type: "trial",
+      ...fields,
+      channel,
+      website: honeypot,
+    });
 
     /* 접수 실패를 성공으로 보여주면 신청자는 오지 않을 연락을 기다린다. */
     if (ok) {
@@ -95,10 +110,10 @@ export default function FinalCta() {
             지금 바로 사용해보십시오.
           </h2>
           <p className={styles.sub} data-reveal="lg" style={stagger(2)}>
-            신청하시면 세팅까지 함께 잡아드립니다. 지금 초기 파트너 30개사를 모집 중이며, 30개사
-            안에 드시면 AI ORDER를 월{" "}
-            <span className={styles.listPrice}>129,000원</span>{" "}
-            <b>89,000원</b>에 쓰실 수 있습니다.
+            신청하시면 세팅까지 함께 잡아드립니다. 지금 초기 파트너 30개사를
+            모집 중이며, 30개사 안에 드시면 AI ORDER를 월{" "}
+            <span className={styles.listPrice}>129,000원</span> <b>89,000원</b>
+            에 쓰실 수 있습니다.
           </p>
 
           <div className={styles.pills} data-reveal="lg" style={stagger(3)}>
@@ -130,8 +145,8 @@ export default function FinalCta() {
               <div className={styles.thanksMark}>✓</div>
               <div className={styles.thanksTitle}>신청이 접수되었습니다.</div>
               <p className={styles.thanksBody}>
-                영업일 기준 1일 내에 담당자가 연락드립니다. 주문을 어떻게 받고 계신지 먼저 여쭤보고,
-                품목코드 세팅까지 같이 잡아드리겠습니다.
+                영업일 기준 1일 내에 담당자가 연락드립니다. 주문을 어떻게 받고
+                계신지 먼저 여쭤보고, 품목코드 세팅까지 같이 잡아드리겠습니다.
               </p>
             </div>
           ) : (
@@ -166,7 +181,9 @@ export default function FinalCta() {
                     onChange={set("company")}
                     aria-invalid={Boolean(errors.company)}
                   />
-                  {errors.company && <div className={styles.errorText}>{errors.company}</div>}
+                  {errors.company && (
+                    <div className={styles.errorText}>{errors.company}</div>
+                  )}
                 </div>
 
                 <div className={styles.pair}>
@@ -182,7 +199,9 @@ export default function FinalCta() {
                       onChange={set("name")}
                       aria-invalid={Boolean(errors.name)}
                     />
-                    {errors.name && <div className={styles.errorText}>{errors.name}</div>}
+                    {errors.name && (
+                      <div className={styles.errorText}>{errors.name}</div>
+                    )}
                   </div>
                   <div>
                     <label className={styles.label} htmlFor="f-phone">
@@ -198,7 +217,9 @@ export default function FinalCta() {
                       onChange={set("phone")}
                       aria-invalid={Boolean(errors.phone)}
                     />
-                    {errors.phone && <div className={styles.errorText}>{errors.phone}</div>}
+                    {errors.phone && (
+                      <div className={styles.errorText}>{errors.phone}</div>
+                    )}
                   </div>
                 </div>
 
@@ -215,7 +236,9 @@ export default function FinalCta() {
                     onChange={set("email")}
                     aria-invalid={Boolean(errors.email)}
                   />
-                  {errors.email && <div className={styles.errorText}>{errors.email}</div>}
+                  {errors.email && (
+                    <div className={styles.errorText}>{errors.email}</div>
+                  )}
                 </div>
 
                 <div>
@@ -233,7 +256,11 @@ export default function FinalCta() {
 
                 <div>
                   <span className={styles.label}>주로 받는 주문 방식</span>
-                  <div className={styles.choices} role="radiogroup" aria-label="주로 받는 주문 방식">
+                  <div
+                    className={styles.choices}
+                    role="radiogroup"
+                    aria-label="주로 받는 주문 방식"
+                  >
                     {CHANNELS.map((c) => (
                       <button
                         key={c}
@@ -257,7 +284,11 @@ export default function FinalCta() {
                 </div>
               )}
 
-              <button className={styles.submit} type="submit" disabled={status === "submitting"}>
+              <button
+                className={styles.submit}
+                type="submit"
+                disabled={status === "submitting"}
+              >
                 {status === "submitting" ? (
                   <>
                     <span className={styles.spinner} aria-hidden="true" />
@@ -271,18 +302,26 @@ export default function FinalCta() {
               <div className={styles.fineprint}>
                 약정 없이 월 단위 · 초기 파트너 30개사 마감 시 종료
                 <br />
-                제출 시 <span className={styles.fineprintLink}>개인정보 수집·이용</span>에 동의하게
-                됩니다
+                제출 시{" "}
+                <span className={styles.fineprintLink}>개인정보 수집·이용</span>
+                에 동의하게 됩니다
               </div>
 
               <div className={styles.cardRule} />
               <div className={styles.consult}>
-                <div className={styles.consultText}>먼저 물어보고 싶으신가요?</div>
+                <div className={styles.consultText}>
+                  먼저 물어보고 싶으신가요?
+                </div>
                 <div className={styles.consultBtns}>
-                  {/* ⚠️ 연동 지점: 카카오톡 상담 채널이 열리면 여기를 <a href>로 바꾼다. */}
-                  <span className={`${styles.consultBtn} ${styles.consultBtnSoon}`}>
-                    카톡 상담 준비 중
-                  </span>
+                  <a
+                    href="http://pf.kakao.com/_TBRrX"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${styles.consultBtn} ${styles.consultBtnSoon}`}
+                  >
+                    카톡 상담
+                  </a>
+
                   <a href="tel:01029155311" className={styles.consultBtn}>
                     전화 상담
                   </a>
