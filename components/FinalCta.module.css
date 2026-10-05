@@ -395,12 +395,14 @@
 
 /* 아직 열리지 않은 채널 — 누를 수 없다는 걸 색으로 알린다 */
 /* 카카오톡 상담 — 메인 CTA와 동일한 브랜드 버튼 */
+/* 카카오톡 상담 — 실제 카카오 상담임을 즉시 인지할 수 있도록 분리 */
 .consultBtnSoon {
-  background: var(--violet);
-  color: #fff;
-  border-color: var(--violet);
+  background: #fee500;
+  color: #191919;
+  border-color: #fee500;
   font-weight: 700;
   cursor: pointer;
+  gap: 7px;
 
   transition:
     transform var(--d-base) var(--ease-inout),
@@ -408,10 +410,27 @@
     background var(--d-base) var(--ease-inout);
 }
 
+.kakaoIcon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  color: #191919;
+}
+
+.kakaoIcon svg {
+  display: block;
+}
+
 @media (hover: hover) {
   .consultBtnSoon:hover {
+    background: #f5dc00;
+    border-color: #f5dc00;
+    color: #191919;
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px -12px rgba(86, 48, 227, 0.6);
+    box-shadow: 0 12px 24px -12px rgba(25, 25, 25, 0.35);
   }
 
   .consultBtn:not(.consultBtnSoon):hover {

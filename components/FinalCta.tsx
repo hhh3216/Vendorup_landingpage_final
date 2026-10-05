@@ -280,7 +280,7 @@ export default function FinalCta() {
               {failed && (
                 <div className={styles.sendFail} role="alert">
                   접수 중 문제가 생겼습니다. 잠시 후 다시 시도하시거나{" "}
-                  <a href="tel:01029155311">010-2915-5311</a>로 연락 주세요.
+                  <a href="tel:01029155311">010-2915-5312</a>로 연락 주세요.
                 </div>
               )}
 
@@ -314,15 +314,24 @@ export default function FinalCta() {
                 </div>
                 <div className={styles.consultBtns}>
                   <a
-                    href="http://pf.kakao.com/_TBRrX"
+                    href="https://pf.kakao.com/_TBRrX"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`${styles.consultBtn} ${styles.consultBtnSoon}`}
+                    aria-label="카카오톡으로 상담하기"
                   >
-                    카톡 상담
+                    <span className={styles.kakaoIcon} aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="18" height="18">
+                        <path
+                          fill="currentColor"
+                          d="M12 3C6.48 3 2 6.58 2 11c0 2.84 1.86 5.34 4.66 6.76L5.6 21l3.82-2.18c.83.16 1.69.24 2.58.24 5.52 0 10-3.58 10-8.06S17.52 3 12 3Z"
+                        />
+                      </svg>
+                    </span>
+                    카카오톡 상담
                   </a>
 
-                  <a href="tel:01029155311" className={styles.consultBtn}>
+                  <a href="tel:01029155312" className={styles.consultBtn}>
                     전화 상담
                   </a>
                 </div>

@@ -17,6 +17,7 @@ import Pricing from "@/components/Pricing";
 import Faq from "@/components/Faq";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
+import KakaoConsult from "@/components/KakaoConsult";
 
 export default function Page() {
   /* §3 공통 스크롤 진입 — 페이지 전체의 [data-reveal]을 한 번에 관측한다.
@@ -59,6 +60,7 @@ export default function Page() {
 
       {/* §4.11 */}
       <Footer />
+      <KakaoConsult />
     </>
   );
 }
