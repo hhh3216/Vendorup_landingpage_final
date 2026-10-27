@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import styles from "./FinalCta.module.css";
-import { stagger } from "@/lib/reveal";
-import { submitInquiry } from "@/lib/submitInquiry";
+import { useState } from 'react';
+import styles from './FinalCta.module.css';
+import { stagger } from '@/lib/reveal';
+import { submitInquiry } from '@/lib/submitInquiry';
 
-type Status = "idle" | "submitting" | "done";
+type Status = 'idle' | 'submitting' | 'done';
 
-const CHANNELS = ["카톡", "문자", "전화", "복합"] as const;
+const CHANNELS = ['카톡', '문자', '전화', '복합'] as const;
 
 const STEPS = [
   {
-    title: "신청서를 남기시면 담당자가 연락드립니다",
-    body: "주문을 어떻게 받고 계신지 먼저 여쭤봅니다. 통화는 10분이면 충분합니다.",
+    title: '신청서를 남기시면 담당자가 연락드립니다',
+    body: '주문을 어떻게 받고 계신지 먼저 여쭤봅니다. 통화는 10분이면 충분합니다.',
   },
   {
-    title: "품목코드·거래처 세팅을 같이 잡습니다",
-    body: "쓰던 품목 리스트를 주시면 매칭 기준을 저희가 만들어 드립니다.",
+    title: '품목코드·거래처 세팅을 같이 잡습니다',
+    body: '쓰던 품목 리스트를 주시면 매칭 기준을 저희가 만들어 드립니다.',
   },
   {
-    title: "다음 날부터 실제 주문으로 쓰십니다",
-    body: "약정은 없습니다. 월 단위로 언제든 중단하실 수 있습니다.",
+    title: '다음 날부터 실제 주문으로 쓰십니다',
+    body: '약정은 없습니다. 월 단위로 언제든 중단하실 수 있습니다.',
   },
 ];
 
@@ -33,23 +33,23 @@ type Fields = {
 };
 
 const EMPTY: Fields = {
-  company: "",
-  name: "",
-  phone: "",
-  email: "",
-  bizNo: "",
+  company: '',
+  name: '',
+  phone: '',
+  email: '',
+  bizNo: '',
 };
 
 export default function FinalCta() {
   const [fields, setFields] = useState<Fields>(EMPTY);
-  const [channel, setChannel] = useState<string>("카톡");
+  const [channel, setChannel] = useState<string>('카톡');
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>(
-    {},
+    {}
   );
-  const [status, setStatus] = useState<Status>("idle");
+  const [status, setStatus] = useState<Status>('idle');
   const [failed, setFailed] = useState(false);
   /** 스팸 봇 함정 — 사람 눈에는 안 보이므로 값이 차 있으면 봇이다 */
-  const [honeypot, setHoneypot] = useState("");
+  const [honeypot, setHoneypot] = useState('');
 
   const set =
     (key: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,30 +60,30 @@ export default function FinalCta() {
 
   const validate = () => {
     const next: Partial<Record<keyof Fields, string>> = {};
-    if (!fields.company.trim()) next.company = "업체명을 입력해 주세요.";
-    if (!fields.name.trim()) next.name = "담당자명을 입력해 주세요.";
+    if (!fields.company.trim()) next.company = '업체명을 입력해 주세요.';
+    if (!fields.name.trim()) next.name = '담당자명을 입력해 주세요.';
     if (!/^[0-9-]{9,}$/.test(fields.phone.trim()))
-      next.phone = "연락 가능한 번호를 입력해 주세요.";
+      next.phone = '연락 가능한 번호를 입력해 주세요.';
     if (fields.email.trim() && !/^\S+@\S+\.\S+$/.test(fields.email.trim())) {
-      next.email = "이메일 형식을 확인해 주세요.";
+      next.email = '이메일 형식을 확인해 주세요.';
     }
     return next;
   };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (status === "submitting") return;
+    if (status === 'submitting') return;
 
     const found = validate();
     setErrors(found);
     // 유효성 오류: 필드 테두리 색 전환만. shake 애니메이션 금지 (§4.10).
     if (Object.keys(found).length) return;
 
-    setStatus("submitting");
+    setStatus('submitting');
     setFailed(false);
 
     const ok = await submitInquiry({
-      type: "trial",
+      type: 'trial',
       ...fields,
       channel,
       website: honeypot,
@@ -91,42 +91,44 @@ export default function FinalCta() {
 
     /* 접수 실패를 성공으로 보여주면 신청자는 오지 않을 연락을 기다린다. */
     if (ok) {
-      setStatus("done");
+      setStatus('done');
     } else {
       setFailed(true);
-      setStatus("idle");
+      setStatus('idle');
     }
   };
 
   return (
-    <section className={styles.section} id="apply">
+    <section className={styles.section} id='apply'>
       <div className={styles.grid}>
         <div>
           {/* 다크/브랜드 구간이므로 y 거리 --y-lg */}
-          <div className={styles.kicker} data-reveal="lg">
+          <div className={styles.kicker} data-reveal='lg'>
             초기 파트너 30개사 모집 중
           </div>
-          <h2 className={styles.title} data-reveal="lg" style={stagger(1)}>
+          <h2 className={styles.title} data-reveal='lg' style={stagger(1)}>
             지금 바로 사용해보십시오.
           </h2>
-          <p className={styles.sub} data-reveal="lg" style={stagger(2)}>
+          <p className={styles.sub} data-reveal='lg' style={stagger(2)}>
             신청하시면 세팅까지 함께 잡아드립니다. 지금 초기 파트너 30개사를
-            모집 중이며, 30개사 안에 드시면 AI ORDER를 월{" "}
-            <span className={styles.listPrice}>129,000원</span> <b>89,000원</b>
+            모집 중이며, 30개사 안에 드시면 AI ORDER를 월{' '}
+            <span className={styles.listPrice}>129,000원</span> <b>99,000원</b>
             에 쓰실 수 있습니다.
           </p>
 
-          <div className={styles.pills} data-reveal="lg" style={stagger(3)}>
+          <div className={styles.pills} data-reveal='lg' style={stagger(3)}>
             <span className={styles.pill}>정가 대비 월 40,000원 할인</span>
             <span className={styles.pill}>30개사 마감 시 종료</span>
             <span className={styles.pill}>약정 없이 월 단위</span>
           </div>
 
-          <div className={styles.steps} data-reveal="lg" style={stagger(4)}>
+          <div className={styles.steps} data-reveal='lg' style={stagger(4)}>
             {STEPS.map((step, i) => (
               <div
                 key={step.title}
-                className={`${styles.step} ${i === STEPS.length - 1 ? styles.stepLast : ""}`}
+                className={`${styles.step} ${
+                  i === STEPS.length - 1 ? styles.stepLast : ''
+                }`}
               >
                 <div className={styles.stepNo}>{i + 1}</div>
                 <div>
@@ -139,9 +141,9 @@ export default function FinalCta() {
         </div>
 
         {/* 폼 블록 단위로 한 번에 진입 — 필드별 스태거 없음 */}
-        <div className={styles.card} data-reveal="lg" style={stagger(2)}>
-          {status === "done" ? (
-            <div className={styles.thanks} role="status">
+        <div className={styles.card} data-reveal='lg' style={stagger(2)}>
+          {status === 'done' ? (
+            <div className={styles.thanks} role='status'>
               <div className={styles.thanksMark}>✓</div>
               <div className={styles.thanksTitle}>신청이 접수되었습니다.</div>
               <p className={styles.thanksBody}>
@@ -154,11 +156,11 @@ export default function FinalCta() {
               {/* 스팸 봇 함정. 사람에게는 보이지도, 탭으로 닿지도 않는다. */}
               <input
                 className={styles.honeypot}
-                type="text"
-                name="website"
+                type='text'
+                name='website'
                 tabIndex={-1}
-                autoComplete="off"
-                aria-hidden="true"
+                autoComplete='off'
+                aria-hidden='true'
                 value={honeypot}
                 onChange={(e) => setHoneypot(e.target.value)}
               />
@@ -170,15 +172,17 @@ export default function FinalCta() {
 
               <div className={styles.fields}>
                 <div>
-                  <label className={styles.label} htmlFor="f-company">
+                  <label className={styles.label} htmlFor='f-company'>
                     업체명
                   </label>
                   <input
-                    id="f-company"
-                    className={`${styles.input} ${errors.company ? styles.inputError : ""}`}
-                    placeholder="예) 우리청과"
+                    id='f-company'
+                    className={`${styles.input} ${
+                      errors.company ? styles.inputError : ''
+                    }`}
+                    placeholder='예) 우리청과'
                     value={fields.company}
-                    onChange={set("company")}
+                    onChange={set('company')}
                     aria-invalid={Boolean(errors.company)}
                   />
                   {errors.company && (
@@ -188,15 +192,17 @@ export default function FinalCta() {
 
                 <div className={styles.pair}>
                   <div>
-                    <label className={styles.label} htmlFor="f-name">
+                    <label className={styles.label} htmlFor='f-name'>
                       담당자명
                     </label>
                     <input
-                      id="f-name"
-                      className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
-                      placeholder="성함"
+                      id='f-name'
+                      className={`${styles.input} ${
+                        errors.name ? styles.inputError : ''
+                      }`}
+                      placeholder='성함'
                       value={fields.name}
-                      onChange={set("name")}
+                      onChange={set('name')}
                       aria-invalid={Boolean(errors.name)}
                     />
                     {errors.name && (
@@ -204,17 +210,19 @@ export default function FinalCta() {
                     )}
                   </div>
                   <div>
-                    <label className={styles.label} htmlFor="f-phone">
+                    <label className={styles.label} htmlFor='f-phone'>
                       연락처
                     </label>
                     <input
-                      id="f-phone"
-                      type="tel"
-                      inputMode="tel"
-                      className={`${styles.input} ${errors.phone ? styles.inputError : ""}`}
-                      placeholder="010-"
+                      id='f-phone'
+                      type='tel'
+                      inputMode='tel'
+                      className={`${styles.input} ${
+                        errors.phone ? styles.inputError : ''
+                      }`}
+                      placeholder='010-'
                       value={fields.phone}
-                      onChange={set("phone")}
+                      onChange={set('phone')}
                       aria-invalid={Boolean(errors.phone)}
                     />
                     {errors.phone && (
@@ -224,16 +232,18 @@ export default function FinalCta() {
                 </div>
 
                 <div>
-                  <label className={styles.label} htmlFor="f-email">
+                  <label className={styles.label} htmlFor='f-email'>
                     이메일
                   </label>
                   <input
-                    id="f-email"
-                    type="email"
-                    className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
-                    placeholder="example@company.co.kr"
+                    id='f-email'
+                    type='email'
+                    className={`${styles.input} ${
+                      errors.email ? styles.inputError : ''
+                    }`}
+                    placeholder='example@company.co.kr'
                     value={fields.email}
-                    onChange={set("email")}
+                    onChange={set('email')}
                     aria-invalid={Boolean(errors.email)}
                   />
                   {errors.email && (
@@ -242,15 +252,15 @@ export default function FinalCta() {
                 </div>
 
                 <div>
-                  <label className={styles.label} htmlFor="f-bizno">
+                  <label className={styles.label} htmlFor='f-bizno'>
                     사업자등록번호
                   </label>
                   <input
-                    id="f-bizno"
+                    id='f-bizno'
                     className={styles.input}
-                    placeholder="000-00-00000"
+                    placeholder='000-00-00000'
                     value={fields.bizNo}
-                    onChange={set("bizNo")}
+                    onChange={set('bizNo')}
                   />
                 </div>
 
@@ -258,16 +268,18 @@ export default function FinalCta() {
                   <span className={styles.label}>주로 받는 주문 방식</span>
                   <div
                     className={styles.choices}
-                    role="radiogroup"
-                    aria-label="주로 받는 주문 방식"
+                    role='radiogroup'
+                    aria-label='주로 받는 주문 방식'
                   >
                     {CHANNELS.map((c) => (
                       <button
                         key={c}
-                        type="button"
-                        role="radio"
+                        type='button'
+                        role='radio'
                         aria-checked={channel === c}
-                        className={`${styles.choice} ${channel === c ? styles.choiceOn : ""}`}
+                        className={`${styles.choice} ${
+                          channel === c ? styles.choiceOn : ''
+                        }`}
                         onClick={() => setChannel(c)}
                       >
                         {c}
@@ -278,31 +290,31 @@ export default function FinalCta() {
               </div>
 
               {failed && (
-                <div className={styles.sendFail} role="alert">
-                  접수 중 문제가 생겼습니다. 잠시 후 다시 시도하시거나{" "}
-                  <a href="tel:01029155311">010-2915-5312</a>로 연락 주세요.
+                <div className={styles.sendFail} role='alert'>
+                  접수 중 문제가 생겼습니다. 잠시 후 다시 시도하시거나{' '}
+                  <a href='tel:01029155311'>010-2915-5312</a>로 연락 주세요.
                 </div>
               )}
 
               <button
                 className={styles.submit}
-                type="submit"
-                disabled={status === "submitting"}
+                type='submit'
+                disabled={status === 'submitting'}
               >
-                {status === "submitting" ? (
+                {status === 'submitting' ? (
                   <>
-                    <span className={styles.spinner} aria-hidden="true" />
+                    <span className={styles.spinner} aria-hidden='true' />
                     접수 중…
                   </>
                 ) : (
-                  "지금 시작하기"
+                  '지금 시작하기'
                 )}
               </button>
 
               <div className={styles.fineprint}>
                 약정 없이 월 단위 · 초기 파트너 30개사 마감 시 종료
                 <br />
-                제출 시{" "}
+                제출 시{' '}
                 <span className={styles.fineprintLink}>개인정보 수집·이용</span>
                 에 동의하게 됩니다
               </div>
@@ -314,24 +326,24 @@ export default function FinalCta() {
                 </div>
                 <div className={styles.consultBtns}>
                   <a
-                    href="https://pf.kakao.com/_TBRrX"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href='https://pf.kakao.com/_TBRrX'
+                    target='_blank'
+                    rel='noopener noreferrer'
                     className={`${styles.consultBtn} ${styles.consultBtnSoon}`}
-                    aria-label="카카오톡으로 상담하기"
+                    aria-label='카카오톡으로 상담하기'
                   >
-                    <span className={styles.kakaoIcon} aria-hidden="true">
-                      <svg viewBox="0 0 24 24" width="18" height="18">
+                    <span className={styles.kakaoIcon} aria-hidden='true'>
+                      <svg viewBox='0 0 24 24' width='18' height='18'>
                         <path
-                          fill="currentColor"
-                          d="M12 3C6.48 3 2 6.58 2 11c0 2.84 1.86 5.34 4.66 6.76L5.6 21l3.82-2.18c.83.16 1.69.24 2.58.24 5.52 0 10-3.58 10-8.06S17.52 3 12 3Z"
+                          fill='currentColor'
+                          d='M12 3C6.48 3 2 6.58 2 11c0 2.84 1.86 5.34 4.66 6.76L5.6 21l3.82-2.18c.83.16 1.69.24 2.58.24 5.52 0 10-3.58 10-8.06S17.52 3 12 3Z'
                         />
                       </svg>
                     </span>
                     카카오톡 상담
                   </a>
 
-                  <a href="tel:01029155312" className={styles.consultBtn}>
+                  <a href='tel:01029155312' className={styles.consultBtn}>
                     전화 상담
                   </a>
                 </div>

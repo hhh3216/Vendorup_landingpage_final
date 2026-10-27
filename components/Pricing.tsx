@@ -1,26 +1,33 @@
-"use client";
+'use client';
 
-import styles from "./Pricing.module.css";
-import { smoothScrollTo, useIsMobile } from "@/lib/reveal";
+import styles from './Pricing.module.css';
+import { smoothScrollTo, useIsMobile } from '@/lib/reveal';
 
 type Feature = { label: string; on: boolean; strong?: boolean };
 
 const FEATURES = [
-  "수·발주 ERP",
-  "AI 주문 자동전산화",
-  "원가 연동 판매가 자동 조정",
-  "AI 재고 관리",
-  "배송기사 추적",
+  '수·발주 ERP',
+  'AI 주문 자동전산화',
+  '원가 연동 판매가 자동 조정',
+  'AI 재고 관리',
+  '배송기사 추적',
 ] as const;
 
 const make = (onCount: number, strongIndex?: number): Feature[] =>
-  FEATURES.map((label, i) => ({ label, on: i < onCount, strong: i === strongIndex }));
+  FEATURES.map((label, i) => ({
+    label,
+    on: i < onCount,
+    strong: i === strongIndex,
+  }));
 
 const BONUS = [
-  { title: "품목코드 초기 세팅 대행", body: "고객사 품목 리스트를 받아 매칭 기준을 함께 잡아드립니다" },
-  { title: "카톡·문자 주문 채널 연동 설정", body: "설정은 저희가 합니다" },
-  { title: "도입 첫 달 밀착 지원", body: "세팅부터 안정화까지 함께 봅니다" },
-  { title: "전담 담당자 직통 상담", body: "초기 파트너 기간 동안" },
+  {
+    title: '품목코드 초기 세팅 대행',
+    body: '고객사 품목 리스트를 받아 매칭 기준을 함께 잡아드립니다',
+  },
+  { title: '카톡·문자 주문 채널 연동 설정', body: '설정은 저희가 합니다' },
+  { title: '도입 첫 달 밀착 지원', body: '세팅부터 안정화까지 함께 봅니다' },
+  { title: '전담 담당자 직통 상담', body: '초기 파트너 기간 동안' },
 ];
 
 /* §4.8 가운데 AI ORDER부터 진입 → 좌우가 --stagger 뒤에 따라온다.
@@ -32,9 +39,16 @@ function Features({ items }: { items: Feature[] }) {
   return (
     <>
       {items.map((f) => (
-        <div key={f.label} className={`${styles.feature} ${f.on ? "" : styles.featureOff}`}>
-          <span className={f.strong ? styles.featureStrong : undefined}>{f.label}</span>
-          <span className={f.on ? styles.on : undefined}>{f.on ? "포함" : "—"}</span>
+        <div
+          key={f.label}
+          className={`${styles.feature} ${f.on ? '' : styles.featureOff}`}
+        >
+          <span className={f.strong ? styles.featureStrong : undefined}>
+            {f.label}
+          </span>
+          <span className={f.on ? styles.on : undefined}>
+            {f.on ? '포함' : '—'}
+          </span>
         </div>
       ))}
     </>
@@ -52,20 +66,29 @@ export default function Pricing() {
   };
 
   const goToApply = () => {
-    const el = document.getElementById("apply");
-    if (el) smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 56);
+    const el = document.getElementById('apply');
+    if (el)
+      smoothScrollTo(el.getBoundingClientRect().top + window.scrollY - 56);
   };
 
   return (
-    <section className={`${styles.section} section-pad`} id="pricing">
+    <section className={`${styles.section} section-pad`} id='pricing'>
       <div className={styles.head}>
-        <h2 className="h2" data-reveal>
+        <h2 className='h2' data-reveal>
           Vendor-UP 요금 안내
         </h2>
-        <p className={styles.sub} data-reveal style={{ ["--reveal-delay" as string]: "70ms" }}>
+        <p
+          className={styles.sub}
+          data-reveal
+          style={{ ['--reveal-delay' as string]: '70ms' }}
+        >
           초기 파트너 한정 · 정가 대비 <b>월 40,000원 할인</b>
         </p>
-        <div className={styles.urgency} data-reveal="sm" style={{ ["--reveal-delay" as string]: "140ms" }}>
+        <div
+          className={styles.urgency}
+          data-reveal='sm'
+          style={{ ['--reveal-delay' as string]: '140ms' }}
+        >
           초기 파트너 30개사 마감 시 종료
         </div>
       </div>
@@ -75,7 +98,7 @@ export default function Pricing() {
         <div
           className={styles.plan}
           data-reveal
-          style={{ ["--reveal-delay" as string]: `${delay.basic}ms` }}
+          style={{ ['--reveal-delay' as string]: `${delay.basic}ms` }}
         >
           <div className={styles.planName}>BASIC</div>
           <div className={styles.planDesc}>수·발주 업무를 시스템으로</div>
@@ -95,19 +118,28 @@ export default function Pricing() {
           className={`${styles.plan} ${styles.planMain}`}
           data-reveal
           data-reveal-slow
-          style={{ ["--reveal-delay" as string]: `${delay.main}ms` }}
+          style={{ ['--reveal-delay' as string]: `${delay.main}ms` }}
         >
           <div className={styles.mainHead}>
-            <div className={`${styles.planName} ${styles.planNameMain}`}>AI ORDER</div>
+            <div className={`${styles.planName} ${styles.planNameMain}`}>
+              AI ORDER
+            </div>
             {/* 카드와 함께 등장 — 뱃지 단독 팝인 없음 */}
             <span className={styles.recommend}>추천</span>
           </div>
-          <div className={styles.planDescMain}>주문 입력과 가격 관리를 AI가 대신</div>
-          <div className={`${styles.listPrice} ${styles.listPriceMain}`}>129,000원/월</div>
-          <div className={`${styles.price} ${styles.priceMain}`}>
-            89,000원<span className={`${styles.per} ${styles.perMain}`}>/월</span>
+          <div className={styles.planDescMain}>
+            주문 입력과 가격 관리를 AI가 대신
           </div>
-          <div className={`${styles.avail} ${styles.availMain}`}>바로 이용 가능</div>
+          <div className={`${styles.listPrice} ${styles.listPriceMain}`}>
+            129,000원/월
+          </div>
+          <div className={`${styles.price} ${styles.priceMain}`}>
+            99,000원
+            <span className={`${styles.per} ${styles.perMain}`}>/월</span>
+          </div>
+          <div className={`${styles.avail} ${styles.availMain}`}>
+            바로 이용 가능
+          </div>
           <div className={`${styles.rule} ${styles.ruleMain}`} />
           <div className={`${styles.features} ${styles.featuresMain}`}>
             <Features items={make(3, 1)} />
@@ -121,7 +153,7 @@ export default function Pricing() {
         <div
           className={styles.plan}
           data-reveal
-          style={{ ["--reveal-delay" as string]: `${delay.inventory}ms` }}
+          style={{ ['--reveal-delay' as string]: `${delay.inventory}ms` }}
         >
           <div className={styles.planName}>AI INVENTORY</div>
           <div className={styles.planDesc}>재고·배송까지</div>
@@ -137,9 +169,9 @@ export default function Pricing() {
         </div>
       </div>
 
-      <div className={styles.footnote} data-reveal="sm">
-        AI 배송(배송 동선 자동 세팅)은 지도 서비스 연동 비용이 발생해 플랜과 별개로 추가
-        과금됩니다 · 기능은 지속적으로 개선됩니다
+      <div className={styles.footnote} data-reveal='sm'>
+        AI 배송(배송 동선 자동 세팅)은 지도 서비스 연동 비용이 발생해 플랜과
+        별개로 추가 과금됩니다 · 기능은 지속적으로 개선됩니다
       </div>
 
       <div className={styles.bonus} data-reveal>
@@ -149,11 +181,11 @@ export default function Pricing() {
             <div
               key={item.title}
               className={styles.bonusItem}
-              data-reveal="sm"
+              data-reveal='sm'
               /* 가치 스택 체크리스트: 항목당 60ms 스태거 */
-              style={{ ["--reveal-delay" as string]: `${i * 60}ms` }}
+              style={{ ['--reveal-delay' as string]: `${i * 60}ms` }}
             >
-              <span className={styles.check} aria-hidden="true">
+              <span className={styles.check} aria-hidden='true'>
                 ✓
               </span>
               <div className={styles.bonusText}>
