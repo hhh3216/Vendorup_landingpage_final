@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./InquiryModal.module.css";
 import { submitInquiry } from "@/lib/submitInquiry";
+import { INQUIRY_PHONE } from "@/lib/operatorInfo";
 
 /* 네이티브 <dialog>를 쓴다. 배경 딤(::backdrop), ESC 닫기, 포커스 가둠,
    바깥 스크롤 잠금을 브라우저가 이미 해준다 — 직접 만들 이유가 없다. */
@@ -116,7 +117,7 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
           <div className={styles.thanksMark}>✓</div>
           <div className={styles.thanksTitle}>문의가 접수되었습니다.</div>
           <p className={styles.thanksBody}>
-            영업일 기준 1일 내에 담당자가 연락드립니다. 급하시면 010-2915-5311로 바로 전화 주셔도
+            영업일 기준 1일 내에 담당자가 연락드립니다. 급하시면 {INQUIRY_PHONE.label}로 바로 전화 주셔도
             됩니다.
           </p>
           <button className={styles.thanksBtn} onClick={close}>
@@ -144,7 +145,7 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
           <p className={styles.lead}>
             주문을 어떻게 받고 계신지, 품목 수가 어느 정도인지 여쭤보고 맞는 방식을 제안드립니다.
             통화는 10분이면 충분합니다. 급하시면{" "}
-            <a href="tel:01029155311">010-2915-5311</a>로 바로 연락 주셔도 됩니다.
+            <a href={`tel:${INQUIRY_PHONE.tel}`}>{INQUIRY_PHONE.label}</a>로 바로 연락 주셔도 됩니다.
           </p>
 
           <div className={styles.fields}>
@@ -293,7 +294,7 @@ export default function InquiryModal({ open, onClose }: { open: boolean; onClose
           {failed && (
             <div className={styles.sendFail} role="alert">
               접수 중 문제가 생겼습니다. 잠시 후 다시 시도하시거나{" "}
-              <a href="tel:01029155311">010-2915-5311</a>로 연락 주세요.
+              <a href={`tel:${INQUIRY_PHONE.tel}`}>{INQUIRY_PHONE.label}</a>로 연락 주세요.
             </div>
           )}
 

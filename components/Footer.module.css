@@ -106,12 +106,22 @@
 
 .legal {
   font: 400 14px/1.9 Pretendard, sans-serif;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.68);
+  overflow-wrap: anywhere;
+}
+
+.legal > div + div {
+  margin-top: 4px;
+}
+
+.legal a[href^="tel:"],
+.nowrap {
+  white-space: nowrap;
 }
 
 /* 다크 배경이라 기본 링크색(보라)이 묻힌다. 본문과 같은 톤으로 두고 밑줄로만 구분한다. */
 .legal a {
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.88);
   text-decoration: underline;
   text-underline-offset: 2px;
   /* 인라인 요소의 세로 패딩은 줄 간격을 밀지 않는다 —
@@ -140,7 +150,8 @@
 
 @media (max-width: 767px) {
   .footer {
-    padding: 48px 20px 28px;
+    /* 고정 카카오톡 버튼 아래에 사업자 정보와 저작권 문구가 가려지지 않도록 한다. */
+    padding: 48px 20px 96px;
   }
   .logo {
     height: 40px;
@@ -166,7 +177,7 @@
     min-height: 44px;
   }
   .legal {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.8;
   }
 }

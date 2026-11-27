@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './FinalCta.module.css';
 import { stagger } from '@/lib/reveal';
 import { submitInquiry } from '@/lib/submitInquiry';
+import { INQUIRY_PHONE, OPERATOR } from '@/lib/operatorInfo';
 
 type Status = 'idle' | 'submitting' | 'done';
 
@@ -292,7 +293,7 @@ export default function FinalCta() {
               {failed && (
                 <div className={styles.sendFail} role='alert'>
                   접수 중 문제가 생겼습니다. 잠시 후 다시 시도하시거나{' '}
-                  <a href='tel:01029155311'>010-2915-5312</a>로 연락 주세요.
+                  <a href={`tel:${INQUIRY_PHONE.tel}`}>{INQUIRY_PHONE.label}</a>로 연락 주세요.
                 </div>
               )}
 
@@ -326,7 +327,7 @@ export default function FinalCta() {
                 </div>
                 <div className={styles.consultBtns}>
                   <a
-                    href='https://pf.kakao.com/_TBRrX'
+                    href={OPERATOR.kakaoChatUrl}
                     target='_blank'
                     rel='noopener noreferrer'
                     className={`${styles.consultBtn} ${styles.consultBtnSoon}`}
@@ -343,7 +344,7 @@ export default function FinalCta() {
                     카카오톡 상담
                   </a>
 
-                  <a href='tel:01029155312' className={styles.consultBtn}>
+                  <a href={`tel:${INQUIRY_PHONE.tel}`} className={styles.consultBtn}>
                     전화 상담
                   </a>
                 </div>
