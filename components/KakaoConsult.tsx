@@ -1,11 +1,12 @@
 //* 페이지 우측 하단 내부 페이지 카카오톡 상담 버튼 추가 *//
 
 import styles from "./KakaoConsult.module.css";
+import { OPERATOR } from "@/lib/operatorInfo";
 
 export default function KakaoConsult() {
   return (
     <a
-      href="https://pf.kakao.com/_TBRrX"
+      href={OPERATOR.kakaoChatUrl}
       target="_blank"
       rel="noopener noreferrer"
       className={styles.floating}

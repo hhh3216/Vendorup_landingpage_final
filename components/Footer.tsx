@@ -1,10 +1,11 @@
 import styles from "./Footer.module.css";
 import ConsultBanner from "./ConsultBanner";
+import { OPERATOR } from "@/lib/operatorInfo";
 
 type FooterLink = { label: string; href?: string; special?: "consult" };
 
 /* href가 있는 항목만 페이지 내 실제 섹션으로 연결한다.
-   "카톡·문자 상담"은 연락 방법 배너(ConsultBanner)로 특별 처리하고,
+   "카카오톡·전화 상담"은 연락 방법 배너(ConsultBanner)로 특별 처리하고,
    나머지 href 없는 항목(약관류)은 아직 만들어진 페이지가 없어 비활성으로 둔다. */
 const COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
@@ -20,7 +21,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
     links: [
       { label: "도입 문의", href: "#apply" },
       { label: "자주 묻는 질문", href: "#faq" },
-      { label: "카톡·문자 상담", special: "consult" as const },
+      { label: "카카오톡·전화 상담", special: "consult" as const },
     ],
   },
   {
@@ -33,16 +34,16 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
    서버 컴포넌트로 두어 클라이언트 번들에도 실리지 않는다. */
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} aria-label="밴더업 사업자 정보 및 고객 지원">
       <div className={styles.grid}>
         <div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/kyton-logo-white.png"
-            alt="KYTON — Korea Youth Technology"
+            alt={OPERATOR.companyName}
             className={styles.logo}
           />
-          <div className={styles.company}>카이톤(KYTON, Korea Youth Technology)</div>
+          <div className={styles.company}>{OPERATOR.companyName}</div>
 
           <a
             className={styles.social}
@@ -95,13 +96,22 @@ export default function Footer() {
       <div className={styles.rule} />
 
       <div className={styles.legal}>
-        카이톤(KYTON, Korea Youth Technology) · 대표: 성시훈 · 사업자등록번호: 152-16-03084
-        <br />
-        주소: 경기도 안산시 단원구 화랑로 402, 3층 (고잔동, 신원빌딩) · 이메일:
-        account@kyton.co.kr
-        <br />
-        연락처: <a href="tel:01029155311">010-2915-5311</a>
-        <br />© 2026 KYTON. All rights reserved.
+        <div>{OPERATOR.serviceName} · 운영 {OPERATOR.companyName}</div>
+        <div>대표이사: {OPERATOR.ceo} · 사업자등록번호: <span className={styles.nowrap}>{OPERATOR.bizNo}</span></div>
+        <div>통신판매업 신고번호: {OPERATOR.mailOrderNo} ({OPERATOR.mailOrderAuthority})</div>
+        <div>주소: {OPERATOR.address}</div>
+        <div>이메일: <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a></div>
+        <div>
+          문의 전화: {OPERATOR.phones.map((phone, index) => (
+            <span key={phone.tel}>
+              {index > 0 && " / "}
+              <a href={`tel:${phone.tel}`}>{phone.label}</a>
+            </span>
+          ))}
+        </div>
+        <div>상담시간: {OPERATOR.hours}</div>
+        <div><a href={OPERATOR.kakaoChatUrl} target="_blank" rel="noopener noreferrer">공식 카카오톡 문의</a></div>
+        <div>© 2026 KYTON. All rights reserved.</div>
       </div>
     </footer>
   );
